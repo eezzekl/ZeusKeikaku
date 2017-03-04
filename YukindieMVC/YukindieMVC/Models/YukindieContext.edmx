@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ZeusFinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="AlbumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Imagen" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaPublicacion" Type="date" Nullable="false" />
+          <Property Name="Formato" Type="varchar" MaxLength="50" />
+          <Property Name="Contenido" Type="varchar" MaxLength="200" />
+          <Property Name="Precio" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Oferta" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LinkCompra" Type="varchar" MaxLength="300" />
+          <Property Name="Promocion" Type="varchar" MaxLength="600" />
+          <Property Name="PerfilId" Type="int" Nullable="false" />
+          <Property Name="SubGeneroId" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="FechaRegistro" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="GeneroId" />
+          </Key>
+          <Property Name="GeneroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="FechaRegistro" Type="date" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="PerfilId" />
+          </Key>
+          <Property Name="PerfilId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Rol" Type="bit" />
+          <Property Name="PerfilTipoId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="300" />
+          <Property Name="FotoPerfil" Type="varchar" MaxLength="500" />
+          <Property Name="AcercaDe" Type="varchar(max)" />
+          <Property Name="Telefono1" Type="varchar" MaxLength="25" />
+          <Property Name="Telefono2" Type="varchar" MaxLength="25" />
+          <Property Name="Correo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="300" />
+          <Property Name="UbicacionGM" Type="varchar" MaxLength="100" />
+          <Property Name="Horario" Type="varchar" MaxLength="100" />
+          <Property Name="Fundacion" Type="date" />
+          <Property Name="CiudadId" Type="int" />
+        </EntityType>
+        <EntityType Name="SubGenero">
+          <Key>
+            <PropertyRef Name="SubGeneroId" />
+          </Key>
+          <Property Name="SubGeneroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GeneroId" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="FechaRegistro" Type="date" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="25" />
+          <Property Name="Correo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Album__PerfilId__5CD6CB2B">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Album__SubGenero__5DCAEF64">
+          <End Role="SubGenero" Type="Self.SubGenero" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGenero">
+              <PropertyRef Name="SubGeneroId" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="SubGeneroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Perfil__UsuarioI__32E0915F">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="st_DelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_InsAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varchar" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="date" Mode="In" />
+          <Parameter Name="Formato" Type="varchar" Mode="In" />
+          <Parameter Name="Contenido" Type="varchar" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Oferta" Type="decimal" Mode="In" />
+          <Parameter Name="LinkCompra" Type="varchar" Mode="In" />
+          <Parameter Name="Promocion" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+          <Parameter Name="SubGeneroId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="date" Mode="In" />
+        </Function>
+        <Function Name="st_SelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelSubGeneroGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ZeusFinalModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubGenero" EntityType="Self.SubGenero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Album__PerfilId__5CD6CB2B" Association="Self.FK__Album__PerfilId__5CD6CB2B">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Album__SubGenero__5DCAEF64" Association="Self.FK__Album__SubGenero__5DCAEF64">
+            <End Role="SubGenero" EntitySet="SubGenero" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Perfil__UsuarioI__32E0915F" Association="Self.FK__Perfil__UsuarioI__32E0915F">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZeusFinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="AlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaPublicacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Formato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contenido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Oferta" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LinkCompra" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Promocion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="PerfilId" Type="Int32" Nullable="false" />
+          <Property Name="SubGeneroId" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Album__PerfilId__5CD6CB2B" FromRole="Album" ToRole="Perfil" />
+          <NavigationProperty Name="SubGenero" Relationship="Self.FK__Album__SubGenero__5DCAEF64" FromRole="Album" ToRole="SubGenero" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="GeneroId" />
+          </Key>
+          <Property Name="GeneroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="PerfilId" />
+          </Key>
+          <Property Name="PerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Rol" Type="Boolean" />
+          <Property Name="PerfilTipoId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FotoPerfil" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AcercaDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="UbicacionGM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Horario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fundacion" Type="DateTime" Precision="0" />
+          <Property Name="CiudadId" Type="Int32" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__Album__PerfilId__5CD6CB2B" FromRole="Perfil" ToRole="Album" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Perfil__UsuarioI__32E0915F" FromRole="Perfil" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="SubGenero">
+          <Key>
+            <PropertyRef Name="SubGeneroId" />
+          </Key>
+          <Property Name="SubGeneroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeneroId" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__Album__SubGenero__5DCAEF64" FromRole="SubGenero" ToRole="Album" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Perfil__UsuarioI__32E0915F" FromRole="Usuario" ToRole="Perfil" />
+        </EntityType>
+        <Association Name="FK__Album__PerfilId__5CD6CB2B">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Album__SubGenero__5DCAEF64">
+          <End Role="SubGenero" Type="Self.SubGenero" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGenero">
+              <PropertyRef Name="SubGeneroId" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="SubGeneroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Perfil__UsuarioI__32E0915F">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YukindieEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Album" EntityType="Self.Album" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="SubGenero" EntityType="Self.SubGenero" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Album__PerfilId__5CD6CB2B" Association="Self.FK__Album__PerfilId__5CD6CB2B">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Album__SubGenero__5DCAEF64" Association="Self.FK__Album__SubGenero__5DCAEF64">
+            <End Role="SubGenero" EntitySet="SubGenero" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Perfil__UsuarioI__32E0915F" Association="Self.FK__Perfil__UsuarioI__32E0915F">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
+          <FunctionImport Name="st_DelAlbum_">
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsAlbum_">
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Formato" Mode="In" Type="String" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Oferta" Mode="In" Type="Decimal" />
+            <Parameter Name="LinkCompra" Mode="In" Type="String" />
+            <Parameter Name="Promocion" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+            <Parameter Name="SubGeneroId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelAlbum_" ReturnType="Collection(ZeusFinalModel.st_SelAlbum__Result)">
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelSubGeneroGetAll" ReturnType="Collection(ZeusFinalModel.st_SelSubGeneroGetAll_Result)" />
+        </EntityContainer>
+        <ComplexType Name="st_SelAlbum__Result">
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="Oferta" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="LinkCompra" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Promocion" Nullable="true" MaxLength="600" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelSubGeneroGetAll_Result">
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZeusFinalModelStoreContainer" CdmEntityContainer="YukindieEntities">
+          <EntitySetMapping Name="Album">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+                <ScalarProperty Name="LinkCompra" ColumnName="LinkCompra" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genero">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Genero">
+              <MappingFragment StoreEntitySet="Genero">
+                <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfil">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="PerfilTipoId" ColumnName="PerfilTipoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FotoPerfil" ColumnName="FotoPerfil" />
+                <ScalarProperty Name="AcercaDe" ColumnName="AcercaDe" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="UbicacionGM" ColumnName="UbicacionGM" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Fundacion" ColumnName="Fundacion" />
+                <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubGenero">
+            <EntityTypeMapping TypeName="ZeusFinalModel.SubGenero">
+              <MappingFragment StoreEntitySet="SubGenero">
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="st_DelAlbum_" FunctionName="ZeusFinalModel.Store.st_DelAlbum_" />
+          <FunctionImportMapping FunctionImportName="st_InsAlbum_" FunctionName="ZeusFinalModel.Store.st_InsAlbum_" />
+          <FunctionImportMapping FunctionImportName="st_SelAlbum_" FunctionName="ZeusFinalModel.Store.st_SelAlbum_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelAlbum__Result">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+                <ScalarProperty Name="LinkCompra" ColumnName="LinkCompra" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="SubGenero" ColumnName="SubGenero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelSubGeneroGetAll" FunctionName="ZeusFinalModel.Store.st_SelSubGeneroGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelSubGeneroGetAll_Result">
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

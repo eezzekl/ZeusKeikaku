@@ -1,0 +1,172 @@
+﻿/**{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}*/
+
+.clearfix{
+	clear:both;
+}
+
+/*#container{
+	width:330px;
+	min-height:400px;
+	background:#333;
+	overflow:auto;
+	margin:60px auto;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:#666 solid 2px;
+}*/
+
+#audio-image{
+	position:relative;
+	overflow:hidden;
+	height:200px;
+	margin-bottom:15px;
+}
+
+#audio-info{
+	text-align:center;
+}
+
+#audio-info .artist{
+	font-weight:bold;
+}
+
+.cover{
+	width:100%;
+	z-index:1;
+}
+
+input#volume {
+	width:95%;
+	margin-left:2%;
+    -webkit-appearance: none !important;
+    background:#bc003f;
+    height:5px;
+	margin-bottom:20px;
+}
+input#volume::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background:url(../E_Reproductor/knob.png) no-repeat;
+    height:12px;
+    width:12px;
+}
+
+#buttons{
+	width:90%;
+	/*display: block;*/
+    margin: 15px auto;
+	/*margin-left:23px;*/
+	overflow:auto;
+    outline-style:none;
+}
+
+
+button#play{
+	width:57px;
+	height:57px;
+	background:url(../E_Reproductor/play.png) no-repeat;
+    /*float:left;*/
+    border:none;
+}
+
+button#pause{
+	width:57px;
+	height:57px;
+	background:url(../E_Reproductor/pause.png) no-repeat;
+    /*float:left;*/
+        border:none;
+}
+
+button#stop{
+	width:57px;
+	height:57px;
+	background:url(../E_Reproductor/stop.png) no-repeat;float:left;
+        border:none;
+}
+
+button#prev{
+	width:57px;
+	height:57px;
+	background:url(../E_Reproductor/prev.png) no-repeat;
+	/*float:left;*/
+	/*margin-top:15px;*/
+        border:none;
+}
+
+button#next{
+	width:57px;
+	height:57px;
+	background:url(../E_Reproductor/next.png) no-repeat;
+	/*float:right;*/
+	/*margin-top:15px;*/
+        border:none;
+}
+
+#playlist {
+    list-style-type: none;
+	padding:10px;
+}
+
+#playlist li {
+    cursor: pointer;
+    margin:5px;
+}
+
+#tracker{
+	position:relative;
+	width:100%;
+}
+
+#playlist li.active {
+    font-weight: bold;
+	/*padding:3px;*/
+	background:#192445;
+    color:#ffffff;
+}
+
+#progressBar { 
+   width:80%;
+   margin-left:2%;
+   margin-bottom:20px;
+   margin-top:9px;
+   height:10px;
+   background:url(../E_Reproductor/progress_bg.png) no-repeat;
+   float:left;
+}
+
+#progress {
+   background:url(../E_Reproductor/progress.png) no-repeat;
+      /*width:80%;
+   margin-left:2%;
+   margin-bottom:20px;
+   margin-top:9px;
+      float:left;*/
+         height:10px;
+   display:inline-block;
+   /*display:block;*/
+}
+
+/*#duration{
+	position:absolute;
+	top:0;
+	right:10px;
+    padding:0 px 0 px;
+	padding:4px 8px;
+	background:#000;
+	border-radius:5px;
+}*/
+
+#duration{
+	/*position:absolute;
+	top:0;*/
+	/*right:10px;
+    padding:0 px 0 px;*/
+	/*padding:4px 8px;*/
+	/*background:#000;
+	border-radius:5px;*/
+}

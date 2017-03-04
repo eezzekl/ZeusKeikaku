@@ -1,0 +1,58 @@
+﻿.pagenavi a, .pagenavi span
+{
+  /*min-width:24px;
+  min-height:20px;
+  line-height:100%;
+  text-decoration:none;
+  text-align:center;
+  margin:0 3px;
+  padding:4px 0 0;
+  vertical-align:middle;
+  display:inline-block;
+  zoom:1;*display:inline;*/
+  /*-webkit-border-radius:10em;
+  -moz-border-radius:10em;
+  border-radius:10em*/
+
+    min-width: 35px;
+    min-height: 30px;
+    line-height: 100%;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 0px;
+    padding: 8px 0 0;
+    vertical-align: middle;
+    display: inline-block;
+    zoom: 1;
+}
+.pagenavi a
+{
+  background:#BC003F;
+  color:#fff;
+  text-decoration:none
+}
+.pagenavi a:hover
+{
+  background-color:#a30036;
+  text-decoration:none;
+}
+.pagenavi .current
+{
+  color:#BC003F;
+  text-decoration:none;
+}
+.post-nav
+{
+  margin:0 0 30px;
+  padding:15px 0;
+  clear:both;
+  font-size:14px;
+}
+.pagenavi
+{
+  padding:0;
+  text-align:right;
+  margin:0;
+  float:right;
+  width:100%;
+}

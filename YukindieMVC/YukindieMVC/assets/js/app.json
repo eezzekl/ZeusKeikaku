@@ -1,0 +1,29 @@
+﻿{"songs":[{"id":0,
+			"name": "Algo Inmoral",
+			"artista": "Lulaby",
+			"song": "music/Algo Inmoral.mp3",
+			"image": "Músicos/lulaby.jpg"
+		},
+		{
+			"id":1,
+			"name": "El enigma de tus besos",
+			"artista": "Vampiros Leyenda Urbana",
+			"song": "music/El enigma.mp3",
+			"image": "Músicos/vampiros01.png"
+		},
+		{
+			"id":2,
+			"name": "Fuckaholic",
+			"artista": "Commando",
+			"song": "music/fuckaholic.mp3",
+			"image": "Músicos/commando.jpg"
+		},
+		{
+			"id":3,
+			"name": "Serial Bitch Killer",
+			"artista": "Commmando",
+			"song": "music/SBK.mp3",
+			"image": "Músicos/commando.jpg"
+		},
+	]
+}

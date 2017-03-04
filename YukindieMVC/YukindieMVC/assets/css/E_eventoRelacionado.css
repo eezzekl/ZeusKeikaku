@@ -1,0 +1,23 @@
+﻿/*se usa en las miniaturas de los eventos*/
+
+.itemy
+{
+    margin: 0 auto;
+    margin-bottom: 0px;
+    background-color: #fff;
+    width: 90%;
+}
+
+.itemy .item_image
+{
+    height:200px;
+    width:100%;
+    overflow:hidden;
+
+}
+
+.itemy .item_desc{
+    padding: 10px 10px 12px 10px;
+    background-color: #192445;
+    color: #ffffff;
+}

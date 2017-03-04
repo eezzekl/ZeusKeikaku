@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b775b6611cb8459384433ba2057f0f26" Name="Diagram1">
+        <EntityTypeShape EntityType="ZeusFinalModel.Album" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Genero" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Perfil" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.SubGenero" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Usuario" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Album__PerfilId__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Album__SubGenero__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Perfil__UsuarioI__32E0915F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

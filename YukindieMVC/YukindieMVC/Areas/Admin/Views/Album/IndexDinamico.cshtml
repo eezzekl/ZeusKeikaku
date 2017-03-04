@@ -1,0 +1,30 @@
+﻿@model IEnumerable<YukindieMVC.Models.Album>
+
+@{
+    ViewBag.Title = "Index Dinamico";
+}
+
+@section scripts
+{
+    <script>
+        var urlGetAll = '@Url.Action("GetAll", "Album", new { area = "Admin" })';
+        var urlGetSubGenero = '@Url.Action("Get", "SubGenero", new { area = "Admin" })';
+        var PerfilId = 2;
+    </script>
+<script src="~/Scripts/jquery.bootpag.js"></script>
+    @*<script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.js"></script>*@
+<script src="~/Scripts/f/IndexDinamico.js"></script>
+    @*<script src="~/Scripts/f/AlbumIndex.js"></script>*@
+}
+
+<div class="col-lg-12">
+    <section class="box">
+        <div class="content-body" style="display: block;">
+            <div class="row">
+                <div id="content"></div>
+                <div id="page-selection">Pagination goes here</div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YukindieMVC", "YukindieMVC\YukindieMVC.csproj", "{961FFC0E-C5EA-4FE0-BF6C-434369411542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{2D80800F-0A81-438A-AFAA-0C3693165027}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{08BD351B-CB94-4E7B-92F1-275D628C4D9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{961FFC0E-C5EA-4FE0-BF6C-434369411542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{961FFC0E-C5EA-4FE0-BF6C-434369411542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{961FFC0E-C5EA-4FE0-BF6C-434369411542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{961FFC0E-C5EA-4FE0-BF6C-434369411542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D80800F-0A81-438A-AFAA-0C3693165027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D80800F-0A81-438A-AFAA-0C3693165027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D80800F-0A81-438A-AFAA-0C3693165027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D80800F-0A81-438A-AFAA-0C3693165027}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08BD351B-CB94-4E7B-92F1-275D628C4D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08BD351B-CB94-4E7B-92F1-275D628C4D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08BD351B-CB94-4E7B-92F1-275D628C4D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08BD351B-CB94-4E7B-92F1-275D628C4D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

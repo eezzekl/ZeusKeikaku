@@ -1,0 +1,721 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="~/assets/images/favicon.png" type="image/x-icon" />
+    <!-- Favicon -->
+    <link rel="apple-touch-icon-precomposed" href="~/assets/images/apple-touch-icon-57-precomposed.png">
+    <!-- For iPhone -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/assets/images/apple-touch-icon-114-precomposed.png">
+    <!-- For iPhone 4 Retina display -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/assets/images/apple-touch-icon-72-precomposed.png">
+    <!-- For iPad -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/assets/images/apple-touch-icon-144-precomposed.png">
+    <!-- For iPad Retina display -->
+    <!-- CORE CSS FRAMEWORK - START -->
+    <!-- css para que salgan submenus el el grou button-->
+    <link href="~/assets/css/multiopcion.css" rel="stylesheet" />
+    @*<%--    sirve para el cargador e pagina--%>
+    <%--
+    <link href="../assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />--%>*@
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/prettyphoto/prettyPhoto.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/css/E_Login.css" rel="stylesheet" />
+
+    <!-- CORE CSS FRAMEWORK - END -->
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+
+    <link href="~/assets/plugins/uikit/css/uikit.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/uikit/css/components/nestable.min.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    <!-- CORE CSS TEMPLATE - START -->
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- CORE CSS TEMPLATE - END -->
+    @*<%--    para fechas--%>*@
+    <link href="~/assets/plugins/jquery-ui/smoothness/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/timepicker/css/bootstrap-timepicker.css" rel="stylesheet" />
+
+    @*<%--    para las notificaciones--%>
+    <%--
+    <link href="assets/css/E_Notifications.css" rel="stylesheet" />--%>*@
+    <link href="~/assets/plugins/messenger/css/messenger.css" rel="stylesheet" />
+    @*<%--
+    <link href="assets/plugins/messenger/css/messenger-theme-air.css" rel="stylesheet" />--%>*@
+    <link href="~/assets/plugins/messenger/css/messenger-theme-future.css" rel="stylesheet" />
+    <link href="~/assets/plugins/messenger/css/messenger-theme-flat.css" rel="stylesheet" />
+
+    @*<%--    para el diseño de los check--%>*@
+    <link href="~/assets/plugins/icheck/skins/all.css" rel="stylesheet" />
+
+    @*<%--    14/dic/2016 para la paginacion--%>*@
+    <link href="~/assets/css/E_Pagination.css" rel="stylesheet" />
+
+    @*<%--    para el reprodcutor--%>*@
+    <link href="~/assets/css/E_Reproductor.css" rel="stylesheet" media="screen" />
+
+    @*<%--    para el diseño el tipo de calendario para eventos--%>*@
+    <link href="~/assets/css/E_Calendar.css" rel="stylesheet" />
+
+    @*<%--    para el rango del reproductor--%>
+    <%--
+    <link href="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" />--%>*@
+
+    @*<%--diseño para la parte e crear cuenta--%>*@
+    <link href="~/assets/css/E_CrearCuenta.css" rel="stylesheet" />
+
+    @*<%--    para el listado de eventos recomendados--%>*@
+    <link href="~/assets/css/E_eventoRelacionado.css" rel="stylesheet" />
+
+    <script src="https://use.fontawesome.com/318d9dcb85.js"></script>
+
+    <link href="~/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    @RenderSection("css", required: false)
+
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.8&appId=159911320703065";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>*@
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)*@
+
+
+
+    <div class='page-topbar '>
+        <div class='logo-area'>
+        </div>
+        <div class='quick-area'>
+            <div class='pull-left'>
+                <ul class="info-menu left-links list-inline list-unstyled">
+                    @*<%--
+                    <li class="message-toggle-wrapper">
+                        <a href="#" data-toggle="dropdown" class="toggle">
+                            <i class="fa fa-envelope"></i>
+                            <span class="badge badge-accent">7</span>
+                        </a>
+                        <ul class="dropdown-menu messages animated fadeIn">
+
+                            <li class="list">
+
+                                <ul class="dropdown-menu-list list-unstyled ps-scrollbar">
+                                    <li class="unread status-available">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Clarine Vassar</strong>
+                                                    <span class="time small">- 15 mins ago</span>
+                                                    <span class="profile-status available pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-away">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Brooks Latshaw</strong>
+                                                    <span class="time small">- 45 mins ago</span>
+                                                    <span class="profile-status away pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-busy">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Clementina Brodeur</strong>
+                                                    <span class="time small">- 1 hour ago</span>
+                                                    <span class="profile-status busy pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-offline">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-4.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Carri Busey</strong>
+                                                    <span class="time small">- 5 hours ago</span>
+                                                    <span class="profile-status offline pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-offline">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-5.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Melissa Dock</strong>
+                                                    <span class="time small">- Yesterday</span>
+                                                    <span class="profile-status offline pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-available">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-1.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Verdell Rea</strong>
+                                                    <span class="time small">- 14th Mar</span>
+                                                    <span class="profile-status available pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-busy">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-2.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Linette Lheureux</strong>
+                                                    <span class="time small">- 16th Mar</span>
+                                                    <span class="profile-status busy pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class=" status-away">
+                                        <a href="javascript:;">
+                                            <div class="user-img">
+                                                <img src="../data/profile/avatar-3.png" alt="user-image" class="img-circle img-inline">
+                                            </div>
+                                            <div>
+                                                <span class="name">
+                                                    <strong>Araceli Boatright</strong>
+                                                    <span class="time small">- 16th Mar</span>
+                                                    <span class="profile-status away pull-right"></span>
+                                                </span>
+                                                <span class="desc small">
+                                                    Sometimes it takes a lifetime to win a battle.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <li class="external">
+                                <a href="javascript:;">
+                                    <span>Read All Messages</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>--%>*@
+                    <li class="sidebar-toggle-wrap">
+                        <a href="#" data-toggle="sidebar" class="sidebar_toggle">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                    <li class="hidden-sm hidden-xs searchform">
+                        <form action="ui-search.html" method="post">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                                <input type="text" class="form-control animated fadeIn" placeholder="Buscar en YUKINDIE">
+                            </div>
+                            <input type='submit' value="">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class='pull-right'>
+                <ul class="info-menu right-links list-inline list-unstyled">
+                    <li class="">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b style="color: #fff">Iniciar Sesión</b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Mediante
+                                        <div class="social-buttons">
+                                            <a href="#" class="btn btn-fb" style="color: #fff; background-color: #3b5998"><i class="fa fa-facebook"></i>Facebook</a>
+                                            <a href="#" class="btn btn-tw" style="color: #fff; background-color: #55acee"><i class="fa fa-twitter"></i>Twitter</a>
+                                        </div>
+                                        o con tú E-mail
+                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                                <div class="help-block text-right"><a href="">¿Olvidó su contraseña?</a></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-yukindie btn-block">Acceder</button>
+                                            </div>
+                                            @*<%--										<div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> keep me logged-in
+                                                </label>
+                                            </div>--%>*@
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        ¿Nuevo en YUKINDIE? <a href="CuentaCrear.aspx"><b>¡Únete!</b></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="profile">
+                        <a href="#" data-toggle="dropdown" class="toggle">
+                            <img src="~/Images/Usuario/perfiledwin.jpg" alt="user-image" class="img-circle img-inline" />
+                            <span><strong>Bienvenido </strong>Edwin <i class="fa fa-angle-down"></i></span>
+                        </a>
+                        @*<%--			<ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Login via
+                                        <div class="social-buttons">
+                                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                        </div>
+                                        or
+                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                                <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> keep me logged-in
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        New here ? <a href="#"><b>Join Us</b></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>--%>*@
+                        <ul class="dropdown-menu profile animated fadeIn">
+                            <li>
+                                <a href="#settings">
+                                    <i class="fa fa-wrench"></i>
+                                    Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#profile">
+                                    <i class="fa fa-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#help">
+                                    <i class="fa fa-info"></i>
+                                    Help
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="ui-login.html">
+                                    <i class="fa fa-lock"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="CuentaCrear.aspx" class="btn btn-default btn-border" style="width: 100%; color: white">Crear Cuenta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- END TOPBAR -->
+    <!-- START CONTAINER -->
+    <div class="page-container row-fluid container-fluid">
+
+        <!-- SIDEBAR - START -->
+
+        <div class="page-sidebar pagescroll" style="height: 100%">
+
+            <!-- MAIN MENU - START -->
+            @*<asp:ContentPlaceHolder ID="contenPlaceHolderMenu" runat="server">
+            </asp:ContentPlaceHolder>*@
+
+
+            @*<%--            menu estatico--%>*@
+            <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+
+                <ul class='wraplist'>
+
+                    <li class='menusection'>YUKINDIE</li>
+                    <li class="">
+                        <a href="Default.aspx">
+                            <i class="fa fa-globe"></i>
+                            <span class="title">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;">
+                            <i class="fa fa-music"></i>
+                            <span class="title">Música</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a class="" href="ListadoMusicos.aspx">Bandas</a>
+                            </li>
+                            <li>
+                                <a class="" href="AlbumListado.aspx">Álbumes</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="ListadoEventosCartelera.aspx">
+                            <i class="fa fa-calendar"></i>
+                            <span class="title">Eventos</span>
+                        </a>
+                    </li>
+                    <li class='menusection'>Administración</li>
+                    <li class="">
+                        <a href="javascript:;">
+                            <i class="fa fa-users"></i>
+                            <span class="title">Mis perfiles</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a class="" href="mail-inbox.html">Inbox</a>
+                            </li>
+                            <li>
+                                <a class="" href="mail-compose.html">Compose</a>
+                            </li>
+                            <li>
+                                <a class="" href="mail-view.html">View</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="javascript:;">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Gestión de Información</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="javascript:;"><span class="title">Música</span> <span class="arrow "></span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="AlbumAdministrador.aspx"><span class="title">Gestión de Álbumes</span> </a></li>
+                                    <li><a href="CancionAdministrador.aspx"><span class="title">Gestión de Canciones</span> </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="" href="GestionListadoPerfil.aspx">Eventos</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- MAIN MENU - END -->
+
+
+
+        </div>
+        <!--  SIDEBAR - END -->
+        <!-- START CONTENT -->
+        <section id="main-content">
+            <section class="wrapper main-wrapper row" style=''>
+                @RenderBody()
+
+                <!-- MAIN CONTENT AREA ENDS -->
+            </section>
+            <!-- footer-->
+            <!-- quitar posicion relative-->
+            <footer class="footer navbar-inverse" style="background-color: #192445; padding-top: 20px; border-radius: 0; padding-bottom: 0px; position: ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3">
+                            <img src="~/assets/images/logo.png" width="100%" />
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <ul class="list-unstyled">
+                                <li style="color: #fff">
+                                    <h3 style="color: white"><strong>Compañia</strong></h3>
+                                </li>
+                                <li><a href="Contacto1.aspx" style="color: white">Acerca De</a></li>
+                                <li><a href="#" style="color: white">¿Olvido su Contraseña?</a></li>
+                                <li><a href="#" style="color: white">Ayuda</a></li>
+                                <li><a href="#" style="color: white">Prensa</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <ul class="list-unstyled">
+                                <li style="color: #fff">
+                                    <h3 style="color: white"><strong>Contacto</strong></h3>
+                                </li>
+                                <li><a href="Contacto1.aspx" style="color: white"><i class="fa fa-phone"></i> 9991-25-51-47</a></li>
+                                <li><a href="#" style="color: white"><i class="fa fa-envelope"></i> hola@yukindie.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <ul class="list-unstyled">
+                                <li style="color: #fff">
+                                    <h3 style="color: white"><strong>Síguenos En</strong></h3>
+                                </li>
+                                <li>
+                                    <a href="#" style="color: white"><i class="fa fa-facebook"></i> Facebook</a>
+                                </li>
+                                <li>
+                                    <a href="#" style="color: white"><i class="fa fa-linkedin-square"></i> Linkedin</a>
+                                </li>
+                                <li>
+                                    <a href="#" style="color: white"><i class="fa fa-youtube-play"></i> YouTube</a>
+                                </li>
+                                <li>
+                                    <a href="#" style="color: white"><i class="fa fa-twitter"></i> Twitter</a>
+
+                                </li>
+                            </ul>
+                            @*<%--                            <div class="row">
+                                <div class="col-xs-12 btn-social pull-left">
+                                    <button type="button" class="btn btn-primary facebook"><i class="fa fa-facebook"></i></button>
+                                    <button type="button" class="btn btn-primary twitter"><i class="fa fa-twitter"></i></button>
+                                    <button type="button" class="btn btn-primary youtube"><i class="fa fa-youtube"></i></button>
+                                    <button type="button" class="btn btn-primary rss"><i class="fa fa-soundcloud"></i></button>
+                                    <button type="button" class="btn btn-primary flickr"><i class="fa fa-instagram"></i></button>
+                                </div>
+                            </div>--%>*@
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="list-unstyled list-inline" align="center">
+                                <li><a href="Aviso.aspx" style="color: white">Aviso Legal</a></li>
+                                <li><a href="PreguntasFrecuentes.aspx" style="color: white">Mapa del Sitio</a></li>
+                                <li><label style="color: white">© 2017 YUKINDIE.</label></li>
+                            </ul>
+                        </div>
+                        @*<%--                        <div class="col-sm-4">
+                            <p class="text-muted pull-right" style="color: white">Copyright © 2017 YUKINDIE.</p>
+                        </div>--%>*@
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <label style="color:white">Desarrollado por: YUKINDIE Ingeniería y Desarrollo Para Negocios.</label>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </section>
+        <!-- END CONTENT -->
+
+
+
+    </div>
+    <!-- END CONTAINER -->
+
+    <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+    <!-- CORE JS FRAMEWORK - START -->
+    @*<script src="~/assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>*@
+    <script src="~/assets/js/jquery.easing.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    @*<%--    sirve para el cargador de pagina--%>
+    <%--
+    <script src="../assets/plugins/pace/pace.min.js" type="text/javascript"></script>--%>*@
+    <script src="~/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/jquery-1.11.3.min.js"><\/script>');</script>
+    <script src="~/assets/plugins/prettyphoto/jquery.prettyPhoto.js" type="text/javascript"></script>
+    <!-- CORE JS FRAMEWORK - END -->
+    @*<%--
+    <script src="assets/js/app.js"></script>--%>*@
+
+    <script src="~/assets/js/multiopcion.js"></script>
+    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+    <script src="~/assets/plugins/uikit/js/uikit.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/uikit/js/components/nestable.min.js" type="text/javascript"></script>
+    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    <!-- CORE TEMPLATE JS - START -->
+    <script src="~/assets/js/scripts.js" type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS - END -->
+    <!-- js para compartir en redes sociales-->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-557388c2452ce3f6" async="async"></script>
+
+    @*<%--    para fechas--%>*@
+    <script src="~/assets/plugins/jquery-ui/smoothness/jquery-ui.min.js"></script>
+    <script src="~/assets/plugins/timepicker/js/bootstrap-timepicker.min.js"></script>
+
+    @*<%--    para las notificaciones--%>
+    <%--
+    <script src="assets/js/E_Notifications.js"></script>--%>*@
+    <script src="~/assets/plugins/messenger/js/messenger.min.js"></script>
+    <script src="~/assets/plugins/messenger/js/messenger-theme-flat.js"></script>
+    <script src="~/assets/plugins/messenger/js/messenger-theme-future.js"></script>
+    <script src="~/assets/js/messenger.js"></script>
+
+    @*<%--    prueba peticion ajax--%>*@
+    <script src="~/assets/Funciones/PruebaAjax.js"></script>
+
+    @*<%--    cargar imagen luego de cargar un fileupload--%>*@
+    <script src="~/assets/Funciones/GestionEvento.js"></script>
+
+    @*<%--    para el check--%>*@
+    <script src="~/assets/plugins/icheck/icheck.min.js"></script>
+
+    @*<%--    para la administracion de albumes--%>*@
+    <script src="~/assets/Funciones/GestionAlbum.js"></script>
+
+    @*<%--    para el reproductor--%>*@
+    <script src="~/assets/js/E_Reproductor.js"></script>
+
+    @*<%--    para el rango del reprodutor--%>*@
+    <script src="~/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+    @*js general para todas las paginas*@
+    <script src="~/Scripts/f/Generico.js"></script>
+
+    @*para la fecha en español*@
+    <link href="~/Scripts/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.es.min.js"></script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+    <!-- General section box modal start -->
+    <div class="modal" id="section-settings" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog animated bounceInDown">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Section Settings</h4>
+                </div>
+                <div class="modal-body">
+                    Body goes here...
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-success" type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
+
+</body>
+</html>
