@@ -1,15 +1,9 @@
-﻿@model YukindieMVC.Models.Album
+﻿@model Model.Album
 
 @{
     ViewBag.Title = "Administración de Álbumes";
 }
 
-@*Las siguientes secciones se han definido, pero no se han presentado para la página de diseño "~/Views/Shared/_Layout.cshtml": "scripts".
-    @section scripts
-    {
-        var urlGet = '@Url.Action("Get", "Album", new { area = "Admin" })';
-        var AlbumId = @ViewBag.IdAlbum;
-    }*@
 
 @section scripts
 {
@@ -20,8 +14,20 @@
         var AlbumId = @ViewBag.IdAlbum;
         var PerfilId = 2;
     </script>
+    <script src="~/Areas/Admin/Scrips/Album/Gestion.js"></script>
 
-    <script src="~/Scripts/f/Album.js"></script>
+    <script src="~/assets/Texttext/textext.core.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.ajax.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.arrow.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.autocomplete.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.clear.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.filter.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.focus.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.prompt.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.suggestions.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.tags.js"></script>
+   <!-- <script src="~/assets/js/Cust_Textext.js"></script> -->
+    @*<script src="~/Scripts/f/Album.js"></script>*@
 }
 
 <div class="col-lg-12">
@@ -125,6 +131,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br />
+                            <textarea id="textarea" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <br />
                     <div class="row">
                         <div class="col-md-12">
                             <span class="pull-right">

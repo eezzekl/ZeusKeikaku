@@ -68,6 +68,7 @@
     <Compile Include="Ciudad.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Album.cs" />
     <Compile Include="Classes\AppConfigHelper.cs" />
     <Compile Include="Classes\ConnectionStringHelper.cs" />
     <Compile Include="Classes\Entities.cs" />
@@ -108,6 +109,9 @@
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="st_SelAlbum__Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="st_SelSubGeneroGetAll_Result.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>

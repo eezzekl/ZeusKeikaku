@@ -19,7 +19,7 @@ namespace Model.Classes
                 EntityConnectionStringBuilder builder = new EntityConnectionStringBuilder();
                 builder.Provider = "System.Data.SqlClient";
                 builder.ProviderConnectionString = AppConfigHelper.GetConfiProp("connectionStr");
-                string databaseModel = "YukindieMdl"; // nombre del modelo de la base de datos
+                string databaseModel = "YukindieModel"; // nombre del modelo de la base de datos
                 builder.Metadata = $"res://*/{databaseModel}.csdl|res://*/{databaseModel}.ssdl|res://*/{databaseModel}.msl";
                 _connectionString = builder.ToString();
             }

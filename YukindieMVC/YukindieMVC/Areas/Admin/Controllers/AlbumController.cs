@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAO;
 using Model;
+using System;
 
 namespace YukindieMVC.Areas.Admin.Controllers
 {
@@ -15,7 +16,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
         // GET: Admin/Album
         public ActionResult Index()
         {
-            var litemAlbum = AlbumDAO.Get(0, null, 0);
+            var litemAlbum = AlbumDAO.Get(0, 0);
             return View(litemAlbum);
         }
 
@@ -36,19 +37,21 @@ namespace YukindieMVC.Areas.Admin.Controllers
             //se valida que el Id recibido tenga datos, de lo contrario mandar a index
             IdAlbum = Id;
             ViewBag.IdAlbum = IdAlbum;
-
+                
             return View();
         }
 
         [HttpPost]
-        public JsonResult Get(int AlbumId, string Titulo, int PerfilId)
+        public JsonResult Get(int AlbumId, int PerfilId, string Titulo)
         {
-            var Album = AlbumDAO.Get(AlbumId, Titulo, PerfilId).FirstOrDefault();
-            return new JsonResult()
+            Album album = AlbumDAO.Get(AlbumId, PerfilId, Titulo).FirstOrDefault();
+            //var LTag = new List<Tag>(TagDAO.GetTagsByAlbum(album.AlbumId));
+            var a = new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new { Datos = Album }
+                Data = new { Datos = album/*, Tags = LTag */}
             };
+            return a;
         }
 
         [HttpGet]
@@ -56,7 +59,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
         {
             var jsonData = new
             {
-                data = AlbumDAO.Get(0, "", 0)
+                data = AlbumDAO.Get(0, 0)
         };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
@@ -64,31 +67,74 @@ namespace YukindieMVC.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult Guardar(string album, string valor1)
         {
+            //Convcertimos el objeto json a Album
+            var albumbo = Newtonsoft.Json.JsonConvert.DeserializeObject<Album>(album, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
             //  Get all files from Request object  
             HttpFileCollectionBase files = Request.Files;
-            for (int i = 0; i < files.Count; i++)
+            //Si files tiene al menos un archivo 
+            if (files.Count > 0)
             {
-                var file = files[i];
+                for (int i = 0; i < files.Count; i++)
+                {
+                    var file = files[i];
 
-                var fileName = Path.GetFileName(file.FileName);
+                    var fileName = Path.GetFileName(file.FileName);
 
-                var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                file.SaveAs(path);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    file.SaveAs(path);
+                }
             }
-            
-            var albumbo = Newtonsoft.Json.JsonConvert.DeserializeObject<Album>(album, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
-            AlbumDAO.Save(albumbo);
-            return new JsonResult()
+            else
             {
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new { Mensaje = "¡Registro creado con éxito!" }
-            };
+                if(string.IsNullOrEmpty(albumbo.Imagen))
+                    //si no tiene imagenes asignamos uno como por defecto 
+                    albumbo.Imagen = "~/Images/Album/album.jpg";
+            }
+            try
+            {
+                Valida(albumbo);
+                AlbumDAO.Save(albumbo);
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { Mensaje = "¡Registro creado con éxito!" }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { error = ex.Message.ToString() }
+                };
+            }
         }
 
         public ActionResult Create()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Regresa verdadero si todas las condiciones se cumplen.
+        /// </summary>
+        /// <param name="item">Item a validar</param>
+        /// <history>
+        /// [ecanul] 23/03/2017 created
+        /// </history>
+        private bool Valida(Album item)
+        {
+            bool valid = false;
+            //si el titulo no esta vacio
+            if (string.IsNullOrEmpty(item.Titulo))
+            {
+                throw new Exception("El titulo es necesario");
+                
+            }
+            //si la fecha de creacion es una fecha valida //Ekliminar fecha hoy
+            if (item.FechaPublicacion == new DateTime() && item.FechaPublicacion > DateTime.Today)
+                throw new Exception("Ingrese una fecha valida");
+            return valid;
         }
     }
 }

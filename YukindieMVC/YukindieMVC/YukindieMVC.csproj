@@ -252,6 +252,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Scrips\Album\Create.js" />
+    <Content Include="Areas\Admin\Scrips\Album\Gestion.js" />
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\E_Calendar.css" />
     <Content Include="assets\css\E_CrearCuenta.css" />
@@ -307,6 +309,7 @@
     <Content Include="assets\js\chart-rickshaw.js" />
     <Content Include="assets\js\chart-sparkline.js" />
     <Content Include="assets\js\crm-dashboard.js" />
+    <Content Include="assets\js\Cust_Textext.js" />
     <Content Include="assets\js\dashboard.js" />
     <Content Include="assets\js\eco-dashboard.js" />
     <Content Include="assets\js\E_Notifications.js" />
@@ -1957,6 +1960,23 @@
     <Content Include="assets\plugins\uikit\vendor\marked\marked.js" />
     <Content Include="assets\plugins\uikit\vendor\marked\marked.min.js" />
     <Content Include="assets\plugins\viewport\viewportchecker.js" />
+    <Content Include="assets\Texttext\CSS\textext.core.css" />
+    <Content Include="assets\Texttext\CSS\textext.plugin.arrow.css" />
+    <Content Include="assets\Texttext\CSS\textext.plugin.autocomplete.css" />
+    <Content Include="assets\Texttext\CSS\textext.plugin.clear.css" />
+    <Content Include="assets\Texttext\CSS\textext.plugin.focus.css" />
+    <Content Include="assets\Texttext\CSS\textext.plugin.prompt.css" />
+    <Content Include="assets\Texttext\CSS\textext.plugin.tags.css" />
+    <Content Include="assets\Texttext\textext.core.js" />
+    <Content Include="assets\Texttext\textext.plugin.ajax.js" />
+    <Content Include="assets\Texttext\textext.plugin.arrow.js" />
+    <Content Include="assets\Texttext\textext.plugin.autocomplete.js" />
+    <Content Include="assets\Texttext\textext.plugin.clear.js" />
+    <Content Include="assets\Texttext\textext.plugin.filter.js" />
+    <Content Include="assets\Texttext\textext.plugin.focus.js" />
+    <Content Include="assets\Texttext\textext.plugin.prompt.js" />
+    <Content Include="assets\Texttext\textext.plugin.suggestions.js" />
+    <Content Include="assets\Texttext\textext.plugin.tags.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2107,6 +2127,7 @@
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\f\Album.js" />
     <Content Include="Scripts\f\AlbumIndex.js" />
+    <Content Include="Scripts\f\Create.js" />
     <Content Include="Scripts\f\Generico.js" />
     <Content Include="Areas\Admin\Views\Album\IndexDinamico.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2118,13 +2139,12 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\f\IndexDinamico.js" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <None Include="Scripts\jquery-1.11.3.intellisense.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.bootpag.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -2182,8 +2202,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -126,5 +126,22 @@ namespace Model
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelSubGeneroGetAll_Result>("st_SelSubGeneroGetAll");
         }
+    
+        public virtual ObjectResult<st_SelAlbum__Result> st_SelAlbum_(Nullable<int> albumId, string titulo, Nullable<int> perfilId)
+        {
+            var albumIdParameter = albumId.HasValue ?
+                new ObjectParameter("AlbumId", albumId) :
+                new ObjectParameter("AlbumId", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelAlbum__Result>("st_SelAlbum_", albumIdParameter, tituloParameter, perfilIdParameter);
+        }
     }
 }

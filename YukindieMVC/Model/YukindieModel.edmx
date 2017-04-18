@@ -487,6 +487,11 @@
           <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="FechaRegistro" Type="date" Mode="In" />
         </Function>
+        <Function Name="st_SelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
         <Function Name="st_SelSubGeneroGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ZeusModelStoreContainer">
           <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
@@ -1218,10 +1223,31 @@
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="st_SelSubGeneroGetAll" ReturnType="Collection(ZeusModel.st_SelSubGeneroGetAll_Result)" />
+          <FunctionImport Name="st_SelAlbum_" ReturnType="Collection(ZeusModel.st_SelAlbum__Result)">
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="st_SelSubGeneroGetAll_Result">
           <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelAlbum__Result">
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="Oferta" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="LinkCompra" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Promocion" Nullable="true" MaxLength="600" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1478,6 +1504,26 @@
               <ComplexTypeMapping TypeName="ZeusModel.st_SelSubGeneroGetAll_Result">
                 <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelAlbum_" FunctionName="ZeusModel.Store.st_SelAlbum_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusModel.st_SelAlbum__Result">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+                <ScalarProperty Name="LinkCompra" ColumnName="LinkCompra" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="SubGenero" ColumnName="SubGenero" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
