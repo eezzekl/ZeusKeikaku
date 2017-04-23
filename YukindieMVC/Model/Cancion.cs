@@ -14,6 +14,12 @@ namespace Model
     
     public partial class Cancion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cancion()
+        {
+            this.LikeCancion = new HashSet<LikeCancion>();
+        }
+    
         public int CancionId { get; set; }
         public string Titulo { get; set; }
         public string Duracion { get; set; }
@@ -23,7 +29,12 @@ namespace Model
         public int AlbumId { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public System.DateTime FechaRegistro { get; set; }
+        public string RutaArchivo { get; set; }
+        public Nullable<int> Reproducciones { get; set; }
+        public string Letra { get; set; }
     
         public virtual Album Album { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LikeCancion> LikeCancion { get; set; }
     }
 }

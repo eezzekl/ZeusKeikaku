@@ -72,6 +72,7 @@
     <Compile Include="Classes\AppConfigHelper.cs" />
     <Compile Include="Classes\ConnectionStringHelper.cs" />
     <Compile Include="Classes\Entities.cs" />
+    <Compile Include="Classes\Evento.cs" />
     <Compile Include="Estado.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
@@ -87,10 +88,16 @@
     <Compile Include="EventoTipo.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EventoVideo.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Genero.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LikeAlbum.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LikeCancion.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LikeEvento.cs">
@@ -102,13 +109,28 @@
     <Compile Include="Pais.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Patrocinio.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Perfil.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilSociales.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PerfilTipo.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seguridad_Menu.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad_Rol.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad_RolPerfil.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="st_SelAlbum__Result.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
@@ -122,6 +144,9 @@
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoPatrocinio.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">

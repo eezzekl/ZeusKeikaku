@@ -93,6 +93,8 @@ namespace YukindieMVC.Areas.Admin.Controllers
             try
             {
                 Valida(albumbo);
+                // por que viene null este? no es correcto debe poderse popular al objeto
+                albumbo.PerfilId = 3;
                 AlbumDAO.Save(albumbo);
                 return new JsonResult()
                 {

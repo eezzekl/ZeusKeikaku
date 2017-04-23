@@ -20,6 +20,7 @@ namespace Model
             this.EventoPerfil = new HashSet<EventoPerfil>();
             this.EventoTag = new HashSet<EventoTag>();
             this.LikeEvento = new HashSet<LikeEvento>();
+            this.EventoVideo = new HashSet<EventoVideo>();
         }
     
         public int EventoId { get; set; }
@@ -40,6 +41,7 @@ namespace Model
         public string LinkComprarBoleto { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public int PerfilId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventoPerfil> EventoPerfil { get; set; }
@@ -47,5 +49,7 @@ namespace Model
         public virtual ICollection<EventoTag> EventoTag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LikeEvento> LikeEvento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventoVideo> EventoVideo { get; set; }
     }
 }

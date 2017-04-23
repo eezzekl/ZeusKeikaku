@@ -24,6 +24,8 @@ namespace Model
         public string Descripcion { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public System.DateTime FechaRegistro { get; set; }
+        public string Titulo { get; set; }
+        public string Imagen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Perfil> Perfil { get; set; }

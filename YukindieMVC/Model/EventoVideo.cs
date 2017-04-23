@@ -12,14 +12,12 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LikePerfil
+    public partial class EventoVideo
     {
-        public int id { get; set; }
-        public Nullable<int> PerfilId { get; set; }
-        public Nullable<int> PerfilLike { get; set; }
-        public int LikePerfilId { get; set; }
+        public int EventoVideoId { get; set; }
+        public int EventoId { get; set; }
+        public string UrlVideo { get; set; }
     
-        public virtual Perfil Perfil { get; set; }
-        public virtual Perfil Perfil1 { get; set; }
+        public virtual Evento Evento { get; set; }
     }
 }

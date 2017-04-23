@@ -23,6 +23,9 @@ namespace Model
             this.LikeEvento = new HashSet<LikeEvento>();
             this.LikePerfil = new HashSet<LikePerfil>();
             this.LikePerfil1 = new HashSet<LikePerfil>();
+            this.LikeCancion = new HashSet<LikeCancion>();
+            this.PerfilSociales = new HashSet<PerfilSociales>();
+            this.Seguridad_RolPerfil = new HashSet<Seguridad_RolPerfil>();
         }
     
         public int PerfilId { get; set; }
@@ -40,6 +43,11 @@ namespace Model
         public string Horario { get; set; }
         public Nullable<System.DateTime> Fundacion { get; set; }
         public Nullable<int> CiudadId { get; set; }
+        public string Telefono { get; set; }
+        public string Latitud { get; set; }
+        public string Longitud { get; set; }
+        public string Presskit { get; set; }
+        public string DescripcionCorta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Album { get; set; }
@@ -56,5 +64,11 @@ namespace Model
         public virtual ICollection<LikePerfil> LikePerfil1 { get; set; }
         public virtual PerfilTipo PerfilTipo { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LikeCancion> LikeCancion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PerfilSociales> PerfilSociales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Seguridad_RolPerfil> Seguridad_RolPerfil { get; set; }
     }
 }

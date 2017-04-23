@@ -12,14 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LikePerfil
+    public partial class Seguridad_RolPerfil
     {
-        public int id { get; set; }
-        public Nullable<int> PerfilId { get; set; }
-        public Nullable<int> PerfilLike { get; set; }
-        public int LikePerfilId { get; set; }
+        public int RolPerfilId { get; set; }
+        public int RolId { get; set; }
+        public int PerfilId { get; set; }
     
         public virtual Perfil Perfil { get; set; }
-        public virtual Perfil Perfil1 { get; set; }
+        public virtual Seguridad_Rol Seguridad_Rol { get; set; }
     }
 }

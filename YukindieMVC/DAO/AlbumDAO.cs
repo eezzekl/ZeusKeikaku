@@ -24,6 +24,7 @@ namespace DAO
         {
             try
             {
+                PerfilId = 3;
                 var item = new List<Album>();
                 using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
                 {

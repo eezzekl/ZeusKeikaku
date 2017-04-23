@@ -47,6 +47,14 @@ namespace Model
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<EventoVideo> EventoVideo { get; set; }
+        public virtual DbSet<LikeCancion> LikeCancion { get; set; }
+        public virtual DbSet<Patrocinio> Patrocinio { get; set; }
+        public virtual DbSet<PerfilSociales> PerfilSociales { get; set; }
+        public virtual DbSet<Seguridad_Menu> Seguridad_Menu { get; set; }
+        public virtual DbSet<Seguridad_Rol> Seguridad_Rol { get; set; }
+        public virtual DbSet<Seguridad_RolPerfil> Seguridad_RolPerfil { get; set; }
+        public virtual DbSet<TipoPatrocinio> TipoPatrocinio { get; set; }
     
         public virtual int st_DelAlbum_(Nullable<int> albumId, Nullable<int> perfilId)
         {

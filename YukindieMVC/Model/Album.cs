@@ -36,6 +36,8 @@ namespace Model
         public int SubGeneroId { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public System.DateTime FechaRegistro { get; set; }
+        public string UrlAlbumPrecargado { get; set; }
+        public Nullable<bool> UsarAlbumPrecargado { get; set; }
     
         public virtual Perfil Perfil { get; set; }
         public virtual SubGenero SubGenero { get; set; }

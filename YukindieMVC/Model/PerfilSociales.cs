@@ -12,14 +12,15 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LikePerfil
+    public partial class PerfilSociales
     {
-        public int id { get; set; }
+        public int PerfilSocialId { get; set; }
+        public string RedSocial { get; set; }
+        public string Url { get; set; }
+        public Nullable<bool> Estatus { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
         public Nullable<int> PerfilId { get; set; }
-        public Nullable<int> PerfilLike { get; set; }
-        public int LikePerfilId { get; set; }
     
         public virtual Perfil Perfil { get; set; }
-        public virtual Perfil Perfil1 { get; set; }
     }
 }

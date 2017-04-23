@@ -12,24 +12,20 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Estado
+    public partial class TipoPatrocinio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Estado()
+        public TipoPatrocinio()
         {
-            this.Ciudad = new HashSet<Ciudad>();
             this.Patrocinio = new HashSet<Patrocinio>();
         }
     
-        public int EstadoId { get; set; }
+        public int TipoPatId { get; set; }
         public string Nombre { get; set; }
-        public Nullable<bool> Estatus { get; set; }
-        public int PaisId { get; set; }
+        public string descripcion { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public Nullable<bool> Estatus { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ciudad> Ciudad { get; set; }
-        public virtual Pais Pais { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Patrocinio> Patrocinio { get; set; }
     }

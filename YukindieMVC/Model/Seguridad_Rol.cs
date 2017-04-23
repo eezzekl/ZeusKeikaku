@@ -12,25 +12,21 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Estado
+    public partial class Seguridad_Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Estado()
+        public Seguridad_Rol()
         {
-            this.Ciudad = new HashSet<Ciudad>();
-            this.Patrocinio = new HashSet<Patrocinio>();
+            this.Seguridad_RolPerfil = new HashSet<Seguridad_RolPerfil>();
         }
     
-        public int EstadoId { get; set; }
+        public int RolId { get; set; }
         public string Nombre { get; set; }
-        public Nullable<bool> Estatus { get; set; }
-        public int PaisId { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public string Descripcion { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public bool Estatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ciudad> Ciudad { get; set; }
-        public virtual Pais Pais { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Patrocinio> Patrocinio { get; set; }
+        public virtual ICollection<Seguridad_RolPerfil> Seguridad_RolPerfil { get; set; }
     }
 }

@@ -12,14 +12,16 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LikePerfil
+    public partial class Seguridad_Menu
     {
-        public int id { get; set; }
-        public Nullable<int> PerfilId { get; set; }
-        public Nullable<int> PerfilLike { get; set; }
-        public int LikePerfilId { get; set; }
-    
-        public virtual Perfil Perfil { get; set; }
-        public virtual Perfil Perfil1 { get; set; }
+        public int MenuId { get; set; }
+        public string Titulo { get; set; }
+        public string UrlMenu { get; set; }
+        public Nullable<int> PadreId { get; set; }
+        public Nullable<int> Orden { get; set; }
+        public Nullable<bool> EsPublico { get; set; }
+        public string Icono { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public bool Estatus { get; set; }
     }
 }

@@ -45,6 +45,22 @@
         <AssociationConnector Association="ZeusModel.FK__LikePerfi__Perfi__6EF57B66" ManuallyRouted="false" />
         <AssociationConnector Association="ZeusModel.FK__Perfil__PerfilTi__33D4B598" ManuallyRouted="false" />
         <AssociationConnector Association="ZeusModel.FK__Perfil__UsuarioI__32E0915F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ZeusModel.EventoVideo" Width="1.5" PointX="13.125" PointY="0.75" />
+        <EntityTypeShape EntityType="ZeusModel.LikeCancion" Width="1.5" PointX="14.625" PointY="13.125" />
+        <EntityTypeShape EntityType="ZeusModel.Patrocinio" Width="1.5" PointX="5.625" PointY="1.375" />
+        <EntityTypeShape EntityType="ZeusModel.PerfilSociales" Width="1.5" PointX="10.125" PointY="14.75" />
+        <EntityTypeShape EntityType="ZeusModel.Seguridad_Menu" Width="1.5" PointX="0.75" PointY="13.25" />
+        <EntityTypeShape EntityType="ZeusModel.Seguridad_Rol" Width="1.5" PointX="12.875" PointY="18.125" />
+        <EntityTypeShape EntityType="ZeusModel.Seguridad_RolPerfil" Width="1.5" PointX="15.125" PointY="16.25" />
+        <EntityTypeShape EntityType="ZeusModel.TipoPatrocinio" Width="1.5" PointX="3.375" PointY="4.5" />
+        <AssociationConnector Association="ZeusModel.FK__LikeCanci__Canci__5AEE82B9" />
+        <AssociationConnector Association="ZeusModel.FK__Patrocini__Estad__60A75C0F" />
+        <AssociationConnector Association="ZeusModel.FK__EventoVid__UrlVi__1BC821DD" />
+        <AssociationConnector Association="ZeusModel.FK__LikeCanci__Perfi__5BE2A6F2" />
+        <AssociationConnector Association="ZeusModel.FK__Patrocini__TipoP__619B8048" />
+        <AssociationConnector Association="ZeusModel.FK__PerfilSoc__perfi__656C112C" />
+        <AssociationConnector Association="ZeusModel.FK__Seguridad__Perfi__3F115E1A" />
+        <AssociationConnector Association="ZeusModel.FK__Seguridad__RolId__3E1D39E1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
