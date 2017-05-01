@@ -20,7 +20,6 @@ namespace YukindieMVC.Controllers
             Model.Perfil p = new Model.Perfil();
             p.Nombre = "MNM PRODUCCIONES";   
             p.FotoPerfil = "/Images/Perfiles/mnm producciones.jpg";
-            usu.PerfilId.Nombre = "edwin";
             usu.PerfilId = p;
 
             SessionPersister.UsuarioEnSession = usu;
