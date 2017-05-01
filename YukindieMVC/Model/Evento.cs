@@ -19,8 +19,8 @@ namespace Model
         {
             this.EventoPerfil = new HashSet<EventoPerfil>();
             this.EventoTag = new HashSet<EventoTag>();
-            this.LikeEvento = new HashSet<LikeEvento>();
             this.EventoVideo = new HashSet<EventoVideo>();
+            this.LikeEvento = new HashSet<LikeEvento>();
         }
     
         public int EventoId { get; set; }
@@ -30,9 +30,8 @@ namespace Model
         public string Direccion { get; set; }
         public string Establecimiento { get; set; }
         public Nullable<decimal> PrecioRegular { get; set; }
-        public Nullable<decimal> PrecioPreventa { get; set; }
         public string Promocion { get; set; }
-        public string Preventa { get; set; }
+        public Nullable<decimal> Preventa { get; set; }
         public Nullable<int> EventoTipoId { get; set; }
         public Nullable<int> CiudadId { get; set; }
         public string Latitud { get; set; }
@@ -43,13 +42,16 @@ namespace Model
         public Nullable<System.DateTime> FechaRegistro { get; set; }
         public int PerfilId { get; set; }
     
+        public virtual Ciudad Ciudad { get; set; }
+        public virtual EventoTipo EventoTipo { get; set; }
+        public virtual Perfil Perfil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventoPerfil> EventoPerfil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventoTag> EventoTag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LikeEvento> LikeEvento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventoVideo> EventoVideo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LikeEvento> LikeEvento { get; set; }
     }
 }

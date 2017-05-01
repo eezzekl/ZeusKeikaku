@@ -14,10 +14,9 @@ namespace Model
     
     public partial class LikeEvento
     {
-        public int id { get; set; }
+        public int LikeEventoId { get; set; }
         public Nullable<int> PerfilId { get; set; }
         public Nullable<int> EventoId { get; set; }
-        public int LikeEventoId { get; set; }
     
         public virtual Evento Evento { get; set; }
         public virtual Perfil Perfil { get; set; }

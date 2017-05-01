@@ -22,9 +22,9 @@ namespace Model
         }
     
         public int EstadoId { get; set; }
+        public int PaisId { get; set; }
         public string Nombre { get; set; }
         public Nullable<bool> Estatus { get; set; }
-        public int PaisId { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

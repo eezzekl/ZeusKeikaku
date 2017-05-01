@@ -14,10 +14,9 @@ namespace Model
     
     public partial class LikeAlbum
     {
-        public int id { get; set; }
+        public int LikeAlbumId { get; set; }
         public Nullable<int> PerfilId { get; set; }
         public Nullable<int> AlbumId { get; set; }
-        public int LikeAlbumId { get; set; }
     
         public virtual Album Album { get; set; }
         public virtual Perfil Perfil { get; set; }

@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@{
+    //aqui iniciamos los valores del usuario que ha iniciado sesión.
+
+    string nombrePerfil = string.Empty;
+    string fotoPerfil = string.Empty;
+
+    if (YukindieMVC.Helpers.SessionPersister.UsuarioEnSession != null)
+    {
+        nombrePerfil = YukindieMVC.Helpers.SessionPersister.UsuarioEnSession.PerfilId.Nombre;
+        fotoPerfil = YukindieMVC.Helpers.SessionPersister.UsuarioEnSession.PerfilId.FotoPerfil;
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -332,116 +345,52 @@
             </div>
             <div class='pull-right'>
                 <ul class="info-menu right-links list-inline list-unstyled">
-                    <li class="">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b style="color: #fff">Iniciar Sesión</b> <span class="caret"></span></a>
-                        <ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        Mediante
-                                        <div class="social-buttons">
-                                            <a href="#" class="btn btn-fb" style="color: #fff; background-color: #3b5998"><i class="fa fa-facebook"></i>Facebook</a>
-                                            <a href="#" class="btn btn-tw" style="color: #fff; background-color: #55acee"><i class="fa fa-twitter"></i>Twitter</a>
-                                        </div>
-                                        o con tú E-mail
-                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                                <div class="help-block text-right"><a href="">¿Olvidó su contraseña?</a></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-yukindie btn-block">Acceder</button>
-                                            </div>
-                                            @*<%--										<div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> keep me logged-in
-                                                </label>
-                                            </div>--%>*@
-                                        </form>
-                                    </div>
-                                    <div class="bottom text-center">
-                                        ¿Nuevo en YUKINDIE? <a href="CuentaCrear.aspx"><b>¡Únete!</b></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="profile">
-                        <a href="#" data-toggle="dropdown" class="toggle">
-                            <img src="~/Images/Usuario/perfiledwin.jpg" alt="user-image" class="img-circle img-inline" />
-                            <span><strong>Bienvenido </strong>Edwin <i class="fa fa-angle-down"></i></span>
-                        </a>
-                        @*<%--			<ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        Login via
-                                        <div class="social-buttons">
-                                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                                        </div>
-                                        or
-                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                                <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> keep me logged-in
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="bottom text-center">
-                                        New here ? <a href="#"><b>Join Us</b></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>--%>*@
-                        <ul class="dropdown-menu profile animated fadeIn">
-                            <li>
-                                <a href="#settings">
-                                    <i class="fa fa-wrench"></i>
-                                    Settings
+                    @{
+                        if (YukindieMVC.Helpers.SessionPersister.UsuarioEnSession != null)
+                        {
+                            <li class="profile showopacity">
+                                <a href="#" data-toggle="dropdown" class="toggle">
+                                    <img src="@fotoPerfil" alt="user-image" class="img-circle img-inline" />
+                                    <span><strong>Bienvenido </strong>@nombrePerfil <i class="fa fa-angle-down"></i></span>
                                 </a>
+                                <ul class="dropdown-menu profile animated fadeIn">
+                                    <li>
+                                        <a href="#settings">
+                                            <i class="fa fa-wrench"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#profile">
+                                            <i class="fa fa-user"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#help">
+                                            <i class="fa fa-info"></i>
+                                            Help
+                                        </a>
+                                    </li>
+                                    <li class="last">
+                                        <a href="ui-login.html">
+                                            <i class="fa fa-lock"></i>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="CuentaCrear.aspx" class="btn btn-default btn-border" style="width: 100%; color: white">Iniciar Sesión</a>
                             </li>
                             <li>
-                                <a href="#profile">
-                                    <i class="fa fa-user"></i>
-                                    Profile
-                                </a>
+                                <a href="CuentaCrear.aspx" class="btn btn-default btn-border" style="width: 100%; color: white">Crear Cuenta</a>
                             </li>
-                            <li>
-                                <a href="#help">
-                                    <i class="fa fa-info"></i>
-                                    Help
-                                </a>
-                            </li>
-                            <li class="last">
-                                <a href="ui-login.html">
-                                    <i class="fa fa-lock"></i>
-                                    Logout
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="CuentaCrear.aspx" class="btn btn-default btn-border" style="width: 100%; color: white">Crear Cuenta</a>
-                    </li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -621,7 +570,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-12" align="center">
-                            <label style="color:white">Desarrollado por: YUKINDIE Ingeniería y Desarrollo Para Negocios.</label>
+                            <label style="color:white">Desarrollado por: YUKINDIE TECHNOLOGIES.</label>
                         </div>
                     </div>
                 </div>

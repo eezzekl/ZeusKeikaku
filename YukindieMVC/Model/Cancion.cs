@@ -24,12 +24,11 @@ namespace Model
         public string Titulo { get; set; }
         public string Duracion { get; set; }
         public int NumeroTrack { get; set; }
-        public string rutaArchivo { get; set; }
+        public string RutaArchivo { get; set; }
         public Nullable<bool> Tipo { get; set; }
         public int AlbumId { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public System.DateTime FechaRegistro { get; set; }
-        public string RutaArchivo { get; set; }
         public Nullable<int> Reproducciones { get; set; }
         public string Letra { get; set; }
     

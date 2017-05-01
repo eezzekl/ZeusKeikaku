@@ -4,63 +4,66 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a63b4453a37149df8beadfba9f9c83a5" Name="Diagram1">
-        <EntityTypeShape EntityType="ZeusModel.Album" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.AlbumTag" Width="1.5" PointX="15" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Cancion" Width="1.5" PointX="12" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Ciudad" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Estado" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Evento" Width="1.5" PointX="10.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.EventoPerfil" Width="1.5" PointX="12.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.EventoTag" Width="1.5" PointX="15" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.EventoTipo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Genero" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.LikeAlbum" Width="1.5" PointX="15" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.LikeEvento" Width="1.5" PointX="12.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.LikePerfil" Width="1.5" PointX="9.75" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Pais" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Perfil" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.PerfilTipo" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.SubGenero" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Tag" Width="1.5" PointX="12.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusModel.Usuario" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <AssociationConnector Association="ZeusModel.FK__Album__PerfilId__25869641" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Album__SubGenero__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__AlbumTag__AlbumI__628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Cancion__AlbumId__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__LikeAlbum__Album__6754599E" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__AlbumTag__TagId__619B8048" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Ciudad__EstadoId__286302EC" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Perfil__CiudadId__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Estado__PaisId__29572725" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__EventoPer__Event__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__EventoTag__Event__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__LikeEvent__Event__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__EventoPer__Perfi__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__EventoTag__TagId__59FA5E80" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__LikeAlbum__Perfi__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__LikeEvent__Perfi__6A30C649" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__LikePerfi__Perfi__6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__LikePerfi__Perfi__6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Perfil__PerfilTi__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="ZeusModel.FK__Perfil__UsuarioI__32E0915F" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ZeusModel.EventoVideo" Width="1.5" PointX="13.125" PointY="0.75" />
-        <EntityTypeShape EntityType="ZeusModel.LikeCancion" Width="1.5" PointX="14.625" PointY="13.125" />
-        <EntityTypeShape EntityType="ZeusModel.Patrocinio" Width="1.5" PointX="5.625" PointY="1.375" />
-        <EntityTypeShape EntityType="ZeusModel.PerfilSociales" Width="1.5" PointX="10.125" PointY="14.75" />
-        <EntityTypeShape EntityType="ZeusModel.Seguridad_Menu" Width="1.5" PointX="0.75" PointY="13.25" />
-        <EntityTypeShape EntityType="ZeusModel.Seguridad_Rol" Width="1.5" PointX="12.875" PointY="18.125" />
-        <EntityTypeShape EntityType="ZeusModel.Seguridad_RolPerfil" Width="1.5" PointX="15.125" PointY="16.25" />
-        <EntityTypeShape EntityType="ZeusModel.TipoPatrocinio" Width="1.5" PointX="3.375" PointY="4.5" />
-        <AssociationConnector Association="ZeusModel.FK__LikeCanci__Canci__5AEE82B9" />
-        <AssociationConnector Association="ZeusModel.FK__Patrocini__Estad__60A75C0F" />
-        <AssociationConnector Association="ZeusModel.FK__EventoVid__UrlVi__1BC821DD" />
-        <AssociationConnector Association="ZeusModel.FK__LikeCanci__Perfi__5BE2A6F2" />
-        <AssociationConnector Association="ZeusModel.FK__Patrocini__TipoP__619B8048" />
-        <AssociationConnector Association="ZeusModel.FK__PerfilSoc__perfi__656C112C" />
-        <AssociationConnector Association="ZeusModel.FK__Seguridad__Perfi__3F115E1A" />
-        <AssociationConnector Association="ZeusModel.FK__Seguridad__RolId__3E1D39E1" />
+      <Diagram DiagramId="e78a344d656b46d69a71c44187312cc3" Name="Diagram1">
+        <EntityTypeShape EntityType="ZeusFinalModel.Album" Width="1.5" PointX="15.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.AlbumTag" Width="1.5" PointX="18" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Cancion" Width="1.5" PointX="18" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Ciudad" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Estado" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Evento" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.EventoPerfil" Width="1.5" PointX="12.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.EventoTag" Width="1.5" PointX="12.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.EventoTipo" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.EventoVideo" Width="1.5" PointX="9.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Genero" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.LikeAlbum" Width="1.5" PointX="21" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.LikeCancion" Width="1.5" PointX="20.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.LikeEvento" Width="1.5" PointX="15.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.LikePerfil" Width="1.5" PointX="12.75" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Pais" Width="1.5" PointX="0.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Patrocinio" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Perfil" Width="1.5" PointX="10.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.PerfilSociales" Width="1.5" PointX="12.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.PerfilTipo" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_Rol" Width="1.5" PointX="13.5" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_RolPerfil" Width="1.5" PointX="15.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.SubGenero" Width="1.5" PointX="13.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Tag" Width="1.5" PointX="10.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.TipoPatrocinio" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Usuario" Width="1.5" PointX="8.25" PointY="27.25" IsExpanded="true" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Album__PerfilId__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Album__SubGenero__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__AlbumTag__AlbumI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Cancion__AlbumId__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikeAlbum__Album__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__AlbumTag__TagId__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikeCanci__Canci__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Ciudad__EstadoId__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Evento__CiudadId__1209AD79" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Perfil__CiudadId__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Estado__PaisId__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Patrocini__Estad__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Evento__EventoTi__0F2D40CE" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Evento__PerfilId__13F1F5EB" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__EventoPer__Event__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__EventoTag__Event__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__EventoVid__UrlVi__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikeEvent__Event__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__EventoPer__Perfi__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__EventoTag__TagId__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__SubGenero__Gener__12FDD1B2" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikeAlbum__Perfi__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikeCanci__Perfi__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikeEvent__Perfi__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikePerfi__Perfi__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__LikePerfi__Perfi__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Patrocini__TipoP__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Perfil__PerfilTi__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Perfil__UsuarioI__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__PerfilSoc__perfi__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Seguridad__Perfi__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="ZeusFinalModel.FK__Seguridad__RolId__3E1D39E1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

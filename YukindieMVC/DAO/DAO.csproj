@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,10 @@
   <ItemGroup>
     <Compile Include="AlbumDAO.cs" />
     <Compile Include="AlbumTagDAO.cs" />
+    <Compile Include="CiudadDAO.cs" />
+    <Compile Include="EventoDAO.cs" />
+    <Compile Include="EventoTipoDAO.cs" />
+    <Compile Include="PerfilDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubGeneroDAO.cs" />
     <Compile Include="TagDAO.cs" />

@@ -22,7 +22,6 @@ namespace Model
         }
     
         public int TagId { get; set; }
-        public string nombre { get; set; }
         public string Nombre { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }

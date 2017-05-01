@@ -47,7 +47,7 @@ namespace DAO
             {
                 using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
                 {
-                    return db.Tag.Where(t => t.nombre == item.nombre).FirstOrDefault();
+                    return db.Tag.Where(t => t.Nombre  == item.Nombre ).FirstOrDefault();
                 }
             }
             catch (EntityException e)
@@ -95,6 +95,32 @@ namespace DAO
             catch (EntityException ex)
             {
 
+                throw ex;
+            }
+        }
+
+        /*************************************************************************/
+
+        public static List<Tag> Get(int TagId, string Nombre)
+        {
+            try
+            {
+                List<Tag> litem = new List<Tag>();
+                using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
+                {
+                    litem = db.st_SelTag(TagId, Nombre)
+                        .Select(x => new Tag
+                        {
+                            TagId = x.TagId,
+                            Nombre = x.Nombre,
+                            Estatus = x.Estatus
+                        }).ToList();
+                }
+
+                return litem;
+            }
+            catch (EntityException ex)
+            {
                 throw ex;
             }
         }

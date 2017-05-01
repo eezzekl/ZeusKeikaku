@@ -14,10 +14,9 @@ namespace Model
     
     public partial class EventoTag
     {
-        public int id { get; set; }
+        public int EventoTagId { get; set; }
         public Nullable<int> TagId { get; set; }
         public Nullable<int> EventoId { get; set; }
-        public int EventoTagId { get; set; }
     
         public virtual Evento Evento { get; set; }
         public virtual Tag Tag { get; set; }

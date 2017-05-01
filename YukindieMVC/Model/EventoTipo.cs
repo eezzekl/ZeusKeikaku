@@ -14,9 +14,18 @@ namespace Model
     
     public partial class EventoTipo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EventoTipo()
+        {
+            this.Evento = new HashSet<Evento>();
+        }
+    
         public int EventoTipoId { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Evento> Evento { get; set; }
     }
 }

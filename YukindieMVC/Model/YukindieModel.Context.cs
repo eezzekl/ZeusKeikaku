@@ -36,25 +36,24 @@ namespace Model
         public virtual DbSet<EventoPerfil> EventoPerfil { get; set; }
         public virtual DbSet<EventoTag> EventoTag { get; set; }
         public virtual DbSet<EventoTipo> EventoTipo { get; set; }
+        public virtual DbSet<EventoVideo> EventoVideo { get; set; }
         public virtual DbSet<Genero> Genero { get; set; }
         public virtual DbSet<LikeAlbum> LikeAlbum { get; set; }
+        public virtual DbSet<LikeCancion> LikeCancion { get; set; }
         public virtual DbSet<LikeEvento> LikeEvento { get; set; }
         public virtual DbSet<LikePerfil> LikePerfil { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
-        public virtual DbSet<Perfil> Perfil { get; set; }
-        public virtual DbSet<PerfilTipo> PerfilTipo { get; set; }
-        public virtual DbSet<SubGenero> SubGenero { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Tag> Tag { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<EventoVideo> EventoVideo { get; set; }
-        public virtual DbSet<LikeCancion> LikeCancion { get; set; }
         public virtual DbSet<Patrocinio> Patrocinio { get; set; }
+        public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<PerfilSociales> PerfilSociales { get; set; }
+        public virtual DbSet<PerfilTipo> PerfilTipo { get; set; }
         public virtual DbSet<Seguridad_Menu> Seguridad_Menu { get; set; }
         public virtual DbSet<Seguridad_Rol> Seguridad_Rol { get; set; }
         public virtual DbSet<Seguridad_RolPerfil> Seguridad_RolPerfil { get; set; }
+        public virtual DbSet<SubGenero> SubGenero { get; set; }
+        public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<TipoPatrocinio> TipoPatrocinio { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     
         public virtual int st_DelAlbum_(Nullable<int> albumId, Nullable<int> perfilId)
         {
@@ -67,6 +66,59 @@ namespace Model
                 new ObjectParameter("PerfilId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_DelAlbum_", albumIdParameter, perfilIdParameter);
+        }
+    
+        public virtual int st_InsAlbum(string titulo, string imagen, Nullable<System.DateTime> fechaPublicacion, string formato, string contenido, Nullable<decimal> precio, Nullable<decimal> oferta, string linkCompra, string promocion, Nullable<int> perfilId, Nullable<int> subGeneroId, Nullable<bool> estatus)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(string));
+    
+            var fechaPublicacionParameter = fechaPublicacion.HasValue ?
+                new ObjectParameter("FechaPublicacion", fechaPublicacion) :
+                new ObjectParameter("FechaPublicacion", typeof(System.DateTime));
+    
+            var formatoParameter = formato != null ?
+                new ObjectParameter("Formato", formato) :
+                new ObjectParameter("Formato", typeof(string));
+    
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(decimal));
+    
+            var ofertaParameter = oferta.HasValue ?
+                new ObjectParameter("Oferta", oferta) :
+                new ObjectParameter("Oferta", typeof(decimal));
+    
+            var linkCompraParameter = linkCompra != null ?
+                new ObjectParameter("LinkCompra", linkCompra) :
+                new ObjectParameter("LinkCompra", typeof(string));
+    
+            var promocionParameter = promocion != null ?
+                new ObjectParameter("Promocion", promocion) :
+                new ObjectParameter("Promocion", typeof(string));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            var subGeneroIdParameter = subGeneroId.HasValue ?
+                new ObjectParameter("SubGeneroId", subGeneroId) :
+                new ObjectParameter("SubGeneroId", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsAlbum", tituloParameter, imagenParameter, fechaPublicacionParameter, formatoParameter, contenidoParameter, precioParameter, ofertaParameter, linkCompraParameter, promocionParameter, perfilIdParameter, subGeneroIdParameter, estatusParameter);
         }
     
         public virtual int st_InsAlbum_(Nullable<int> albumId, string titulo, string imagen, Nullable<System.DateTime> fechaPublicacion, string formato, string contenido, Nullable<decimal> precio, Nullable<decimal> oferta, string linkCompra, string promocion, Nullable<int> perfilId, Nullable<int> subGeneroId, Nullable<bool> estatus, Nullable<System.DateTime> fechaRegistro)
@@ -130,9 +182,162 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsAlbum_", albumIdParameter, tituloParameter, imagenParameter, fechaPublicacionParameter, formatoParameter, contenidoParameter, precioParameter, ofertaParameter, linkCompraParameter, promocionParameter, perfilIdParameter, subGeneroIdParameter, estatusParameter, fechaRegistroParameter);
         }
     
-        public virtual ObjectResult<st_SelSubGeneroGetAll_Result> st_SelSubGeneroGetAll()
+        public virtual int st_InsCancion(string titulo, string duracion, Nullable<int> numeroTrack, string rutaArchivo, Nullable<bool> tipo, Nullable<int> albumId, Nullable<bool> estatus)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelSubGeneroGetAll_Result>("st_SelSubGeneroGetAll");
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var duracionParameter = duracion != null ?
+                new ObjectParameter("Duracion", duracion) :
+                new ObjectParameter("Duracion", typeof(string));
+    
+            var numeroTrackParameter = numeroTrack.HasValue ?
+                new ObjectParameter("NumeroTrack", numeroTrack) :
+                new ObjectParameter("NumeroTrack", typeof(int));
+    
+            var rutaArchivoParameter = rutaArchivo != null ?
+                new ObjectParameter("RutaArchivo", rutaArchivo) :
+                new ObjectParameter("RutaArchivo", typeof(string));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(bool));
+    
+            var albumIdParameter = albumId.HasValue ?
+                new ObjectParameter("AlbumId", albumId) :
+                new ObjectParameter("AlbumId", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsCancion", tituloParameter, duracionParameter, numeroTrackParameter, rutaArchivoParameter, tipoParameter, albumIdParameter, estatusParameter);
+        }
+    
+        public virtual int st_InsEvento(ObjectParameter eventoId, string titulo, string imagen, Nullable<System.DateTime> fechaEvento, string direccion, string establecimiento, Nullable<decimal> precioRegular, string promocion, Nullable<decimal> preventa, Nullable<int> eventoTipoId, Nullable<int> ciudadId, string latitud, string longitud, string linkEventoFacebook, string linkComprarBoleto, Nullable<bool> estatus, Nullable<int> perfilId)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(string));
+    
+            var fechaEventoParameter = fechaEvento.HasValue ?
+                new ObjectParameter("FechaEvento", fechaEvento) :
+                new ObjectParameter("FechaEvento", typeof(System.DateTime));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var establecimientoParameter = establecimiento != null ?
+                new ObjectParameter("Establecimiento", establecimiento) :
+                new ObjectParameter("Establecimiento", typeof(string));
+    
+            var precioRegularParameter = precioRegular.HasValue ?
+                new ObjectParameter("PrecioRegular", precioRegular) :
+                new ObjectParameter("PrecioRegular", typeof(decimal));
+    
+            var promocionParameter = promocion != null ?
+                new ObjectParameter("Promocion", promocion) :
+                new ObjectParameter("Promocion", typeof(string));
+    
+            var preventaParameter = preventa.HasValue ?
+                new ObjectParameter("Preventa", preventa) :
+                new ObjectParameter("Preventa", typeof(decimal));
+    
+            var eventoTipoIdParameter = eventoTipoId.HasValue ?
+                new ObjectParameter("EventoTipoId", eventoTipoId) :
+                new ObjectParameter("EventoTipoId", typeof(int));
+    
+            var ciudadIdParameter = ciudadId.HasValue ?
+                new ObjectParameter("CiudadId", ciudadId) :
+                new ObjectParameter("CiudadId", typeof(int));
+    
+            var latitudParameter = latitud != null ?
+                new ObjectParameter("Latitud", latitud) :
+                new ObjectParameter("Latitud", typeof(string));
+    
+            var longitudParameter = longitud != null ?
+                new ObjectParameter("Longitud", longitud) :
+                new ObjectParameter("Longitud", typeof(string));
+    
+            var linkEventoFacebookParameter = linkEventoFacebook != null ?
+                new ObjectParameter("LinkEventoFacebook", linkEventoFacebook) :
+                new ObjectParameter("LinkEventoFacebook", typeof(string));
+    
+            var linkComprarBoletoParameter = linkComprarBoleto != null ?
+                new ObjectParameter("LinkComprarBoleto", linkComprarBoleto) :
+                new ObjectParameter("LinkComprarBoleto", typeof(string));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsEvento", eventoId, tituloParameter, imagenParameter, fechaEventoParameter, direccionParameter, establecimientoParameter, precioRegularParameter, promocionParameter, preventaParameter, eventoTipoIdParameter, ciudadIdParameter, latitudParameter, longitudParameter, linkEventoFacebookParameter, linkComprarBoletoParameter, estatusParameter, perfilIdParameter);
+        }
+    
+        public virtual int st_InsEventoPerfil(Nullable<int> eventoId, string nombre)
+        {
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsEventoPerfil", eventoIdParameter, nombreParameter);
+        }
+    
+        public virtual int st_InsEventoTag(Nullable<int> eventoId, string nombre)
+        {
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsEventoTag", eventoIdParameter, nombreParameter);
+        }
+    
+        public virtual int st_InsEventoTipo(Nullable<int> eventoTipoId, string descripcion, Nullable<bool> estatus)
+        {
+            var eventoTipoIdParameter = eventoTipoId.HasValue ?
+                new ObjectParameter("EventoTipoId", eventoTipoId) :
+                new ObjectParameter("EventoTipoId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsEventoTipo", eventoTipoIdParameter, descripcionParameter, estatusParameter);
+        }
+    
+        public virtual int st_InsEventoVideo(Nullable<int> eventoId, string urlVideo)
+        {
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            var urlVideoParameter = urlVideo != null ?
+                new ObjectParameter("UrlVideo", urlVideo) :
+                new ObjectParameter("UrlVideo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsEventoVideo", eventoIdParameter, urlVideoParameter);
         }
     
         public virtual ObjectResult<st_SelAlbum__Result> st_SelAlbum_(Nullable<int> albumId, string titulo, Nullable<int> perfilId)
@@ -150,6 +355,313 @@ namespace Model
                 new ObjectParameter("PerfilId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelAlbum__Result>("st_SelAlbum_", albumIdParameter, tituloParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelAlbumFiltro_Result> st_SelAlbumFiltro(Nullable<int> subGeneroId, Nullable<int> tipoOrdenamiento)
+        {
+            var subGeneroIdParameter = subGeneroId.HasValue ?
+                new ObjectParameter("SubGeneroId", subGeneroId) :
+                new ObjectParameter("SubGeneroId", typeof(int));
+    
+            var tipoOrdenamientoParameter = tipoOrdenamiento.HasValue ?
+                new ObjectParameter("TipoOrdenamiento", tipoOrdenamiento) :
+                new ObjectParameter("TipoOrdenamiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelAlbumFiltro_Result>("st_SelAlbumFiltro", subGeneroIdParameter, tipoOrdenamientoParameter);
+        }
+    
+        public virtual ObjectResult<st_SelAlbumGet_Result> st_SelAlbumGet(string titulo, Nullable<int> perfilId)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelAlbumGet_Result>("st_SelAlbumGet", tituloParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelAlbumGetAll_Result> st_SelAlbumGetAll(Nullable<int> perfilId)
+        {
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelAlbumGetAll_Result>("st_SelAlbumGetAll", perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelAlbumGetOne_Result> st_SelAlbumGetOne(Nullable<int> albumId, Nullable<int> perfilId)
+        {
+            var albumIdParameter = albumId.HasValue ?
+                new ObjectParameter("AlbumId", albumId) :
+                new ObjectParameter("AlbumId", typeof(int));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelAlbumGetOne_Result>("st_SelAlbumGetOne", albumIdParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelCancionGet_Result> st_SelCancionGet(string titulo, Nullable<int> perfilId)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelCancionGet_Result>("st_SelCancionGet", tituloParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelCancionGetAll_Result> st_SelCancionGetAll(Nullable<int> perfilId)
+        {
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelCancionGetAll_Result>("st_SelCancionGetAll", perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelCancionGetOne_Result> st_SelCancionGetOne(Nullable<int> cancionId, Nullable<int> perfilId)
+        {
+            var cancionIdParameter = cancionId.HasValue ?
+                new ObjectParameter("CancionId", cancionId) :
+                new ObjectParameter("CancionId", typeof(int));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelCancionGetOne_Result>("st_SelCancionGetOne", cancionIdParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelCiudadGetAll_Result> st_SelCiudadGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelCiudadGetAll_Result>("st_SelCiudadGetAll");
+        }
+    
+        public virtual ObjectResult<st_SelEvento_Result> st_SelEvento(Nullable<int> eventoTipoId, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<decimal> precio, Nullable<int> tipoOrdenamiento, Nullable<bool> estatus)
+        {
+            var eventoTipoIdParameter = eventoTipoId.HasValue ?
+                new ObjectParameter("EventoTipoId", eventoTipoId) :
+                new ObjectParameter("EventoTipoId", typeof(int));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("FechaInicial", fechaInicial) :
+                new ObjectParameter("FechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(decimal));
+    
+            var tipoOrdenamientoParameter = tipoOrdenamiento.HasValue ?
+                new ObjectParameter("TipoOrdenamiento", tipoOrdenamiento) :
+                new ObjectParameter("TipoOrdenamiento", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEvento_Result>("st_SelEvento", eventoTipoIdParameter, fechaInicialParameter, fechaFinalParameter, precioParameter, tipoOrdenamientoParameter, estatusParameter);
+        }
+    
+        public virtual ObjectResult<st_SelEventoPerfil_Result> st_SelEventoPerfil(Nullable<int> eventoPerfilId, Nullable<int> eventoId, Nullable<int> perfilId)
+        {
+            var eventoPerfilIdParameter = eventoPerfilId.HasValue ?
+                new ObjectParameter("EventoPerfilId", eventoPerfilId) :
+                new ObjectParameter("EventoPerfilId", typeof(int));
+    
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEventoPerfil_Result>("st_SelEventoPerfil", eventoPerfilIdParameter, eventoIdParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelEventoTag_Result> st_SelEventoTag(Nullable<int> eventoTagId, Nullable<int> tagId, Nullable<int> eventoId)
+        {
+            var eventoTagIdParameter = eventoTagId.HasValue ?
+                new ObjectParameter("EventoTagId", eventoTagId) :
+                new ObjectParameter("EventoTagId", typeof(int));
+    
+            var tagIdParameter = tagId.HasValue ?
+                new ObjectParameter("TagId", tagId) :
+                new ObjectParameter("TagId", typeof(int));
+    
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEventoTag_Result>("st_SelEventoTag", eventoTagIdParameter, tagIdParameter, eventoIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelEventoTipo_Result> st_SelEventoTipo(Nullable<int> eventoTipoId, string descripcion, Nullable<bool> estatus)
+        {
+            var eventoTipoIdParameter = eventoTipoId.HasValue ?
+                new ObjectParameter("EventoTipoId", eventoTipoId) :
+                new ObjectParameter("EventoTipoId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEventoTipo_Result>("st_SelEventoTipo", eventoTipoIdParameter, descripcionParameter, estatusParameter);
+        }
+    
+        public virtual ObjectResult<st_SelEventoVideo_Result> st_SelEventoVideo(Nullable<int> eventoVideoId, Nullable<int> eventoId, string urlVideo)
+        {
+            var eventoVideoIdParameter = eventoVideoId.HasValue ?
+                new ObjectParameter("EventoVideoId", eventoVideoId) :
+                new ObjectParameter("EventoVideoId", typeof(int));
+    
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            var urlVideoParameter = urlVideo != null ?
+                new ObjectParameter("UrlVideo", urlVideo) :
+                new ObjectParameter("UrlVideo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEventoVideo_Result>("st_SelEventoVideo", eventoVideoIdParameter, eventoIdParameter, urlVideoParameter);
+        }
+    
+        public virtual ObjectResult<st_selPerfil_Result> st_selPerfil()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_selPerfil_Result>("st_selPerfil");
+        }
+    
+        public virtual ObjectResult<st_SelSeguridadMenu_Result> st_SelSeguridadMenu()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelSeguridadMenu_Result>("st_SelSeguridadMenu");
+        }
+    
+        public virtual ObjectResult<st_SelSubGeneroGetAll_Result> st_SelSubGeneroGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelSubGeneroGetAll_Result>("st_SelSubGeneroGetAll");
+        }
+    
+        public virtual ObjectResult<st_SelTag_Result> st_SelTag(Nullable<int> tagId, string nombre)
+        {
+            var tagIdParameter = tagId.HasValue ?
+                new ObjectParameter("TagId", tagId) :
+                new ObjectParameter("TagId", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelTag_Result>("st_SelTag", tagIdParameter, nombreParameter);
+        }
+    
+        public virtual int st_UpdAlbum(Nullable<int> albumId, string titulo, string imagen, Nullable<System.DateTime> fechaPublicacion, string formato, string contenido, Nullable<decimal> precio, Nullable<decimal> oferta, string linkCompra, string promocion, Nullable<int> perfilId, Nullable<int> subGeneroId, Nullable<bool> estatus)
+        {
+            var albumIdParameter = albumId.HasValue ?
+                new ObjectParameter("AlbumId", albumId) :
+                new ObjectParameter("AlbumId", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(string));
+    
+            var fechaPublicacionParameter = fechaPublicacion.HasValue ?
+                new ObjectParameter("FechaPublicacion", fechaPublicacion) :
+                new ObjectParameter("FechaPublicacion", typeof(System.DateTime));
+    
+            var formatoParameter = formato != null ?
+                new ObjectParameter("Formato", formato) :
+                new ObjectParameter("Formato", typeof(string));
+    
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(decimal));
+    
+            var ofertaParameter = oferta.HasValue ?
+                new ObjectParameter("Oferta", oferta) :
+                new ObjectParameter("Oferta", typeof(decimal));
+    
+            var linkCompraParameter = linkCompra != null ?
+                new ObjectParameter("LinkCompra", linkCompra) :
+                new ObjectParameter("LinkCompra", typeof(string));
+    
+            var promocionParameter = promocion != null ?
+                new ObjectParameter("Promocion", promocion) :
+                new ObjectParameter("Promocion", typeof(string));
+    
+            var perfilIdParameter = perfilId.HasValue ?
+                new ObjectParameter("PerfilId", perfilId) :
+                new ObjectParameter("PerfilId", typeof(int));
+    
+            var subGeneroIdParameter = subGeneroId.HasValue ?
+                new ObjectParameter("SubGeneroId", subGeneroId) :
+                new ObjectParameter("SubGeneroId", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_UpdAlbum", albumIdParameter, tituloParameter, imagenParameter, fechaPublicacionParameter, formatoParameter, contenidoParameter, precioParameter, ofertaParameter, linkCompraParameter, promocionParameter, perfilIdParameter, subGeneroIdParameter, estatusParameter);
+        }
+    
+        public virtual int st_UpdCancion(Nullable<int> cancionId, string titulo, string duracion, Nullable<int> numeroTrack, string rutaArchivo, Nullable<bool> tipo, Nullable<int> albumId, Nullable<bool> estatus)
+        {
+            var cancionIdParameter = cancionId.HasValue ?
+                new ObjectParameter("CancionId", cancionId) :
+                new ObjectParameter("CancionId", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var duracionParameter = duracion != null ?
+                new ObjectParameter("Duracion", duracion) :
+                new ObjectParameter("Duracion", typeof(string));
+    
+            var numeroTrackParameter = numeroTrack.HasValue ?
+                new ObjectParameter("NumeroTrack", numeroTrack) :
+                new ObjectParameter("NumeroTrack", typeof(int));
+    
+            var rutaArchivoParameter = rutaArchivo != null ?
+                new ObjectParameter("RutaArchivo", rutaArchivo) :
+                new ObjectParameter("RutaArchivo", typeof(string));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(bool));
+    
+            var albumIdParameter = albumId.HasValue ?
+                new ObjectParameter("AlbumId", albumId) :
+                new ObjectParameter("AlbumId", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_UpdCancion", cancionIdParameter, tituloParameter, duracionParameter, numeroTrackParameter, rutaArchivoParameter, tipoParameter, albumIdParameter, estatusParameter);
         }
     }
 }

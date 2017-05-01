@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ZeusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ZeusFinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
@@ -401,6 +401,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Evento__CiudadId__1209AD79">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="CiudadId" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="CiudadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Evento__EventoTi__0F2D40CE">
+          <End Role="EventoTipo" Type="Self.EventoTipo" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventoTipo">
+              <PropertyRef Name="EventoTipoId" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="EventoTipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Evento__PerfilId__13F1F5EB">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__EventoPer__Event__5535A963">
           <End Role="Evento" Type="Self.Evento" Multiplicity="0..1" />
           <End Role="EventoPerfil" Type="Self.EventoPerfil" Multiplicity="*" />
@@ -653,9 +689,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__SubGenero__Gener__12FDD1B2">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
+          <End Role="SubGenero" Type="Self.SubGenero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="GeneroId" />
+            </Principal>
+            <Dependent Role="SubGenero">
+              <PropertyRef Name="GeneroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="st_DelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AlbumId" Type="int" Mode="In" />
           <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_InsAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varchar" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="date" Mode="In" />
+          <Parameter Name="Formato" Type="varchar" Mode="In" />
+          <Parameter Name="Contenido" Type="varchar" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Oferta" Type="decimal" Mode="In" />
+          <Parameter Name="LinkCompra" Type="varchar" Mode="In" />
+          <Parameter Name="Promocion" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+          <Parameter Name="SubGeneroId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
         </Function>
         <Function Name="st_InsAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AlbumId" Type="int" Mode="In" />
@@ -673,13 +735,144 @@
           <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="FechaRegistro" Type="date" Mode="In" />
         </Function>
+        <Function Name="st_InsCancion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Duracion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroTrack" Type="int" Mode="In" />
+          <Parameter Name="RutaArchivo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Tipo" Type="bit" Mode="In" />
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="st_InsEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoId" Type="int" Mode="InOut" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varchar" Mode="In" />
+          <Parameter Name="FechaEvento" Type="datetime" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+          <Parameter Name="Establecimiento" Type="varchar" Mode="In" />
+          <Parameter Name="PrecioRegular" Type="decimal" Mode="In" />
+          <Parameter Name="Promocion" Type="varchar" Mode="In" />
+          <Parameter Name="Preventa" Type="decimal" Mode="In" />
+          <Parameter Name="EventoTipoId" Type="int" Mode="In" />
+          <Parameter Name="CiudadId" Type="int" Mode="In" />
+          <Parameter Name="Latitud" Type="varchar" Mode="In" />
+          <Parameter Name="Longitud" Type="varchar" Mode="In" />
+          <Parameter Name="LinkEventoFacebook" Type="varchar" Mode="In" />
+          <Parameter Name="LinkComprarBoleto" Type="varchar" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_InsEventoPerfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoId" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="st_InsEventoTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoId" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="st_InsEventoTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoTipoId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="st_InsEventoVideo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoId" Type="int" Mode="In" />
+          <Parameter Name="UrlVideo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="st_SelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AlbumId" Type="int" Mode="In" />
           <Parameter Name="Titulo" Type="varchar" Mode="In" />
           <Parameter Name="PerfilId" Type="int" Mode="In" />
         </Function>
+        <Function Name="st_SelAlbumFiltro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SubGeneroId" Type="int" Mode="In" />
+          <Parameter Name="TipoOrdenamiento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelAlbumGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelAlbumGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelAlbumGetOne" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelCancionGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelCancionGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelCancionGetOne" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CancionId" Type="int" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelCiudadGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="st_SelEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoTipoId" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="TipoOrdenamiento" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="st_SelEventoPerfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoPerfilId" Type="int" Mode="In" />
+          <Parameter Name="EventoId" Type="int" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelEventoTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoTagId" Type="int" Mode="In" />
+          <Parameter Name="TagId" Type="int" Mode="In" />
+          <Parameter Name="EventoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="st_SelEventoTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoTipoId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="st_SelEventoVideo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventoVideoId" Type="int" Mode="In" />
+          <Parameter Name="EventoId" Type="int" Mode="In" />
+          <Parameter Name="UrlVideo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="st_selPerfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="st_SelSeguridadMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="st_SelSubGeneroGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="ZeusModelStoreContainer">
+        <Function Name="st_SelTag" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TagId" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="st_UpdAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varchar" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="date" Mode="In" />
+          <Parameter Name="Formato" Type="varchar" Mode="In" />
+          <Parameter Name="Contenido" Type="varchar" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Oferta" Type="decimal" Mode="In" />
+          <Parameter Name="LinkCompra" Type="varchar" Mode="In" />
+          <Parameter Name="Promocion" Type="varchar" Mode="In" />
+          <Parameter Name="PerfilId" Type="int" Mode="In" />
+          <Parameter Name="SubGeneroId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="st_UpdCancion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CancionId" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Duracion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroTrack" Type="int" Mode="In" />
+          <Parameter Name="RutaArchivo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Tipo" Type="bit" Mode="In" />
+          <Parameter Name="AlbumId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="ZeusFinalModelStoreContainer">
           <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlbumTag" EntityType="Self.AlbumTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cancion" EntityType="Self.Cancion" Schema="dbo" store:Type="Tables" />
@@ -734,6 +927,18 @@
           <AssociationSet Name="FK__Estado__PaisId__5441852A" Association="Self.FK__Estado__PaisId__5441852A">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Evento__CiudadId__1209AD79" Association="Self.FK__Evento__CiudadId__1209AD79">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Evento__EventoTi__0F2D40CE" Association="Self.FK__Evento__EventoTi__0F2D40CE">
+            <End Role="EventoTipo" EntitySet="EventoTipo" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Evento__PerfilId__13F1F5EB" Association="Self.FK__Evento__PerfilId__13F1F5EB">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
           <AssociationSet Name="FK__EventoPer__Event__5535A963" Association="Self.FK__EventoPer__Event__5535A963">
             <End Role="Evento" EntitySet="Evento" />
@@ -819,11 +1024,16 @@
             <End Role="Seguridad_Rol" EntitySet="Seguridad_Rol" />
             <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
           </AssociationSet>
+          <AssociationSet Name="FK__SubGenero__Gener__12FDD1B2" Association="Self.FK__SubGenero__Gener__12FDD1B2">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="SubGenero" EntitySet="SubGenero" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ZeusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ZeusFinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumId" />
@@ -842,13 +1052,13 @@
           <Property Name="SubGeneroId" Type="Int32" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Perfil" Relationship="Self.FK__Album__PerfilId__25869641" FromRole="Album" ToRole="Perfil" />
-          <NavigationProperty Name="SubGenero" Relationship="Self.FK__Album__SubGenero__267ABA7A" FromRole="Album" ToRole="SubGenero" />
-          <NavigationProperty Name="AlbumTag" Relationship="Self.FK__AlbumTag__AlbumI__628FA481" FromRole="Album" ToRole="AlbumTag" />
-          <NavigationProperty Name="Cancion" Relationship="Self.FK__Cancion__AlbumId__276EDEB3" FromRole="Album" ToRole="Cancion" />
-          <NavigationProperty Name="LikeAlbum" Relationship="Self.FK__LikeAlbum__Album__6754599E" FromRole="Album" ToRole="LikeAlbum" />
           <Property Name="UrlAlbumPrecargado" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="UsarAlbumPrecargado" Type="Boolean" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Album__PerfilId__4E88ABD4" FromRole="Album" ToRole="Perfil" />
+          <NavigationProperty Name="SubGenero" Relationship="Self.FK__Album__SubGenero__4F7CD00D" FromRole="Album" ToRole="SubGenero" />
+          <NavigationProperty Name="AlbumTag" Relationship="Self.FK__AlbumTag__AlbumI__5070F446" FromRole="Album" ToRole="AlbumTag" />
+          <NavigationProperty Name="Cancion" Relationship="Self.FK__Cancion__AlbumId__52593CB8" FromRole="Album" ToRole="Cancion" />
+          <NavigationProperty Name="LikeAlbum" Relationship="Self.FK__LikeAlbum__Album__59063A47" FromRole="Album" ToRole="LikeAlbum" />
         </EntityType>
         <EntityType Name="AlbumTag">
           <Key>
@@ -857,8 +1067,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TagId" Type="Int32" />
           <Property Name="AlbumId" Type="Int32" />
-          <NavigationProperty Name="Album" Relationship="Self.FK__AlbumTag__AlbumI__628FA481" FromRole="AlbumTag" ToRole="Album" />
-          <NavigationProperty Name="Tag" Relationship="Self.FK__AlbumTag__TagId__619B8048" FromRole="AlbumTag" ToRole="Tag" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__AlbumTag__AlbumI__5070F446" FromRole="AlbumTag" ToRole="Album" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK__AlbumTag__TagId__5165187F" FromRole="AlbumTag" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Cancion">
           <Key>
@@ -868,27 +1078,27 @@
           <Property Name="Titulo" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Duracion" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumeroTrack" Type="Int32" Nullable="false" />
-          <Property Name="rutaArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RutaArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Tipo" Type="Boolean" />
           <Property Name="AlbumId" Type="Int32" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Album" Relationship="Self.FK__Cancion__AlbumId__276EDEB3" FromRole="Cancion" ToRole="Album" />
-          <Property Name="RutaArchivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Reproducciones" Type="Int32" />
           <Property Name="Letra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LikeCancion" Relationship="ZeusModel.FK__LikeCanci__Canci__5AEE82B9" FromRole="Cancion" ToRole="LikeCancion" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__Cancion__AlbumId__52593CB8" FromRole="Cancion" ToRole="Album" />
+          <NavigationProperty Name="LikeCancion" Relationship="Self.FK__LikeCanci__Canci__5AEE82B9" FromRole="Cancion" ToRole="LikeCancion" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
             <PropertyRef Name="CiudadId" />
           </Key>
           <Property Name="CiudadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstadoId" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
-          <Property Name="EstadoId" Type="Int32" Nullable="false" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Estado" Relationship="Self.FK__Ciudad__EstadoId__286302EC" FromRole="Ciudad" ToRole="Estado" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK__Ciudad__EstadoId__534D60F1" FromRole="Ciudad" ToRole="Estado" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__Evento__CiudadId__1209AD79" FromRole="Ciudad" ToRole="Evento" />
           <NavigationProperty Name="Perfil" Relationship="Self.FK__Perfil__CiudadId__34C8D9D1" FromRole="Ciudad" ToRole="Perfil" />
         </EntityType>
         <EntityType Name="Estado">
@@ -896,13 +1106,13 @@
             <PropertyRef Name="EstadoId" />
           </Key>
           <Property Name="EstadoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaisId" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Estatus" Type="Boolean" />
-          <Property Name="PaisId" Type="Int32" Nullable="false" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Ciudad" Relationship="Self.FK__Ciudad__EstadoId__286302EC" FromRole="Estado" ToRole="Ciudad" />
-          <NavigationProperty Name="Pais" Relationship="Self.FK__Estado__PaisId__29572725" FromRole="Estado" ToRole="Pais" />
-          <NavigationProperty Name="Patrocinio" Relationship="ZeusModel.FK__Patrocini__Estad__60A75C0F" FromRole="Estado" ToRole="Patrocinio" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK__Ciudad__EstadoId__534D60F1" FromRole="Estado" ToRole="Ciudad" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK__Estado__PaisId__5441852A" FromRole="Estado" ToRole="Pais" />
+          <NavigationProperty Name="Patrocinio" Relationship="Self.FK__Patrocini__Estad__60A75C0F" FromRole="Estado" ToRole="Patrocinio" />
         </EntityType>
         <EntityType Name="Evento">
           <Key>
@@ -915,9 +1125,8 @@
           <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Establecimiento" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PrecioRegular" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="PrecioPreventa" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Promocion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Preventa" Type="String" />
+          <Property Name="Preventa" Type="Decimal" Precision="12" Scale="0" />
           <Property Name="EventoTipoId" Type="Int32" />
           <Property Name="CiudadId" Type="Int32" />
           <Property Name="Latitud" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -926,35 +1135,34 @@
           <Property Name="LinkComprarBoleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EventoPerfil" Relationship="Self.FK__EventoPer__Event__52593CB8" FromRole="Evento" ToRole="EventoPerfil" />
-          <NavigationProperty Name="EventoTag" Relationship="Self.FK__EventoTag__Event__5AEE82B9" FromRole="Evento" ToRole="EventoTag" />
-          <NavigationProperty Name="LikeEvento" Relationship="Self.FK__LikeEvent__Event__6B24EA82" FromRole="Evento" ToRole="LikeEvento" />
           <Property Name="PerfilId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EventoVideo" Relationship="ZeusModel.FK__EventoVid__UrlVi__1BC821DD" FromRole="Evento" ToRole="EventoVideo" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK__Evento__CiudadId__1209AD79" FromRole="Evento" ToRole="Ciudad" />
+          <NavigationProperty Name="EventoTipo" Relationship="Self.FK__Evento__EventoTi__0F2D40CE" FromRole="Evento" ToRole="EventoTipo" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Evento__PerfilId__13F1F5EB" FromRole="Evento" ToRole="Perfil" />
+          <NavigationProperty Name="EventoPerfil" Relationship="Self.FK__EventoPer__Event__5535A963" FromRole="Evento" ToRole="EventoPerfil" />
+          <NavigationProperty Name="EventoTag" Relationship="Self.FK__EventoTag__Event__571DF1D5" FromRole="Evento" ToRole="EventoTag" />
+          <NavigationProperty Name="EventoVideo" Relationship="Self.FK__EventoVid__UrlVi__1BC821DD" FromRole="Evento" ToRole="EventoVideo" />
+          <NavigationProperty Name="LikeEvento" Relationship="Self.FK__LikeEvent__Event__5CD6CB2B" FromRole="Evento" ToRole="LikeEvento" />
         </EntityType>
         <EntityType Name="EventoPerfil">
           <Key>
-            <PropertyRef Name="id" />
             <PropertyRef Name="EventoPerfilId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventoPerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EventoId" Type="Int32" />
           <Property Name="PerfilId" Type="Int32" />
-          <NavigationProperty Name="Evento" Relationship="Self.FK__EventoPer__Event__52593CB8" FromRole="EventoPerfil" ToRole="Evento" />
-          <NavigationProperty Name="Perfil" Relationship="Self.FK__EventoPer__Perfi__534D60F1" FromRole="EventoPerfil" ToRole="Perfil" />
-          <Property Name="EventoPerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__EventoPer__Event__5535A963" FromRole="EventoPerfil" ToRole="Evento" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__EventoPer__Perfi__5629CD9C" FromRole="EventoPerfil" ToRole="Perfil" />
         </EntityType>
         <EntityType Name="EventoTag">
           <Key>
-            <PropertyRef Name="id" />
             <PropertyRef Name="EventoTagId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventoTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TagId" Type="Int32" />
           <Property Name="EventoId" Type="Int32" />
-          <NavigationProperty Name="Evento" Relationship="Self.FK__EventoTag__Event__5AEE82B9" FromRole="EventoTag" ToRole="Evento" />
-          <NavigationProperty Name="Tag" Relationship="Self.FK__EventoTag__TagId__59FA5E80" FromRole="EventoTag" ToRole="Tag" />
-          <Property Name="EventoTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__EventoTag__Event__571DF1D5" FromRole="EventoTag" ToRole="Evento" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK__EventoTag__TagId__5812160E" FromRole="EventoTag" ToRole="Tag" />
         </EntityType>
         <EntityType Name="EventoTipo">
           <Key>
@@ -964,6 +1172,16 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__Evento__EventoTi__0F2D40CE" FromRole="EventoTipo" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="EventoVideo">
+          <Key>
+            <PropertyRef Name="EventoVideoId" />
+          </Key>
+          <Property Name="EventoVideoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventoId" Type="Int32" Nullable="false" />
+          <Property Name="UrlVideo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__EventoVid__UrlVi__1BC821DD" FromRole="EventoVideo" ToRole="Evento" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -973,42 +1191,47 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubGenero" Relationship="Self.FK__SubGenero__Gener__12FDD1B2" FromRole="Genero" ToRole="SubGenero" />
         </EntityType>
         <EntityType Name="LikeAlbum">
           <Key>
-            <PropertyRef Name="id" />
             <PropertyRef Name="LikeAlbumId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LikeAlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PerfilId" Type="Int32" />
           <Property Name="AlbumId" Type="Int32" />
-          <NavigationProperty Name="Album" Relationship="Self.FK__LikeAlbum__Album__6754599E" FromRole="LikeAlbum" ToRole="Album" />
-          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikeAlbum__Perfi__66603565" FromRole="LikeAlbum" ToRole="Perfil" />
-          <Property Name="LikeAlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__LikeAlbum__Album__59063A47" FromRole="LikeAlbum" ToRole="Album" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikeAlbum__Perfi__59FA5E80" FromRole="LikeAlbum" ToRole="Perfil" />
+        </EntityType>
+        <EntityType Name="LikeCancion">
+          <Key>
+            <PropertyRef Name="LikeCancionId" />
+          </Key>
+          <Property Name="LikeCancionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerfilId" Type="Int32" />
+          <Property Name="CancionId" Type="Int32" />
+          <NavigationProperty Name="Cancion" Relationship="Self.FK__LikeCanci__Canci__5AEE82B9" FromRole="LikeCancion" ToRole="Cancion" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikeCanci__Perfi__5BE2A6F2" FromRole="LikeCancion" ToRole="Perfil" />
         </EntityType>
         <EntityType Name="LikeEvento">
           <Key>
-            <PropertyRef Name="id" />
             <PropertyRef Name="LikeEventoId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LikeEventoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PerfilId" Type="Int32" />
           <Property Name="EventoId" Type="Int32" />
-          <NavigationProperty Name="Evento" Relationship="Self.FK__LikeEvent__Event__6B24EA82" FromRole="LikeEvento" ToRole="Evento" />
-          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikeEvent__Perfi__6A30C649" FromRole="LikeEvento" ToRole="Perfil" />
-          <Property Name="LikeEventoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__LikeEvent__Event__5CD6CB2B" FromRole="LikeEvento" ToRole="Evento" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikeEvent__Perfi__5DCAEF64" FromRole="LikeEvento" ToRole="Perfil" />
         </EntityType>
         <EntityType Name="LikePerfil">
           <Key>
-            <PropertyRef Name="id" />
             <PropertyRef Name="LikePerfilId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LikePerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PerfilId" Type="Int32" />
           <Property Name="PerfilLike" Type="Int32" />
-          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikePerfi__Perfi__6E01572D" FromRole="LikePerfil" ToRole="Perfil" />
-          <NavigationProperty Name="Perfil1" Relationship="Self.FK__LikePerfi__Perfi__6EF57B66" FromRole="LikePerfil" ToRole="Perfil" />
-          <Property Name="LikePerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__LikePerfi__Perfi__5EBF139D" FromRole="LikePerfil" ToRole="Perfil" />
+          <NavigationProperty Name="Perfil1" Relationship="Self.FK__LikePerfi__Perfi__5FB337D6" FromRole="LikePerfil" ToRole="Perfil" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -1018,7 +1241,30 @@
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Estado" Relationship="Self.FK__Estado__PaisId__29572725" FromRole="Pais" ToRole="Estado" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK__Estado__PaisId__5441852A" FromRole="Pais" ToRole="Estado" />
+        </EntityType>
+        <EntityType Name="Patrocinio">
+          <Key>
+            <PropertyRef Name="PatrocinioId" />
+          </Key>
+          <Property Name="PatrocinioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Medio" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="EspacioId" Type="Int32" />
+          <Property Name="EstadoId" Type="Int32" />
+          <Property Name="VentaTotal" Type="Boolean" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TipoPatrocinio" Type="Int32" />
+          <Property Name="UrlEvento" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="PerfilId" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="TipoArchivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK__Patrocini__Estad__60A75C0F" FromRole="Patrocinio" ToRole="Estado" />
+          <NavigationProperty Name="TipoPatrocinio1" Relationship="Self.FK__Patrocini__TipoP__619B8048" FromRole="Patrocinio" ToRole="TipoPatrocinio" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -1031,31 +1277,41 @@
           <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="FotoPerfil" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AcercaDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="UbicacionGM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Horario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fundacion" Type="DateTime" Precision="0" />
           <Property Name="CiudadId" Type="Int32" />
-          <NavigationProperty Name="Album" Relationship="Self.FK__Album__PerfilId__25869641" FromRole="Perfil" ToRole="Album" />
-          <NavigationProperty Name="Ciudad" Relationship="Self.FK__Perfil__CiudadId__34C8D9D1" FromRole="Perfil" ToRole="Ciudad" />
-          <NavigationProperty Name="EventoPerfil" Relationship="Self.FK__EventoPer__Perfi__534D60F1" FromRole="Perfil" ToRole="EventoPerfil" />
-          <NavigationProperty Name="LikeAlbum" Relationship="Self.FK__LikeAlbum__Perfi__66603565" FromRole="Perfil" ToRole="LikeAlbum" />
-          <NavigationProperty Name="LikeEvento" Relationship="Self.FK__LikeEvent__Perfi__6A30C649" FromRole="Perfil" ToRole="LikeEvento" />
-          <NavigationProperty Name="LikePerfil" Relationship="Self.FK__LikePerfi__Perfi__6E01572D" FromRole="Perfil" ToRole="LikePerfil" />
-          <NavigationProperty Name="LikePerfil1" Relationship="Self.FK__LikePerfi__Perfi__6EF57B66" FromRole="Perfil" ToRole="LikePerfil" />
-          <NavigationProperty Name="PerfilTipo" Relationship="Self.FK__Perfil__PerfilTi__33D4B598" FromRole="Perfil" ToRole="PerfilTipo" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Perfil__UsuarioI__32E0915F" FromRole="Perfil" ToRole="Usuario" />
-          <Property Name="Telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Latitud" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="Longitud" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="Presskit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DescripcionCorta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LikeCancion" Relationship="ZeusModel.FK__LikeCanci__Perfi__5BE2A6F2" FromRole="Perfil" ToRole="LikeCancion" />
-          <NavigationProperty Name="PerfilSociales" Relationship="ZeusModel.FK__PerfilSoc__perfi__656C112C" FromRole="Perfil" ToRole="PerfilSociales" />
-          <NavigationProperty Name="Seguridad_RolPerfil" Relationship="ZeusModel.FK__Seguridad__Perfi__3F115E1A" FromRole="Perfil" ToRole="Seguridad_RolPerfil" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__Album__PerfilId__4E88ABD4" FromRole="Perfil" ToRole="Album" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK__Perfil__CiudadId__34C8D9D1" FromRole="Perfil" ToRole="Ciudad" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK__Evento__PerfilId__13F1F5EB" FromRole="Perfil" ToRole="Evento" />
+          <NavigationProperty Name="EventoPerfil" Relationship="Self.FK__EventoPer__Perfi__5629CD9C" FromRole="Perfil" ToRole="EventoPerfil" />
+          <NavigationProperty Name="LikeAlbum" Relationship="Self.FK__LikeAlbum__Perfi__59FA5E80" FromRole="Perfil" ToRole="LikeAlbum" />
+          <NavigationProperty Name="LikeCancion" Relationship="Self.FK__LikeCanci__Perfi__5BE2A6F2" FromRole="Perfil" ToRole="LikeCancion" />
+          <NavigationProperty Name="LikeEvento" Relationship="Self.FK__LikeEvent__Perfi__5DCAEF64" FromRole="Perfil" ToRole="LikeEvento" />
+          <NavigationProperty Name="LikePerfil" Relationship="Self.FK__LikePerfi__Perfi__5EBF139D" FromRole="Perfil" ToRole="LikePerfil" />
+          <NavigationProperty Name="LikePerfil1" Relationship="Self.FK__LikePerfi__Perfi__5FB337D6" FromRole="Perfil" ToRole="LikePerfil" />
+          <NavigationProperty Name="PerfilTipo" Relationship="Self.FK__Perfil__PerfilTi__33D4B598" FromRole="Perfil" ToRole="PerfilTipo" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Perfil__UsuarioI__32E0915F" FromRole="Perfil" ToRole="Usuario" />
+          <NavigationProperty Name="PerfilSociales" Relationship="Self.FK__PerfilSoc__perfi__656C112C" FromRole="Perfil" ToRole="PerfilSociales" />
+          <NavigationProperty Name="Seguridad_RolPerfil" Relationship="Self.FK__Seguridad__Perfi__3F115E1A" FromRole="Perfil" ToRole="Seguridad_RolPerfil" />
+        </EntityType>
+        <EntityType Name="PerfilSociales">
+          <Key>
+            <PropertyRef Name="PerfilSocialId" />
+          </Key>
+          <Property Name="PerfilSocialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RedSocial" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="PerfilId" Type="Int32" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__PerfilSoc__perfi__656C112C" FromRole="PerfilSociales" ToRole="Perfil" />
         </EntityType>
         <EntityType Name="PerfilTipo">
           <Key>
@@ -1065,9 +1321,44 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Perfil" Relationship="Self.FK__Perfil__PerfilTi__33D4B598" FromRole="PerfilTipo" ToRole="Perfil" />
           <Property Name="Titulo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Perfil__PerfilTi__33D4B598" FromRole="PerfilTipo" ToRole="Perfil" />
+        </EntityType>
+        <EntityType Name="Seguridad_Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UrlMenu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PadreId" Type="Int32" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="EsPublico" Type="Boolean" />
+          <Property Name="Icono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seguridad_Rol">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Seguridad_RolPerfil" Relationship="Self.FK__Seguridad__RolId__3E1D39E1" FromRole="Seguridad_Rol" ToRole="Seguridad_RolPerfil" />
+        </EntityType>
+        <EntityType Name="Seguridad_RolPerfil">
+          <Key>
+            <PropertyRef Name="RolPerfilId" />
+          </Key>
+          <Property Name="RolPerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+          <Property Name="PerfilId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Seguridad__Perfi__3F115E1A" FromRole="Seguridad_RolPerfil" ToRole="Perfil" />
+          <NavigationProperty Name="Seguridad_Rol" Relationship="Self.FK__Seguridad__RolId__3E1D39E1" FromRole="Seguridad_RolPerfil" ToRole="Seguridad_Rol" />
         </EntityType>
         <EntityType Name="SubGenero">
           <Key>
@@ -1078,29 +1369,30 @@
           <Property Name="GeneroId" Type="Int32" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Album" Relationship="Self.FK__Album__SubGenero__267ABA7A" FromRole="SubGenero" ToRole="Album" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Album" Relationship="Self.FK__Album__SubGenero__4F7CD00D" FromRole="SubGenero" ToRole="Album" />
+          <NavigationProperty Name="Genero" Relationship="Self.FK__SubGenero__Gener__12FDD1B2" FromRole="SubGenero" ToRole="Genero" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="TagId" />
           </Key>
           <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AlbumTag" Relationship="Self.FK__AlbumTag__TagId__619B8048" FromRole="Tag" ToRole="AlbumTag" />
-          <NavigationProperty Name="EventoTag" Relationship="Self.FK__EventoTag__TagId__59FA5E80" FromRole="Tag" ToRole="EventoTag" />
           <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Estatus" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlbumTag" Relationship="Self.FK__AlbumTag__TagId__5165187F" FromRole="Tag" ToRole="AlbumTag" />
+          <NavigationProperty Name="EventoTag" Relationship="Self.FK__EventoTag__TagId__5812160E" FromRole="Tag" ToRole="EventoTag" />
+        </EntityType>
+        <EntityType Name="TipoPatrocinio">
+          <Key>
+            <PropertyRef Name="TipoPatId" />
+          </Key>
+          <Property Name="TipoPatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" />
+          <NavigationProperty Name="Patrocinio" Relationship="Self.FK__Patrocini__TipoP__619B8048" FromRole="TipoPatrocinio" ToRole="Patrocinio" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -1118,7 +1410,7 @@
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Perfil" Relationship="Self.FK__Perfil__UsuarioI__32E0915F" FromRole="Usuario" ToRole="Perfil" />
         </EntityType>
-        <Association Name="FK__Album__PerfilId__25869641">
+        <Association Name="FK__Album__PerfilId__4E88ABD4">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
           <End Role="Album" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1130,7 +1422,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Album__SubGenero__267ABA7A">
+        <Association Name="FK__Album__SubGenero__4F7CD00D">
           <End Role="SubGenero" Type="Self.SubGenero" Multiplicity="1" />
           <End Role="Album" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1142,7 +1434,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AlbumTag__AlbumI__628FA481">
+        <Association Name="FK__AlbumTag__AlbumI__5070F446">
           <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
           <End Role="AlbumTag" Type="Self.AlbumTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1154,7 +1446,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cancion__AlbumId__276EDEB3">
+        <Association Name="FK__Cancion__AlbumId__52593CB8">
           <End Role="Album" Type="Self.Album" Multiplicity="1" />
           <End Role="Cancion" Type="Self.Cancion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1166,7 +1458,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeAlbum__Album__6754599E">
+        <Association Name="FK__LikeAlbum__Album__59063A47">
           <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
           <End Role="LikeAlbum" Type="Self.LikeAlbum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1178,7 +1470,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AlbumTag__TagId__619B8048">
+        <Association Name="FK__AlbumTag__TagId__5165187F">
           <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
           <End Role="AlbumTag" Type="Self.AlbumTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1190,7 +1482,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ciudad__EstadoId__286302EC">
+        <Association Name="FK__LikeCanci__Canci__5AEE82B9">
+          <End Role="Cancion" Type="Self.Cancion" Multiplicity="0..1" />
+          <End Role="LikeCancion" Type="Self.LikeCancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cancion">
+              <PropertyRef Name="CancionId" />
+            </Principal>
+            <Dependent Role="LikeCancion">
+              <PropertyRef Name="CancionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ciudad__EstadoId__534D60F1">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1199,6 +1503,18 @@
             </Principal>
             <Dependent Role="Ciudad">
               <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Evento__CiudadId__1209AD79">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="CiudadId" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="CiudadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1214,7 +1530,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Estado__PaisId__29572725">
+        <Association Name="FK__Estado__PaisId__5441852A">
           <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
           <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1226,7 +1542,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoPer__Event__52593CB8">
+        <Association Name="FK__Patrocini__Estad__60A75C0F">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Patrocinio" Type="Self.Patrocinio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstadoId" />
+            </Principal>
+            <Dependent Role="Patrocinio">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Evento__EventoTi__0F2D40CE">
+          <End Role="EventoTipo" Type="Self.EventoTipo" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventoTipo">
+              <PropertyRef Name="EventoTipoId" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="EventoTipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Evento__PerfilId__13F1F5EB">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventoPer__Event__5535A963">
           <End Role="Evento" Type="Self.Evento" Multiplicity="0..1" />
           <End Role="EventoPerfil" Type="Self.EventoPerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1238,7 +1590,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoTag__Event__5AEE82B9">
+        <Association Name="FK__EventoTag__Event__571DF1D5">
           <End Role="Evento" Type="Self.Evento" Multiplicity="0..1" />
           <End Role="EventoTag" Type="Self.EventoTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1250,7 +1602,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeEvent__Event__6B24EA82">
+        <Association Name="FK__EventoVid__UrlVi__1BC821DD">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="EventoVideo" Type="Self.EventoVideo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="EventoId" />
+            </Principal>
+            <Dependent Role="EventoVideo">
+              <PropertyRef Name="EventoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikeEvent__Event__5CD6CB2B">
           <End Role="Evento" Type="Self.Evento" Multiplicity="0..1" />
           <End Role="LikeEvento" Type="Self.LikeEvento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1262,7 +1626,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoPer__Perfi__534D60F1">
+        <Association Name="FK__EventoPer__Perfi__5629CD9C">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="EventoPerfil" Type="Self.EventoPerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1274,7 +1638,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoTag__TagId__59FA5E80">
+        <Association Name="FK__EventoTag__TagId__5812160E">
           <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
           <End Role="EventoTag" Type="Self.EventoTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1286,7 +1650,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeAlbum__Perfi__66603565">
+        <Association Name="FK__SubGenero__Gener__12FDD1B2">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
+          <End Role="SubGenero" Type="Self.SubGenero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="GeneroId" />
+            </Principal>
+            <Dependent Role="SubGenero">
+              <PropertyRef Name="GeneroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikeAlbum__Perfi__59FA5E80">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikeAlbum" Type="Self.LikeAlbum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1298,7 +1674,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeEvent__Perfi__6A30C649">
+        <Association Name="FK__LikeCanci__Perfi__5BE2A6F2">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+          <End Role="LikeCancion" Type="Self.LikeCancion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="LikeCancion">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikeEvent__Perfi__5DCAEF64">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikeEvento" Type="Self.LikeEvento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1310,7 +1698,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikePerfi__Perfi__6E01572D">
+        <Association Name="FK__LikePerfi__Perfi__5EBF139D">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikePerfil" Type="Self.LikePerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1322,7 +1710,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikePerfi__Perfi__6EF57B66">
+        <Association Name="FK__LikePerfi__Perfi__5FB337D6">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikePerfil" Type="Self.LikePerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1331,6 +1719,18 @@
             </Principal>
             <Dependent Role="LikePerfil">
               <PropertyRef Name="PerfilLike" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patrocini__TipoP__619B8048">
+          <End Role="TipoPatrocinio" Type="Self.TipoPatrocinio" Multiplicity="0..1" />
+          <End Role="Patrocinio" Type="Self.Patrocinio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPatrocinio">
+              <PropertyRef Name="TipoPatId" />
+            </Principal>
+            <Dependent Role="Patrocinio">
+              <PropertyRef Name="TipoPatrocinio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1358,6 +1758,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PerfilSoc__perfi__656C112C">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+          <End Role="PerfilSociales" Type="Self.PerfilSociales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="PerfilSociales">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Seguridad__Perfi__3F115E1A">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Seguridad_RolPerfil" Type="Self.Seguridad_RolPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="PerfilId" />
+            </Principal>
+            <Dependent Role="Seguridad_RolPerfil">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Seguridad__RolId__3E1D39E1">
+          <End Role="Seguridad_Rol" Type="Self.Seguridad_Rol" Multiplicity="1" />
+          <End Role="Seguridad_RolPerfil" Type="Self.Seguridad_RolPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seguridad_Rol">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Seguridad_RolPerfil">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Album" EntityType="Self.Album" />
           <EntitySet Name="AlbumTag" EntityType="Self.AlbumTag" />
@@ -1368,88 +1804,131 @@
           <EntitySet Name="EventoPerfil" EntityType="Self.EventoPerfil" />
           <EntitySet Name="EventoTag" EntityType="Self.EventoTag" />
           <EntitySet Name="EventoTipo" EntityType="Self.EventoTipo" />
+          <EntitySet Name="EventoVideo" EntityType="Self.EventoVideo" />
           <EntitySet Name="Genero" EntityType="Self.Genero" />
           <EntitySet Name="LikeAlbum" EntityType="Self.LikeAlbum" />
+          <EntitySet Name="LikeCancion" EntityType="Self.LikeCancion" />
           <EntitySet Name="LikeEvento" EntityType="Self.LikeEvento" />
           <EntitySet Name="LikePerfil" EntityType="Self.LikePerfil" />
           <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <EntitySet Name="Patrocinio" EntityType="Self.Patrocinio" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="PerfilSociales" EntityType="Self.PerfilSociales" />
           <EntitySet Name="PerfilTipo" EntityType="Self.PerfilTipo" />
+          <EntitySet Name="Seguridad_Menu" EntityType="Self.Seguridad_Menu" />
+          <EntitySet Name="Seguridad_Rol" EntityType="Self.Seguridad_Rol" />
+          <EntitySet Name="Seguridad_RolPerfil" EntityType="Self.Seguridad_RolPerfil" />
           <EntitySet Name="SubGenero" EntityType="Self.SubGenero" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="TipoPatrocinio" EntityType="Self.TipoPatrocinio" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK__Album__PerfilId__25869641" Association="Self.FK__Album__PerfilId__25869641">
+          <AssociationSet Name="FK__Album__PerfilId__4E88ABD4" Association="Self.FK__Album__PerfilId__4E88ABD4">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Album" EntitySet="Album" />
           </AssociationSet>
-          <AssociationSet Name="FK__Album__SubGenero__267ABA7A" Association="Self.FK__Album__SubGenero__267ABA7A">
+          <AssociationSet Name="FK__Album__SubGenero__4F7CD00D" Association="Self.FK__Album__SubGenero__4F7CD00D">
             <End Role="SubGenero" EntitySet="SubGenero" />
             <End Role="Album" EntitySet="Album" />
           </AssociationSet>
-          <AssociationSet Name="FK__AlbumTag__AlbumI__628FA481" Association="Self.FK__AlbumTag__AlbumI__628FA481">
+          <AssociationSet Name="FK__AlbumTag__AlbumI__5070F446" Association="Self.FK__AlbumTag__AlbumI__5070F446">
             <End Role="Album" EntitySet="Album" />
             <End Role="AlbumTag" EntitySet="AlbumTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cancion__AlbumId__276EDEB3" Association="Self.FK__Cancion__AlbumId__276EDEB3">
+          <AssociationSet Name="FK__Cancion__AlbumId__52593CB8" Association="Self.FK__Cancion__AlbumId__52593CB8">
             <End Role="Album" EntitySet="Album" />
             <End Role="Cancion" EntitySet="Cancion" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeAlbum__Album__6754599E" Association="Self.FK__LikeAlbum__Album__6754599E">
+          <AssociationSet Name="FK__LikeAlbum__Album__59063A47" Association="Self.FK__LikeAlbum__Album__59063A47">
             <End Role="Album" EntitySet="Album" />
             <End Role="LikeAlbum" EntitySet="LikeAlbum" />
           </AssociationSet>
-          <AssociationSet Name="FK__AlbumTag__TagId__619B8048" Association="Self.FK__AlbumTag__TagId__619B8048">
+          <AssociationSet Name="FK__AlbumTag__TagId__5165187F" Association="Self.FK__AlbumTag__TagId__5165187F">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="AlbumTag" EntitySet="AlbumTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ciudad__EstadoId__286302EC" Association="Self.FK__Ciudad__EstadoId__286302EC">
+          <AssociationSet Name="FK__LikeCanci__Canci__5AEE82B9" Association="Self.FK__LikeCanci__Canci__5AEE82B9">
+            <End Role="Cancion" EntitySet="Cancion" />
+            <End Role="LikeCancion" EntitySet="LikeCancion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ciudad__EstadoId__534D60F1" Association="Self.FK__Ciudad__EstadoId__534D60F1">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Evento__CiudadId__1209AD79" Association="Self.FK__Evento__CiudadId__1209AD79">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
           <AssociationSet Name="FK__Perfil__CiudadId__34C8D9D1" Association="Self.FK__Perfil__CiudadId__34C8D9D1">
             <End Role="Ciudad" EntitySet="Ciudad" />
             <End Role="Perfil" EntitySet="Perfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__Estado__PaisId__29572725" Association="Self.FK__Estado__PaisId__29572725">
+          <AssociationSet Name="FK__Estado__PaisId__5441852A" Association="Self.FK__Estado__PaisId__5441852A">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Estado" EntitySet="Estado" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoPer__Event__52593CB8" Association="Self.FK__EventoPer__Event__52593CB8">
+          <AssociationSet Name="FK__Patrocini__Estad__60A75C0F" Association="Self.FK__Patrocini__Estad__60A75C0F">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Patrocinio" EntitySet="Patrocinio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Evento__EventoTi__0F2D40CE" Association="Self.FK__Evento__EventoTi__0F2D40CE">
+            <End Role="EventoTipo" EntitySet="EventoTipo" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Evento__PerfilId__13F1F5EB" Association="Self.FK__Evento__PerfilId__13F1F5EB">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventoPer__Event__5535A963" Association="Self.FK__EventoPer__Event__5535A963">
             <End Role="Evento" EntitySet="Evento" />
             <End Role="EventoPerfil" EntitySet="EventoPerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoTag__Event__5AEE82B9" Association="Self.FK__EventoTag__Event__5AEE82B9">
+          <AssociationSet Name="FK__EventoTag__Event__571DF1D5" Association="Self.FK__EventoTag__Event__571DF1D5">
             <End Role="Evento" EntitySet="Evento" />
             <End Role="EventoTag" EntitySet="EventoTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeEvent__Event__6B24EA82" Association="Self.FK__LikeEvent__Event__6B24EA82">
+          <AssociationSet Name="FK__EventoVid__UrlVi__1BC821DD" Association="Self.FK__EventoVid__UrlVi__1BC821DD">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="EventoVideo" EntitySet="EventoVideo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikeEvent__Event__5CD6CB2B" Association="Self.FK__LikeEvent__Event__5CD6CB2B">
             <End Role="Evento" EntitySet="Evento" />
             <End Role="LikeEvento" EntitySet="LikeEvento" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoPer__Perfi__534D60F1" Association="Self.FK__EventoPer__Perfi__534D60F1">
+          <AssociationSet Name="FK__EventoPer__Perfi__5629CD9C" Association="Self.FK__EventoPer__Perfi__5629CD9C">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="EventoPerfil" EntitySet="EventoPerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoTag__TagId__59FA5E80" Association="Self.FK__EventoTag__TagId__59FA5E80">
+          <AssociationSet Name="FK__EventoTag__TagId__5812160E" Association="Self.FK__EventoTag__TagId__5812160E">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="EventoTag" EntitySet="EventoTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeAlbum__Perfi__66603565" Association="Self.FK__LikeAlbum__Perfi__66603565">
+          <AssociationSet Name="FK__SubGenero__Gener__12FDD1B2" Association="Self.FK__SubGenero__Gener__12FDD1B2">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="SubGenero" EntitySet="SubGenero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikeAlbum__Perfi__59FA5E80" Association="Self.FK__LikeAlbum__Perfi__59FA5E80">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikeAlbum" EntitySet="LikeAlbum" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeEvent__Perfi__6A30C649" Association="Self.FK__LikeEvent__Perfi__6A30C649">
+          <AssociationSet Name="FK__LikeCanci__Perfi__5BE2A6F2" Association="Self.FK__LikeCanci__Perfi__5BE2A6F2">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="LikeCancion" EntitySet="LikeCancion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikeEvent__Perfi__5DCAEF64" Association="Self.FK__LikeEvent__Perfi__5DCAEF64">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikeEvento" EntitySet="LikeEvento" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikePerfi__Perfi__6E01572D" Association="Self.FK__LikePerfi__Perfi__6E01572D">
+          <AssociationSet Name="FK__LikePerfi__Perfi__5EBF139D" Association="Self.FK__LikePerfi__Perfi__5EBF139D">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikePerfil" EntitySet="LikePerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikePerfi__Perfi__6EF57B66" Association="Self.FK__LikePerfi__Perfi__6EF57B66">
+          <AssociationSet Name="FK__LikePerfi__Perfi__5FB337D6" Association="Self.FK__LikePerfi__Perfi__5FB337D6">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikePerfil" EntitySet="LikePerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patrocini__TipoP__619B8048" Association="Self.FK__Patrocini__TipoP__619B8048">
+            <End Role="TipoPatrocinio" EntitySet="TipoPatrocinio" />
+            <End Role="Patrocinio" EntitySet="Patrocinio" />
           </AssociationSet>
           <AssociationSet Name="FK__Perfil__PerfilTi__33D4B598" Association="Self.FK__Perfil__PerfilTi__33D4B598">
             <End Role="PerfilTipo" EntitySet="PerfilTipo" />
@@ -1459,9 +1938,35 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Perfil" EntitySet="Perfil" />
           </AssociationSet>
+          <AssociationSet Name="FK__PerfilSoc__perfi__656C112C" Association="Self.FK__PerfilSoc__perfi__656C112C">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="PerfilSociales" EntitySet="PerfilSociales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Seguridad__Perfi__3F115E1A" Association="Self.FK__Seguridad__Perfi__3F115E1A">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Seguridad__RolId__3E1D39E1" Association="Self.FK__Seguridad__RolId__3E1D39E1">
+            <End Role="Seguridad_Rol" EntitySet="Seguridad_Rol" />
+            <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
+          </AssociationSet>
           <FunctionImport Name="st_DelAlbum_">
             <Parameter Name="AlbumId" Mode="In" Type="Int32" />
             <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsAlbum">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Formato" Mode="In" Type="String" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Oferta" Mode="In" Type="Decimal" />
+            <Parameter Name="LinkCompra" Mode="In" Type="String" />
+            <Parameter Name="Promocion" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+            <Parameter Name="SubGeneroId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="st_InsAlbum_">
             <Parameter Name="AlbumId" Mode="In" Type="Int32" />
@@ -1479,64 +1984,151 @@
             <Parameter Name="Estatus" Mode="In" Type="Boolean" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="st_SelSubGeneroGetAll" ReturnType="Collection(ZeusModel.st_SelSubGeneroGetAll_Result)" />
-          <FunctionImport Name="st_SelAlbum_" ReturnType="Collection(ZeusModel.st_SelAlbum__Result)">
+          <FunctionImport Name="st_InsCancion">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Duracion" Mode="In" Type="String" />
+            <Parameter Name="NumeroTrack" Mode="In" Type="Int32" />
+            <Parameter Name="RutaArchivo" Mode="In" Type="String" />
+            <Parameter Name="Tipo" Mode="In" Type="Boolean" />
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsEvento">
+            <Parameter Name="EventoId" Mode="InOut" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="String" />
+            <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Establecimiento" Mode="In" Type="String" />
+            <Parameter Name="PrecioRegular" Mode="In" Type="Decimal" />
+            <Parameter Name="Promocion" Mode="In" Type="String" />
+            <Parameter Name="Preventa" Mode="In" Type="Decimal" />
+            <Parameter Name="EventoTipoId" Mode="In" Type="Int32" />
+            <Parameter Name="CiudadId" Mode="In" Type="Int32" />
+            <Parameter Name="Latitud" Mode="In" Type="String" />
+            <Parameter Name="Longitud" Mode="In" Type="String" />
+            <Parameter Name="LinkEventoFacebook" Mode="In" Type="String" />
+            <Parameter Name="LinkComprarBoleto" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsEventoPerfil">
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsEventoTag">
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsEventoTipo">
+            <Parameter Name="EventoTipoId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="st_InsEventoVideo">
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+            <Parameter Name="UrlVideo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelAlbum_" ReturnType="Collection(ZeusFinalModel.st_SelAlbum__Result)">
             <Parameter Name="AlbumId" Mode="In" Type="Int32" />
             <Parameter Name="Titulo" Mode="In" Type="String" />
             <Parameter Name="PerfilId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="EventoVideo" EntityType="ZeusModel.EventoVideo" />
-          <EntitySet Name="LikeCancion" EntityType="ZeusModel.LikeCancion" />
-          <EntitySet Name="Patrocinio" EntityType="ZeusModel.Patrocinio" />
-          <EntitySet Name="PerfilSociales" EntityType="ZeusModel.PerfilSociales" />
-          <EntitySet Name="Seguridad_Menu" EntityType="ZeusModel.Seguridad_Menu" />
-          <EntitySet Name="Seguridad_Rol" EntityType="ZeusModel.Seguridad_Rol" />
-          <EntitySet Name="Seguridad_RolPerfil" EntityType="ZeusModel.Seguridad_RolPerfil" />
-          <EntitySet Name="TipoPatrocinio" EntityType="ZeusModel.TipoPatrocinio" />
-          <AssociationSet Name="FK__LikeCanci__Canci__5AEE82B9" Association="ZeusModel.FK__LikeCanci__Canci__5AEE82B9">
-            <End Role="Cancion" EntitySet="Cancion" />
-            <End Role="LikeCancion" EntitySet="LikeCancion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Patrocini__Estad__60A75C0F" Association="ZeusModel.FK__Patrocini__Estad__60A75C0F">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Patrocinio" EntitySet="Patrocinio" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EventoVid__UrlVi__1BC821DD" Association="ZeusModel.FK__EventoVid__UrlVi__1BC821DD">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="EventoVideo" EntitySet="EventoVideo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LikeCanci__Perfi__5BE2A6F2" Association="ZeusModel.FK__LikeCanci__Perfi__5BE2A6F2">
-            <End Role="Perfil" EntitySet="Perfil" />
-            <End Role="LikeCancion" EntitySet="LikeCancion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Patrocini__TipoP__619B8048" Association="ZeusModel.FK__Patrocini__TipoP__619B8048">
-            <End Role="TipoPatrocinio" EntitySet="TipoPatrocinio" />
-            <End Role="Patrocinio" EntitySet="Patrocinio" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PerfilSoc__perfi__656C112C" Association="ZeusModel.FK__PerfilSoc__perfi__656C112C">
-            <End Role="Perfil" EntitySet="Perfil" />
-            <End Role="PerfilSociales" EntitySet="PerfilSociales" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Seguridad__Perfi__3F115E1A" Association="ZeusModel.FK__Seguridad__Perfi__3F115E1A">
-            <End Role="Perfil" EntitySet="Perfil" />
-            <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Seguridad__RolId__3E1D39E1" Association="ZeusModel.FK__Seguridad__RolId__3E1D39E1">
-            <End Role="Seguridad_Rol" EntitySet="Seguridad_Rol" />
-            <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
-          </AssociationSet>
+          <FunctionImport Name="st_SelAlbumFiltro" ReturnType="Collection(ZeusFinalModel.st_SelAlbumFiltro_Result)">
+            <Parameter Name="SubGeneroId" Mode="In" Type="Int32" />
+            <Parameter Name="TipoOrdenamiento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelAlbumGet" ReturnType="Collection(ZeusFinalModel.st_SelAlbumGet_Result)">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelAlbumGetAll" ReturnType="Collection(ZeusFinalModel.st_SelAlbumGetAll_Result)">
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelAlbumGetOne" ReturnType="Collection(ZeusFinalModel.st_SelAlbumGetOne_Result)">
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelCancionGet" ReturnType="Collection(ZeusFinalModel.st_SelCancionGet_Result)">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelCancionGetAll" ReturnType="Collection(ZeusFinalModel.st_SelCancionGetAll_Result)">
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelCancionGetOne" ReturnType="Collection(ZeusFinalModel.st_SelCancionGetOne_Result)">
+            <Parameter Name="CancionId" Mode="In" Type="Int32" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelCiudadGetAll" ReturnType="Collection(ZeusFinalModel.st_SelCiudadGetAll_Result)" />
+          <FunctionImport Name="st_SelEvento" ReturnType="Collection(ZeusFinalModel.st_SelEvento_Result)">
+            <Parameter Name="EventoTipoId" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="TipoOrdenamiento" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelEventoPerfil" ReturnType="Collection(ZeusFinalModel.st_SelEventoPerfil_Result)">
+            <Parameter Name="EventoPerfilId" Mode="In" Type="Int32" />
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelEventoTag" ReturnType="Collection(ZeusFinalModel.st_SelEventoTag_Result)">
+            <Parameter Name="EventoTagId" Mode="In" Type="Int32" />
+            <Parameter Name="TagId" Mode="In" Type="Int32" />
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelEventoTipo" ReturnType="Collection(ZeusFinalModel.st_SelEventoTipo_Result)">
+            <Parameter Name="EventoTipoId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelEventoVideo" ReturnType="Collection(ZeusFinalModel.st_SelEventoVideo_Result)">
+            <Parameter Name="EventoVideoId" Mode="In" Type="Int32" />
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+            <Parameter Name="UrlVideo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_selPerfil" ReturnType="Collection(ZeusFinalModel.st_selPerfil_Result)" />
+          <FunctionImport Name="st_SelSeguridadMenu" ReturnType="Collection(ZeusFinalModel.st_SelSeguridadMenu_Result)" />
+          <FunctionImport Name="st_SelSubGeneroGetAll" ReturnType="Collection(ZeusFinalModel.st_SelSubGeneroGetAll_Result)" />
+          <FunctionImport Name="st_SelTag" ReturnType="Collection(ZeusFinalModel.st_SelTag_Result)">
+            <Parameter Name="TagId" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_UpdAlbum">
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Formato" Mode="In" Type="String" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Oferta" Mode="In" Type="Decimal" />
+            <Parameter Name="LinkCompra" Mode="In" Type="String" />
+            <Parameter Name="Promocion" Mode="In" Type="String" />
+            <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+            <Parameter Name="SubGeneroId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="st_UpdCancion">
+            <Parameter Name="CancionId" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Duracion" Mode="In" Type="String" />
+            <Parameter Name="NumeroTrack" Mode="In" Type="Int32" />
+            <Parameter Name="RutaArchivo" Mode="In" Type="String" />
+            <Parameter Name="Tipo" Mode="In" Type="Boolean" />
+            <Parameter Name="AlbumId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="st_SelSubGeneroGetAll_Result">
-          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="st_SelAlbum__Result">
           <Property Type="Int32" Name="AlbumId" Nullable="false" />
           <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="FechaPublicacion" Nullable="false" />
           <Property Type="String" Name="Formato" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="400" />
           <Property Type="Decimal" Name="Precio" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="Oferta" Nullable="false" Precision="12" Scale="2" />
           <Property Type="String" Name="LinkCompra" Nullable="true" MaxLength="300" />
@@ -1546,213 +2138,165 @@
           <Property Type="Boolean" Name="Estatus" Nullable="true" />
           <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
         </ComplexType>
-        <EntityType Name="EventoVideo">
-          <Key>
-            <PropertyRef Name="EventoVideoId" />
-          </Key>
-          <Property Name="EventoVideoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EventoId" Type="Int32" Nullable="false" />
-          <Property Name="UrlVideo" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Evento" Relationship="ZeusModel.FK__EventoVid__UrlVi__1BC821DD" FromRole="EventoVideo" ToRole="Evento" />
-        </EntityType>
-        <EntityType Name="LikeCancion">
-          <Key>
-            <PropertyRef Name="LikeCancionId" />
-          </Key>
-          <Property Name="LikeCancionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PerfilId" Type="Int32" />
-          <Property Name="CancionId" Type="Int32" />
-          <NavigationProperty Name="Cancion" Relationship="ZeusModel.FK__LikeCanci__Canci__5AEE82B9" FromRole="LikeCancion" ToRole="Cancion" />
-          <NavigationProperty Name="Perfil" Relationship="ZeusModel.FK__LikeCanci__Perfi__5BE2A6F2" FromRole="LikeCancion" ToRole="Perfil" />
-        </EntityType>
-        <EntityType Name="Patrocinio">
-          <Key>
-            <PropertyRef Name="PatrocinioId" />
-          </Key>
-          <Property Name="PatrocinioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="Medio" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="FechaFin" Type="DateTime" Precision="0" />
-          <Property Name="EspacioId" Type="Int32" />
-          <Property Name="EstadoId" Type="Int32" />
-          <Property Name="VentaTotal" Type="Boolean" />
-          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TipoPatrocinio" Type="Int32" />
-          <Property Name="UrlEvento" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="PerfilId" Type="Int32" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" />
-          <Property Name="TipoArchivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Estado" Relationship="ZeusModel.FK__Patrocini__Estad__60A75C0F" FromRole="Patrocinio" ToRole="Estado" />
-          <NavigationProperty Name="TipoPatrocinio1" Relationship="ZeusModel.FK__Patrocini__TipoP__619B8048" FromRole="Patrocinio" ToRole="TipoPatrocinio" />
-        </EntityType>
-        <EntityType Name="PerfilSociales">
-          <Key>
-            <PropertyRef Name="PerfilSocialId" />
-          </Key>
-          <Property Name="PerfilSocialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RedSocial" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Url" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="Estatus" Type="Boolean" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <Property Name="PerfilId" Type="Int32" />
-          <NavigationProperty Name="Perfil" Relationship="ZeusModel.FK__PerfilSoc__perfi__656C112C" FromRole="PerfilSociales" ToRole="Perfil" />
-        </EntityType>
-        <EntityType Name="Seguridad_Menu">
-          <Key>
-            <PropertyRef Name="MenuId" />
-          </Key>
-          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UrlMenu" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PadreId" Type="Int32" />
-          <Property Name="Orden" Type="Int32" />
-          <Property Name="EsPublico" Type="Boolean" />
-          <Property Name="Icono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Seguridad_Rol">
-          <Key>
-            <PropertyRef Name="RolId" />
-          </Key>
-          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Seguridad_RolPerfil" Relationship="ZeusModel.FK__Seguridad__RolId__3E1D39E1" FromRole="Seguridad_Rol" ToRole="Seguridad_RolPerfil" />
-        </EntityType>
-        <EntityType Name="Seguridad_RolPerfil">
-          <Key>
-            <PropertyRef Name="RolPerfilId" />
-          </Key>
-          <Property Name="RolPerfilId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RolId" Type="Int32" Nullable="false" />
-          <Property Name="PerfilId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Perfil" Relationship="ZeusModel.FK__Seguridad__Perfi__3F115E1A" FromRole="Seguridad_RolPerfil" ToRole="Perfil" />
-          <NavigationProperty Name="Seguridad_Rol" Relationship="ZeusModel.FK__Seguridad__RolId__3E1D39E1" FromRole="Seguridad_RolPerfil" ToRole="Seguridad_Rol" />
-        </EntityType>
-        <EntityType Name="TipoPatrocinio">
-          <Key>
-            <PropertyRef Name="TipoPatId" />
-          </Key>
-          <Property Name="TipoPatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" />
-          <NavigationProperty Name="Patrocinio" Relationship="ZeusModel.FK__Patrocini__TipoP__619B8048" FromRole="TipoPatrocinio" ToRole="Patrocinio" />
-        </EntityType>
-        <Association Name="FK__LikeCanci__Canci__5AEE82B9">
-          <End Type="ZeusModel.Cancion" Role="Cancion" Multiplicity="0..1" />
-          <End Type="ZeusModel.LikeCancion" Role="LikeCancion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cancion">
-              <PropertyRef Name="CancionId" />
-            </Principal>
-            <Dependent Role="LikeCancion">
-              <PropertyRef Name="CancionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Patrocini__Estad__60A75C0F">
-          <End Type="ZeusModel.Estado" Role="Estado" Multiplicity="0..1" />
-          <End Type="ZeusModel.Patrocinio" Role="Patrocinio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="EstadoId" />
-            </Principal>
-            <Dependent Role="Patrocinio">
-              <PropertyRef Name="EstadoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EventoVid__UrlVi__1BC821DD">
-          <End Type="ZeusModel.Evento" Role="Evento" Multiplicity="1" />
-          <End Type="ZeusModel.EventoVideo" Role="EventoVideo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Evento">
-              <PropertyRef Name="EventoId" />
-            </Principal>
-            <Dependent Role="EventoVideo">
-              <PropertyRef Name="EventoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LikeCanci__Perfi__5BE2A6F2">
-          <End Type="ZeusModel.Perfil" Role="Perfil" Multiplicity="0..1" />
-          <End Type="ZeusModel.LikeCancion" Role="LikeCancion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Perfil">
-              <PropertyRef Name="PerfilId" />
-            </Principal>
-            <Dependent Role="LikeCancion">
-              <PropertyRef Name="PerfilId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Patrocini__TipoP__619B8048">
-          <End Type="ZeusModel.TipoPatrocinio" Role="TipoPatrocinio" Multiplicity="0..1" />
-          <End Type="ZeusModel.Patrocinio" Role="Patrocinio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoPatrocinio">
-              <PropertyRef Name="TipoPatId" />
-            </Principal>
-            <Dependent Role="Patrocinio">
-              <PropertyRef Name="TipoPatrocinio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PerfilSoc__perfi__656C112C">
-          <End Type="ZeusModel.Perfil" Role="Perfil" Multiplicity="0..1" />
-          <End Type="ZeusModel.PerfilSociales" Role="PerfilSociales" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Perfil">
-              <PropertyRef Name="PerfilId" />
-            </Principal>
-            <Dependent Role="PerfilSociales">
-              <PropertyRef Name="PerfilId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Seguridad__Perfi__3F115E1A">
-          <End Type="ZeusModel.Perfil" Role="Perfil" Multiplicity="1" />
-          <End Type="ZeusModel.Seguridad_RolPerfil" Role="Seguridad_RolPerfil" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Perfil">
-              <PropertyRef Name="PerfilId" />
-            </Principal>
-            <Dependent Role="Seguridad_RolPerfil">
-              <PropertyRef Name="PerfilId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Seguridad__RolId__3E1D39E1">
-          <End Type="ZeusModel.Seguridad_Rol" Role="Seguridad_Rol" Multiplicity="1" />
-          <End Type="ZeusModel.Seguridad_RolPerfil" Role="Seguridad_RolPerfil" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Seguridad_Rol">
-              <PropertyRef Name="RolId" />
-            </Principal>
-            <Dependent Role="Seguridad_RolPerfil">
-              <PropertyRef Name="RolId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="st_SelAlbumFiltro_Result">
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelAlbumGet_Result">
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="400" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="Oferta" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="LinkCompra" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Promocion" Nullable="true" MaxLength="600" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelAlbumGetAll_Result">
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="400" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="Oferta" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="LinkCompra" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Promocion" Nullable="true" MaxLength="600" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelAlbumGetOne_Result">
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="400" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="Oferta" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="LinkCompra" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Promocion" Nullable="true" MaxLength="600" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="PerfilNombre" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelCancionGet_Result">
+          <Property Type="Int32" Name="CancionId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="400" />
+          <Property Type="String" Name="Duracion" Nullable="false" MaxLength="5" />
+          <Property Type="Int32" Name="NumeroTrack" Nullable="false" />
+          <Property Type="Boolean" Name="tipo" Nullable="true" />
+          <Property Type="String" Name="DescripcionAlbum" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="st_SelCancionGetAll_Result">
+          <Property Type="Int32" Name="CancionId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="400" />
+          <Property Type="String" Name="Duracion" Nullable="false" MaxLength="5" />
+          <Property Type="Int32" Name="NumeroTrack" Nullable="false" />
+          <Property Type="Boolean" Name="Tipo" Nullable="true" />
+          <Property Type="String" Name="DescripcionAlbum" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="st_SelCancionGetOne_Result">
+          <Property Type="Int32" Name="CancionId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="400" />
+          <Property Type="String" Name="Duracion" Nullable="false" MaxLength="5" />
+          <Property Type="Int32" Name="NumeroTrack" Nullable="false" />
+          <Property Type="String" Name="RutaArchivo" Nullable="false" />
+          <Property Type="Boolean" Name="Tipo" Nullable="true" />
+          <Property Type="Int32" Name="AlbumId" Nullable="false" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="st_SelCiudadGetAll_Result">
+          <Property Type="Int32" Name="CiudadId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelEvento_Result">
+          <Property Type="Int32" Name="EventoId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaEvento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Establecimiento" Nullable="false" MaxLength="150" />
+          <Property Type="Decimal" Name="PrecioRegular" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="String" Name="Promocion" Nullable="true" MaxLength="300" />
+          <Property Type="Decimal" Name="Preventa" Nullable="true" Precision="12" Scale="0" />
+          <Property Type="Int32" Name="EventoTipoId" Nullable="true" />
+          <Property Type="Int32" Name="CiudadId" Nullable="true" />
+          <Property Type="String" Name="Latitud" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Longitud" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LinkEventoFacebook" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="LinkComprarBoleto" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="String" Name="TipoEvento" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelEventoPerfil_Result">
+          <Property Type="Int32" Name="EventoPerfilId" Nullable="false" />
+          <Property Type="Int32" Name="EventoId" Nullable="true" />
+          <Property Type="Int32" Name="PerfilId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="st_SelEventoTag_Result">
+          <Property Type="Int32" Name="EventoTagId" Nullable="false" />
+          <Property Type="Int32" Name="TagId" Nullable="true" />
+          <Property Type="Int32" Name="EventoId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="st_SelEventoTipo_Result">
+          <Property Type="Int32" Name="EventoTipoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="st_SelEventoVideo_Result">
+          <Property Type="Int32" Name="EventoVideoId" Nullable="false" />
+          <Property Type="Int32" Name="EventoId" Nullable="false" />
+          <Property Type="String" Name="UrlVideo" Nullable="false" MaxLength="300" />
+        </ComplexType>
+        <ComplexType Name="st_selPerfil_Result">
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="300" />
+        </ComplexType>
+        <ComplexType Name="st_SelSeguridadMenu_Result">
+          <Property Type="Int32" Name="MenuId" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="UrlMenu" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="PadreId" Nullable="true" />
+          <Property Type="Int32" Name="Orden" Nullable="true" />
+          <Property Type="Boolean" Name="EsPublico" Nullable="true" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Estatus" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="st_SelSubGeneroGetAll_Result">
+          <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="st_SelTag_Result">
+          <Property Type="Int32" Name="TagId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ZeusModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="ZeusFinalModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Album">
-            <EntityTypeMapping TypeName="ZeusModel.Album">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Album">
               <MappingFragment StoreEntitySet="Album">
-                <ScalarProperty Name="UsarAlbumPrecargado" ColumnName="UsarAlbumPrecargado" />
-                <ScalarProperty Name="UrlAlbumPrecargado" ColumnName="UrlAlbumPrecargado" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
@@ -1767,11 +2311,13 @@
                 <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UrlAlbumPrecargado" ColumnName="UrlAlbumPrecargado" />
+                <ScalarProperty Name="UsarAlbumPrecargado" ColumnName="UsarAlbumPrecargado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AlbumTag">
-            <EntityTypeMapping TypeName="ZeusModel.AlbumTag">
+            <EntityTypeMapping TypeName="ZeusFinalModel.AlbumTag">
               <MappingFragment StoreEntitySet="AlbumTag">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="TagId" ColumnName="TagId" />
@@ -1780,48 +2326,47 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cancion">
-            <EntityTypeMapping TypeName="ZeusModel.Cancion">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Cancion">
               <MappingFragment StoreEntitySet="Cancion">
-                <ScalarProperty Name="Letra" ColumnName="Letra" />
-                <ScalarProperty Name="Reproducciones" ColumnName="Reproducciones" />
-                <ScalarProperty Name="RutaArchivo" ColumnName="RutaArchivo" />
                 <ScalarProperty Name="CancionId" ColumnName="CancionId" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Duracion" ColumnName="Duracion" />
                 <ScalarProperty Name="NumeroTrack" ColumnName="NumeroTrack" />
+                <ScalarProperty Name="RutaArchivo" ColumnName="RutaArchivo" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Reproducciones" ColumnName="Reproducciones" />
+                <ScalarProperty Name="Letra" ColumnName="Letra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ciudad">
-            <EntityTypeMapping TypeName="ZeusModel.Ciudad">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Ciudad">
               <MappingFragment StoreEntitySet="Ciudad">
                 <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Estado">
-            <EntityTypeMapping TypeName="ZeusModel.Estado">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
                 <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Evento">
-            <EntityTypeMapping TypeName="ZeusModel.Evento">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Evento">
               <MappingFragment StoreEntitySet="Evento">
-                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
                 <ScalarProperty Name="EventoId" ColumnName="EventoId" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
@@ -1839,11 +2384,12 @@
                 <ScalarProperty Name="LinkComprarBoleto" ColumnName="LinkComprarBoleto" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EventoPerfil">
-            <EntityTypeMapping TypeName="ZeusModel.EventoPerfil">
+            <EntityTypeMapping TypeName="ZeusFinalModel.EventoPerfil">
               <MappingFragment StoreEntitySet="EventoPerfil">
                 <ScalarProperty Name="EventoPerfilId" ColumnName="EventoPerfilId" />
                 <ScalarProperty Name="EventoId" ColumnName="EventoId" />
@@ -1852,7 +2398,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EventoTag">
-            <EntityTypeMapping TypeName="ZeusModel.EventoTag">
+            <EntityTypeMapping TypeName="ZeusFinalModel.EventoTag">
               <MappingFragment StoreEntitySet="EventoTag">
                 <ScalarProperty Name="EventoTagId" ColumnName="EventoTagId" />
                 <ScalarProperty Name="TagId" ColumnName="TagId" />
@@ -1861,7 +2407,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EventoTipo">
-            <EntityTypeMapping TypeName="ZeusModel.EventoTipo">
+            <EntityTypeMapping TypeName="ZeusFinalModel.EventoTipo">
               <MappingFragment StoreEntitySet="EventoTipo">
                 <ScalarProperty Name="EventoTipoId" ColumnName="EventoTipoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -1870,8 +2416,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EventoVideo">
+            <EntityTypeMapping TypeName="ZeusFinalModel.EventoVideo">
+              <MappingFragment StoreEntitySet="EventoVideo">
+                <ScalarProperty Name="EventoVideoId" ColumnName="EventoVideoId" />
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+                <ScalarProperty Name="UrlVideo" ColumnName="UrlVideo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Genero">
-            <EntityTypeMapping TypeName="ZeusModel.Genero">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Genero">
               <MappingFragment StoreEntitySet="Genero">
                 <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -1881,7 +2436,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LikeAlbum">
-            <EntityTypeMapping TypeName="ZeusModel.LikeAlbum">
+            <EntityTypeMapping TypeName="ZeusFinalModel.LikeAlbum">
               <MappingFragment StoreEntitySet="LikeAlbum">
                 <ScalarProperty Name="LikeAlbumId" ColumnName="LikeAlbumId" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
@@ -1889,8 +2444,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LikeCancion">
+            <EntityTypeMapping TypeName="ZeusFinalModel.LikeCancion">
+              <MappingFragment StoreEntitySet="LikeCancion">
+                <ScalarProperty Name="LikeCancionId" ColumnName="LikeCancionId" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="CancionId" ColumnName="CancionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LikeEvento">
-            <EntityTypeMapping TypeName="ZeusModel.LikeEvento">
+            <EntityTypeMapping TypeName="ZeusFinalModel.LikeEvento">
               <MappingFragment StoreEntitySet="LikeEvento">
                 <ScalarProperty Name="LikeEventoId" ColumnName="LikeEventoId" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
@@ -1899,7 +2463,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LikePerfil">
-            <EntityTypeMapping TypeName="ZeusModel.LikePerfil">
+            <EntityTypeMapping TypeName="ZeusFinalModel.LikePerfil">
               <MappingFragment StoreEntitySet="LikePerfil">
                 <ScalarProperty Name="LikePerfilId" ColumnName="LikePerfilId" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
@@ -1908,7 +2472,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pais">
-            <EntityTypeMapping TypeName="ZeusModel.Pais">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Pais">
               <MappingFragment StoreEntitySet="Pais">
                 <ScalarProperty Name="PaisId" ColumnName="PaisId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1917,14 +2481,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Patrocinio">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Patrocinio">
+              <MappingFragment StoreEntitySet="Patrocinio">
+                <ScalarProperty Name="PatrocinioId" ColumnName="PatrocinioId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Medio" ColumnName="Medio" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="EspacioId" ColumnName="EspacioId" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="VentaTotal" ColumnName="VentaTotal" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="TipoPatrocinio" ColumnName="TipoPatrocinio" />
+                <ScalarProperty Name="UrlEvento" ColumnName="UrlEvento" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="TipoArchivo" ColumnName="TipoArchivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Perfil">
-            <EntityTypeMapping TypeName="ZeusModel.Perfil">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Perfil">
               <MappingFragment StoreEntitySet="Perfil">
-                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
-                <ScalarProperty Name="Presskit" ColumnName="Presskit" />
-                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
-                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />
@@ -1932,28 +2513,80 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="FotoPerfil" ColumnName="FotoPerfil" />
                 <ScalarProperty Name="AcercaDe" ColumnName="AcercaDe" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="Horario" ColumnName="Horario" />
                 <ScalarProperty Name="Fundacion" ColumnName="Fundacion" />
                 <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Presskit" ColumnName="Presskit" />
+                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerfilSociales">
+            <EntityTypeMapping TypeName="ZeusFinalModel.PerfilSociales">
+              <MappingFragment StoreEntitySet="PerfilSociales">
+                <ScalarProperty Name="PerfilSocialId" ColumnName="PerfilSocialId" />
+                <ScalarProperty Name="RedSocial" ColumnName="RedSocial" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PerfilTipo">
-            <EntityTypeMapping TypeName="ZeusModel.PerfilTipo">
+            <EntityTypeMapping TypeName="ZeusFinalModel.PerfilTipo">
               <MappingFragment StoreEntitySet="PerfilTipo">
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="PerfilTipoId" ColumnName="PerfilTipoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguridad_Menu">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Seguridad_Menu">
+              <MappingFragment StoreEntitySet="Seguridad_Menu">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="UrlMenu" ColumnName="UrlMenu" />
+                <ScalarProperty Name="PadreId" ColumnName="PadreId" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="EsPublico" ColumnName="EsPublico" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguridad_Rol">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Seguridad_Rol">
+              <MappingFragment StoreEntitySet="Seguridad_Rol">
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguridad_RolPerfil">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Seguridad_RolPerfil">
+              <MappingFragment StoreEntitySet="Seguridad_RolPerfil">
+                <ScalarProperty Name="RolPerfilId" ColumnName="RolPerfilId" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubGenero">
-            <EntityTypeMapping TypeName="ZeusModel.SubGenero">
+            <EntityTypeMapping TypeName="ZeusFinalModel.SubGenero">
               <MappingFragment StoreEntitySet="SubGenero">
                 <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -1964,17 +2597,28 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tag">
-            <EntityTypeMapping TypeName="ZeusModel.Tag">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPatrocinio">
+            <EntityTypeMapping TypeName="ZeusFinalModel.TipoPatrocinio">
+              <MappingFragment StoreEntitySet="TipoPatrocinio">
+                <ScalarProperty Name="TipoPatId" ColumnName="TipoPatId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="ZeusModel.Usuario">
+            <EntityTypeMapping TypeName="ZeusFinalModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1989,19 +2633,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="st_DelAlbum_" FunctionName="ZeusModel.Store.st_DelAlbum_" />
-          <FunctionImportMapping FunctionImportName="st_InsAlbum_" FunctionName="ZeusModel.Store.st_InsAlbum_" />
-          <FunctionImportMapping FunctionImportName="st_SelSubGeneroGetAll" FunctionName="ZeusModel.Store.st_SelSubGeneroGetAll">
+          <FunctionImportMapping FunctionImportName="st_DelAlbum_" FunctionName="ZeusFinalModel.Store.st_DelAlbum_" />
+          <FunctionImportMapping FunctionImportName="st_InsAlbum" FunctionName="ZeusFinalModel.Store.st_InsAlbum" />
+          <FunctionImportMapping FunctionImportName="st_InsAlbum_" FunctionName="ZeusFinalModel.Store.st_InsAlbum_" />
+          <FunctionImportMapping FunctionImportName="st_InsCancion" FunctionName="ZeusFinalModel.Store.st_InsCancion" />
+          <FunctionImportMapping FunctionImportName="st_InsEvento" FunctionName="ZeusFinalModel.Store.st_InsEvento" />
+          <FunctionImportMapping FunctionImportName="st_InsEventoPerfil" FunctionName="ZeusFinalModel.Store.st_InsEventoPerfil" />
+          <FunctionImportMapping FunctionImportName="st_InsEventoTag" FunctionName="ZeusFinalModel.Store.st_InsEventoTag" />
+          <FunctionImportMapping FunctionImportName="st_InsEventoTipo" FunctionName="ZeusFinalModel.Store.st_InsEventoTipo" />
+          <FunctionImportMapping FunctionImportName="st_InsEventoVideo" FunctionName="ZeusFinalModel.Store.st_InsEventoVideo" />
+          <FunctionImportMapping FunctionImportName="st_SelAlbum_" FunctionName="ZeusFinalModel.Store.st_SelAlbum_">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ZeusModel.st_SelSubGeneroGetAll_Result">
-                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="st_SelAlbum_" FunctionName="ZeusModel.Store.st_SelAlbum_">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ZeusModel.st_SelAlbum__Result">
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelAlbum__Result">
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
@@ -2019,104 +2662,226 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="EventoVideo">
-            <EntityTypeMapping TypeName="ZeusModel.EventoVideo">
-              <MappingFragment StoreEntitySet="EventoVideo">
-                <ScalarProperty Name="UrlVideo" ColumnName="UrlVideo" />
-                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
-                <ScalarProperty Name="EventoVideoId" ColumnName="EventoVideoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LikeCancion">
-            <EntityTypeMapping TypeName="ZeusModel.LikeCancion">
-              <MappingFragment StoreEntitySet="LikeCancion">
-                <ScalarProperty Name="CancionId" ColumnName="CancionId" />
-                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
-                <ScalarProperty Name="LikeCancionId" ColumnName="LikeCancionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Patrocinio">
-            <EntityTypeMapping TypeName="ZeusModel.Patrocinio">
-              <MappingFragment StoreEntitySet="Patrocinio">
-                <ScalarProperty Name="TipoArchivo" ColumnName="TipoArchivo" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
-                <ScalarProperty Name="UrlEvento" ColumnName="UrlEvento" />
-                <ScalarProperty Name="TipoPatrocinio" ColumnName="TipoPatrocinio" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <FunctionImportMapping FunctionImportName="st_SelAlbumFiltro" FunctionName="ZeusFinalModel.Store.st_SelAlbumFiltro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelAlbumFiltro_Result">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="SubGenero" ColumnName="SubGenero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelAlbumGet" FunctionName="ZeusFinalModel.Store.st_SelAlbumGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelAlbumGet_Result">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="VentaTotal" ColumnName="VentaTotal" />
-                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
-                <ScalarProperty Name="EspacioId" ColumnName="EspacioId" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="Medio" ColumnName="Medio" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="PatrocinioId" ColumnName="PatrocinioId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PerfilSociales">
-            <EntityTypeMapping TypeName="ZeusModel.PerfilSociales">
-              <MappingFragment StoreEntitySet="PerfilSociales">
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+                <ScalarProperty Name="LinkCompra" ColumnName="LinkCompra" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="RedSocial" ColumnName="RedSocial" />
-                <ScalarProperty Name="PerfilSocialId" ColumnName="PerfilSocialId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Seguridad_Menu">
-            <EntityTypeMapping TypeName="ZeusModel.Seguridad_Menu">
-              <MappingFragment StoreEntitySet="Seguridad_Menu">
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="Icono" ColumnName="Icono" />
-                <ScalarProperty Name="EsPublico" ColumnName="EsPublico" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="PadreId" ColumnName="PadreId" />
-                <ScalarProperty Name="UrlMenu" ColumnName="UrlMenu" />
+                <ScalarProperty Name="SubGenero" ColumnName="SubGenero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelAlbumGetAll" FunctionName="ZeusFinalModel.Store.st_SelAlbumGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelAlbumGetAll_Result">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Seguridad_Rol">
-            <EntityTypeMapping TypeName="ZeusModel.Seguridad_Rol">
-              <MappingFragment StoreEntitySet="Seguridad_Rol">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+                <ScalarProperty Name="LinkCompra" ColumnName="LinkCompra" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="SubGenero" ColumnName="SubGenero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelAlbumGetOne" FunctionName="ZeusFinalModel.Store.st_SelAlbumGetOne">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelAlbumGetOne_Result">
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+                <ScalarProperty Name="LinkCompra" ColumnName="LinkCompra" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="PerfilNombre" ColumnName="PerfilNombre" />
+                <ScalarProperty Name="SubGenero" ColumnName="SubGenero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelCancionGet" FunctionName="ZeusFinalModel.Store.st_SelCancionGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelCancionGet_Result">
+                <ScalarProperty Name="CancionId" ColumnName="CancionId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="NumeroTrack" ColumnName="NumeroTrack" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="DescripcionAlbum" ColumnName="DescripcionAlbum" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelCancionGetAll" FunctionName="ZeusFinalModel.Store.st_SelCancionGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelCancionGetAll_Result">
+                <ScalarProperty Name="CancionId" ColumnName="CancionId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="NumeroTrack" ColumnName="NumeroTrack" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="DescripcionAlbum" ColumnName="DescripcionAlbum" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelCancionGetOne" FunctionName="ZeusFinalModel.Store.st_SelCancionGetOne">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelCancionGetOne_Result">
+                <ScalarProperty Name="CancionId" ColumnName="CancionId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="NumeroTrack" ColumnName="NumeroTrack" />
+                <ScalarProperty Name="RutaArchivo" ColumnName="RutaArchivo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelCiudadGetAll" FunctionName="ZeusFinalModel.Store.st_SelCiudadGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelCiudadGetAll_Result">
+                <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelEvento" FunctionName="ZeusFinalModel.Store.st_SelEvento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEvento_Result">
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaEvento" ColumnName="FechaEvento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
+                <ScalarProperty Name="PrecioRegular" ColumnName="PrecioRegular" />
+                <ScalarProperty Name="Promocion" ColumnName="Promocion" />
+                <ScalarProperty Name="Preventa" ColumnName="Preventa" />
+                <ScalarProperty Name="EventoTipoId" ColumnName="EventoTipoId" />
+                <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="LinkEventoFacebook" ColumnName="LinkEventoFacebook" />
+                <ScalarProperty Name="LinkComprarBoleto" ColumnName="LinkComprarBoleto" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="TipoEvento" ColumnName="TipoEvento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelEventoPerfil" FunctionName="ZeusFinalModel.Store.st_SelEventoPerfil">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoPerfil_Result">
+                <ScalarProperty Name="EventoPerfilId" ColumnName="EventoPerfilId" />
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelEventoTag" FunctionName="ZeusFinalModel.Store.st_SelEventoTag">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoTag_Result">
+                <ScalarProperty Name="EventoTagId" ColumnName="EventoTagId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelEventoTipo" FunctionName="ZeusFinalModel.Store.st_SelEventoTipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoTipo_Result">
+                <ScalarProperty Name="EventoTipoId" ColumnName="EventoTipoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="RolId" ColumnName="RolId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Seguridad_RolPerfil">
-            <EntityTypeMapping TypeName="ZeusModel.Seguridad_RolPerfil">
-              <MappingFragment StoreEntitySet="Seguridad_RolPerfil">
-                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
-                <ScalarProperty Name="RolId" ColumnName="RolId" />
-                <ScalarProperty Name="RolPerfilId" ColumnName="RolPerfilId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoPatrocinio">
-            <EntityTypeMapping TypeName="ZeusModel.TipoPatrocinio">
-              <MappingFragment StoreEntitySet="TipoPatrocinio">
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelEventoVideo" FunctionName="ZeusFinalModel.Store.st_SelEventoVideo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoVideo_Result">
+                <ScalarProperty Name="EventoVideoId" ColumnName="EventoVideoId" />
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+                <ScalarProperty Name="UrlVideo" ColumnName="UrlVideo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_selPerfil" FunctionName="ZeusFinalModel.Store.st_selPerfil">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_selPerfil_Result">
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="TipoPatId" ColumnName="TipoPatId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelSeguridadMenu" FunctionName="ZeusFinalModel.Store.st_SelSeguridadMenu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelSeguridadMenu_Result">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="UrlMenu" ColumnName="UrlMenu" />
+                <ScalarProperty Name="PadreId" ColumnName="PadreId" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="EsPublico" ColumnName="EsPublico" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelSubGeneroGetAll" FunctionName="ZeusFinalModel.Store.st_SelSubGeneroGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelSubGeneroGetAll_Result">
+                <ScalarProperty Name="SubGeneroId" ColumnName="SubGeneroId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelTag" FunctionName="ZeusFinalModel.Store.st_SelTag">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelTag_Result">
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_UpdAlbum" FunctionName="ZeusFinalModel.Store.st_UpdAlbum" />
+          <FunctionImportMapping FunctionImportName="st_UpdCancion" FunctionName="ZeusFinalModel.Store.st_UpdCancion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

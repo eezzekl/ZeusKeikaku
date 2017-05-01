@@ -73,6 +73,7 @@
     <Compile Include="Classes\ConnectionStringHelper.cs" />
     <Compile Include="Classes\Entities.cs" />
     <Compile Include="Classes\Evento.cs" />
+    <Compile Include="Classes\Usuario.cs" />
     <Compile Include="Estado.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
@@ -131,16 +132,61 @@
     <Compile Include="Seguridad_RolPerfil.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="st_SelAlbumFiltro_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelAlbumGetAll_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelAlbumGetOne_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelAlbumGet_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="st_SelAlbum__Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelCancionGetAll_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelCancionGetOne_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelCancionGet_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelCiudadGetAll_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelEventoPerfil_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelEventoTag_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelEventoTipo_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelEventoVideo_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelEvento_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_selPerfil_Result.cs">
+      <DependentUpon>YukindieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="st_SelSeguridadMenu_Result.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="st_SelSubGeneroGetAll_Result.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SubGenero.cs">
+    <Compile Include="st_SelTag_Result.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="SubGenero.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
@@ -180,6 +226,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="YukindieModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>YukindieModel.edmx</DependentUpon>
@@ -191,10 +240,6 @@
       <LastGenOutput>YukindieModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

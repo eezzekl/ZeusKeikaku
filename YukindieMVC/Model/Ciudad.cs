@@ -17,16 +17,19 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ciudad()
         {
+            this.Evento = new HashSet<Evento>();
             this.Perfil = new HashSet<Perfil>();
         }
     
         public int CiudadId { get; set; }
+        public int EstadoId { get; set; }
         public string Nombre { get; set; }
         public Nullable<bool> Estatus { get; set; }
-        public int EstadoId { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
     
         public virtual Estado Estado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Evento> Evento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Perfil> Perfil { get; set; }
     }

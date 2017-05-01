@@ -14,9 +14,18 @@ namespace Model
     
     public partial class Genero
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Genero()
+        {
+            this.SubGenero = new HashSet<SubGenero>();
+        }
+    
         public int GeneroId { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubGenero> SubGenero { get; set; }
     }
 }

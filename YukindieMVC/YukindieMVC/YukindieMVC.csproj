@@ -202,13 +202,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AlbumController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CiudadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventoTipoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PerfilController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubGeneroController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SessionExpired.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SessionPersister.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
       <DependentUpon>YukindieContext.tt</DependentUpon>
@@ -314,6 +321,7 @@
     <Content Include="assets\js\eco-dashboard.js" />
     <Content Include="assets\js\E_Notifications.js" />
     <Content Include="assets\js\E_Reproductor.js" />
+    <Content Include="assets\js\E_Textext.js" />
     <Content Include="assets\js\form-validation.js" />
     <Content Include="assets\js\frl-dashboard.js" />
     <Content Include="assets\js\hos-dashboard.js" />
@@ -1985,6 +1993,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Perfiles\delorean.jpg" />
+    <Content Include="Images\Perfiles\mnm producciones.jpg" />
     <Content Include="Models\YukindieContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>YukindieContext.edmx</DependentUpon>
@@ -2125,6 +2135,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
+    <Content Include="Scripts\f\Admin\Evento\Create.js" />
     <Content Include="Scripts\f\Album.js" />
     <Content Include="Scripts\f\AlbumIndex.js" />
     <Content Include="Scripts\f\Create.js" />
@@ -2139,6 +2150,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\f\IndexDinamico.js" />
+    <Content Include="Areas\Admin\Views\Evento\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Evento\Create.cshtml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
@@ -2194,10 +2207,14 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Ciudad\" />
+    <Folder Include="Areas\Admin\Views\EventoTipo\" />
+    <Folder Include="Areas\Admin\Views\Perfil\" />
     <Folder Include="Areas\Admin\Views\SubGenero\" />
+    <Folder Include="Areas\Admin\Views\Tag\" />
     <Folder Include="assets\plugins\datatables\extensions\FixedColumns\examples\integration\" />
     <Folder Include="data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Views\SessionExpired\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

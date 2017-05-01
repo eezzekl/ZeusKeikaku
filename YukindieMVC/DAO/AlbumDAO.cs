@@ -64,7 +64,7 @@ namespace DAO
                 var tags = TagDAO.GetTagsByAlbum(item[0].AlbumId);
                 foreach (var tag in tags)
                 {
-                    item[0].LTag.Add(new Tag { TagId = tag.TagId, nombre = tag.nombre });
+                    item[0].LTag.Add(new Tag { TagId = tag.TagId, Nombre  = tag.Nombre  });
                 }
                 //item[0].LTag = 
                 return item;
