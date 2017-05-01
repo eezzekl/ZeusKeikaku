@@ -23,7 +23,7 @@ namespace YukindieMVC.Controllers
             usu.PerfilId.Nombre = "edwin";
             usu.PerfilId = p;
 
-            SessionPersister.UsuarioEnSession = null;
+            SessionPersister.UsuarioEnSession = usu;
 
             return View();
         }

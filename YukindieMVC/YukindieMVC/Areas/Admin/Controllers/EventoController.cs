@@ -44,6 +44,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
 
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                     file.SaveAs(path);
+                    eventobo.Imagen = fileName;
                 }
             }
             else
