@@ -13,14 +13,14 @@
 @section scripts
 {
     <script>
-        @*var urlGet = '@Url.Action("Get", "Album", new { area = "Admin" })';*@
+        var urlGet = '@Url.Action("Get", "Evento", new { area = "Admin" })';
         var urlGetEventoTipo = '@Url.Action("Get", "EventoTipo", new { area = "Admin" })';
         var urlGetCiudad = '@Url.Action("Get", "Ciudad", new { area = "Admin" })';
         var urlGuardarEvento = '@Url.Action("Guardar", "Evento", new { area = "Admin" })';
         var urlGetBandas = '@Url.Action("GetAll", "Perfil", new { area = "Admin" })';
         var urlGetTags = '@Url.Action("Get", "Tag", new { area = "Admin" })';
         var urlGetEstablecimiento = '@Url.Action("GetEstablecimiento", "Perfil", new { area = "Admin" })';
-        var AlbumId = 1;
+        var EventoId = @ViewBag.EventoId;
         var PerfilId = 3;
 
 
@@ -43,18 +43,19 @@
     </script>
 
     @*<script src="~/assets/Texttext/textext.core.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.ajax.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.arrow.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.autocomplete.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.clear.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.filter.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.focus.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.prompt.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.suggestions.js"></script>
-    <script src="~/assets/Texttext/textext.plugin.tags.js"></script>*@
+        <script src="~/assets/Texttext/textext.plugin.ajax.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.arrow.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.autocomplete.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.clear.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.filter.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.focus.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.prompt.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.suggestions.js"></script>
+        <script src="~/assets/Texttext/textext.plugin.tags.js"></script>*@
 
     @*<script src="~/assets/js/E_Textext.js"></script>*@
-<script src="~/Scripts/f/Admin/Evento/Create.js"></script>
+    @*<script src="~/Scripts/f/Admin/Evento/Create.js"></script>*@
+<script src="~/Scripts/f/Admin/Evento/Update.js"></script>
 
 
     @*<script src="~/Scripts/f/Album.js"></script>*@
@@ -74,7 +75,7 @@
             <div class="row">
                 <div class="page-header">
                     <a href="~/Admin/Evento/Index" class="pull-right btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Regresar</a>
-                    <h2><strong>Nuevo Evento</strong></h2>
+                    <h2><strong>Modificar Evento</strong></h2>
                 </div>
                 <div class="col-xs-12">
                     <div class="row">
@@ -146,19 +147,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Tipo de Evento:</label>
-                                <select id="cmbEventoTipo" class="form-control">
-                                    @*<option>Heavy Metal</option>
-                                        <option>Rock</option>
-                                        <option>Punk</option>*@
-                                </select>
+                                <label>Ciudad:</label>
+                                <select id="cmbCiudad" class="form-control"></select>
                             </div>
                             <div class="form-group">
-                                <label>Ciudad:</label>
-                                <select id="cmbCiudad" class="form-control">
-                                    @*<option>Heavy Metal</option>
-                                        <option>Rock</option>
-                                        <option>Punk</option>*@
+                                <label>Tipo de Evento:</label>
+                                <select id="cmbEventoTipo" class="form-control">
                                 </select>
                             </div>
                             <div class="form-group">

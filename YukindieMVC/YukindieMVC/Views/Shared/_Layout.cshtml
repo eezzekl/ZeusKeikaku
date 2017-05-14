@@ -475,7 +475,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="" href="GestionListadoPerfil.aspx">Eventos</a>
+                                <a class="" href="~/Admin/Evento/Index">Eventos</a>
                             </li>
                         </ul>
                     </li>
@@ -626,13 +626,13 @@
     <script src="~/assets/Funciones/PruebaAjax.js"></script>
 
     @*<%--    cargar imagen luego de cargar un fileupload--%>*@
-    <script src="~/assets/Funciones/GestionEvento.js"></script>
+    @*<script src="~/assets/Funciones/GestionEvento.js"></script>*@
 
     @*<%--    para el check--%>*@
     <script src="~/assets/plugins/icheck/icheck.min.js"></script>
 
     @*<%--    para la administracion de albumes--%>*@
-    <script src="~/assets/Funciones/GestionAlbum.js"></script>
+    @*<script src="~/assets/Funciones/GestionAlbum.js"></script>*@
 
     @*<%--    para el reproductor--%>*@
     <script src="~/assets/js/E_Reproductor.js"></script>
@@ -648,7 +648,18 @@
     <script src="~/Scripts/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.js"></script>
     <script src="~/Scripts/bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.es.min.js"></script>
 
+    @*para los tags de textext*@
 
+    <script src="~/assets/Texttext/textext.core.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.ajax.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.arrow.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.autocomplete.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.clear.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.filter.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.focus.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.prompt.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.suggestions.js"></script>
+    <script src="~/assets/Texttext/textext.plugin.tags.js"></script>
 
     @RenderSection("scripts", required: false)
 

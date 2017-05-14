@@ -67,24 +67,27 @@ namespace DAO
         //}
 
         // vendria siendo un get one
-        public static Evento GetOne(int EventoTipoId, DateTime? FechaInicial, DateTime? FechaFinal, decimal Precio, int TipoOrdenamiento, bool Estatus)
+        //alldata es una bandera si es true traemos aparte del evento todos las tablas ligadas como eventoperfil, eventovideo,eventotag
+        // de lo contrario solo cargamos la tabla evento
+        public static List<Evento> GetData(int EventoId=0, DateTime? FechaInicial=null, DateTime? FechaFinal=null, decimal Precio=0, int TipoOrdenamiento=0, bool Estatus=false , bool allData=false )
         {
             try
             {
-                Model.Evento itemEvento = new Model.Evento();
+                List<Model.Evento> litemEvento = new List<Model.Evento>();
                 List<EventoPerfil> litemEventoPerfil = new List<EventoPerfil>();
                 List<EventoTag> litemEventoTag = new List<EventoTag>();
                 List<EventoVideo> litemEventoVideo = new List<EventoVideo>();
 
                 using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
                 {
-                    itemEvento = db.st_SelEvento(EventoTipoId, FechaInicial, FechaFinal, Precio, TipoOrdenamiento, Estatus)
+                    litemEvento = db.st_SelEvento(EventoId, FechaInicial, FechaFinal, Precio, TipoOrdenamiento, Estatus)
                         .Select(x => new Evento
                         {
                             EventoId = x.EventoId,
                             Titulo = x.Titulo,
                             Imagen = x.Imagen,
                             FechaEvento = x.FechaEvento,
+                            FechaEventoTexto = x.FechaEvento.ToString("dd/mm/yyyy"),
                             Direccion = x.Direccion,
                             Establecimiento = x.Establecimiento,
                             PrecioRegular = x.PrecioRegular,
@@ -107,40 +110,55 @@ namespace DAO
                             {
                                 EventoTipoId = (Int32)x.EventoTipoId,
                                 Descripcion = x.TipoEvento
-                            },
-                        }
-                        ).FirstOrDefault();
+                            }
+                        }).ToList();
+                        
 
                     //AHORA LLENAMOS EVENTOPERFIL
-                    if (itemEvento != null)
+                    if (litemEvento != null)
                     {
-                        litemEventoPerfil = db.st_SelEventoPerfil(0, itemEvento.EventoId, 0)
-                            .Select(x => new EventoPerfil
-                            {
-                                EventoPerfilId = x.EventoPerfilId,
-                                EventoId = x.EventoId,
-                                PerfilId = x.PerfilId
-                            }).ToList();
+                        if (allData)
+                        {
+                            litemEvento[0].lEventoPerfil = db.st_SelEventoPerfil(0, litemEvento[0].EventoId, 0)
+                                .Select(x => new EventoPerfil
+                                {
+                                    EventoPerfilId = x.EventoPerfilId,
+                                    EventoId = x.EventoId,
+                                    Perfil = new Perfil
+                                    {
+                                        PerfilId = x.PerfilId,
+                                        Nombre = x.Nombre
+                                    }
+                                }).ToList();
 
-                        litemEventoTag = db.st_SelEventoTag(0, 0, itemEvento.EventoId)
-                            .Select(x => new EventoTag
-                            {
-                                EventoTagId = x.EventoTagId,
-                                TagId = x.TagId,
-                                EventoId = x.EventoId
-                            }).ToList();
+                            //litemEventoTag = db.st_SelEventoTag(0, 0, itemEvento.EventoId)
+                            litemEvento[0].lEventoTag = db.st_SelEventoTag(0, 0, litemEvento[0].EventoId)
+                                .Select(x => new EventoTag
+                                {
+                                    EventoTagId = x.EventoTagId,
+                                    TagId = x.TagId,
+                                    EventoId = x.EventoId,
+                                    Tag = new Tag
+                                    {
+                                        TagId = (Int32)x.TagId,
+                                        Nombre = x.Nombre
+                                    }
 
-                        litemEventoVideo = db.st_SelEventoVideo(0, itemEvento.EventoId, null)
+                                }).ToList();
+
+                            //litemEventoVideo = db.st_SelEventoVideo(0, itemEvento.EventoId, null)
+                            litemEvento[0].lEventoVideo = db.st_SelEventoVideo(0, litemEvento[0].EventoId, null)
                             .Select(x => new EventoVideo
                             {
                                 EventoVideoId = x.EventoVideoId,
                                 EventoId = x.EventoId,
                                 UrlVideo = x.UrlVideo
                             }).ToList();
+                        }
                     }
                 }
 
-                return itemEvento;
+                return litemEvento;
             }
             catch (EntityException ex)
             {
@@ -149,7 +167,7 @@ namespace DAO
             }
         }
 
-        public static List<Evento> Get(int EventoTipoId, DateTime? FechaInicial, DateTime? FechaFinal, decimal Precio, int TipoOrdenamiento, bool Estatus)
+        public static List<Evento> Get(int EventoId, DateTime? FechaInicial, DateTime? FechaFinal, decimal Precio, int TipoOrdenamiento, bool Estatus)
         {
             try
             {
@@ -160,13 +178,13 @@ namespace DAO
 
                 using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
                 {
-                    litemEvento = db.st_SelEvento(EventoTipoId, FechaInicial, FechaFinal, Precio, TipoOrdenamiento, Estatus)
+                    litemEvento = db.st_SelEvento(EventoId, FechaInicial, FechaFinal, Precio, TipoOrdenamiento, Estatus)
                         .Select(x => new Evento
                         {
                             EventoId = x.EventoId,
                             Titulo = x.Titulo,
                             Imagen = x.Imagen,
-                            FechaEvento = x.FechaEvento,
+                            FechaEventoTexto = x.FechaEvento.ToString("dd/mm/yyyy"),//x.FechaEvento,
                             Direccion = x.Direccion,
                             Establecimiento = x.Establecimiento,
                             PrecioRegular = x.PrecioRegular,
@@ -207,11 +225,11 @@ namespace DAO
             }
         }
 
-        public static void Save(Model.Evento item)
+        public static void Save(Evento item)
         {
             // si necesitamos que un procedure devuelva el valor de un id hacemos esto
             //https://social.msdn.microsoft.com/Forums/en-US/5e56547d-75f0-4688-8069-8328de24f332/error-when-calling-a-stored-procedure?forum=adodotnetentityframework
-            // si no sabemos como activar la ventana checamos esto
+            // si no sabemos como activar la ventana  del link de arriba checamos esto
             //http://stackoverflow.com/questions/3729920/cant-find-ado-net-entity-model-browser-window-in-vs2010
 
             TransactionOptions options = new TransactionOptions();
@@ -224,8 +242,6 @@ namespace DAO
                     System.Data.Entity.Core.Objects.ObjectParameter EventoId = new System.Data.Entity.Core.Objects.ObjectParameter("EventoId", item.EventoId);
                     using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
                     {
-
-
                         try
                         {
                             db.st_InsEvento(EventoId,
@@ -247,13 +263,7 @@ namespace DAO
                                             item.Perfil.PerfilId
                                             );
 
-                            //string box = ("edwin" != null) ? toy.ToString() : "";
-
-                            int eventoid = (item.EventoId>0)?item.EventoId:Convert.ToInt32(EventoId.Value);
-
-                            //int evento = item.eve
-
-                            //item.EventoId = Convert.ToInt32(EventoId.Value);
+                            int eventoid = (item.EventoId > 0) ? item.EventoId : Convert.ToInt32(EventoId.Value);
 
                             //TRABAJADMOS CON EVENTOPERFIL
                             //eliminamos los tags de EventoPerfil que tenga asignado
@@ -262,11 +272,23 @@ namespace DAO
                             {
                                 if (item.lPerfil.Count > 0)
                                 {
+                                    //eliminamos las bandas que este evento tenga asignado
+
+                                    db.st_DelEventoPerfil(eventoid, 3);
+
                                     foreach (Perfil EP in item.lPerfil)
                                     {
-                                        //System.Data.Entity.Core.Objects.ObjectParameter PerfilId = new System.Data.Entity.Core.Objects.ObjectParameter("PerfilId", EP.PerfilId);
-                                        db.st_InsEventoPerfil(eventoid,
-                                                              EP.Nombre);
+                                        // validamos si la banda existe en la lista de perfil
+                                        var banda = db.Perfil.Where(x => x.Nombre == EP.Nombre && x.PerfilTipoId == 2).FirstOrDefault();
+                                        // si existe entonces insertamos normalmente
+                                        if (banda != null)
+                                        {
+                                            // podemos corregir en el sp que no tome el nombre si no que del resultado de linq
+                                            //asignamos el id (banda.perfilId)
+                                            db.st_InsEventoPerfil(eventoid,
+                                                                  EP.Nombre);
+                                        }
+                                        //si no existe significa que burlaron el jquery y no debemos insertar.
                                     }
                                 }
                             }
@@ -277,10 +299,27 @@ namespace DAO
                             {
                                 if (item.lTag.Count > 0)
                                 {
+                                    //eliminamos los tags que este evento tenga asignado
+                                    db.st_DelEventoTag(eventoid, 3);
+
                                     foreach (Tag ET in item.lTag)
                                     {
-                                        //System.Data.Entity.Core.Objects.ObjectParameter TagId = new System.Data.Entity.Core.Objects.ObjectParameter("TagId", ET.TagId);
-                                        db.st_InsEventoTag(eventoid, ET.Nombre );
+                                        // validamos si el tag existe en la lista de tags
+                                        var tag = db.Tag.Where(x => x.Nombre == ET.Nombre).FirstOrDefault();
+                                        //si no existe entonces significa que es un tag nuevo lo insertamos en la tabla tags
+                                        if(tag==null)
+                                        {
+                                            TagDAO.Save(ET);
+                                            //System.Data.Entity.Core.Objects.ObjectParameter TagId = new System.Data.Entity.Core.Objects.ObjectParameter("TagId", ET.TagId);
+                                            //db.st_InsEventoTag(eventoid, ET.Nombre);
+                                        }
+                                        db.st_InsEventoTag(eventoid, ET.Nombre);
+                                        //// si existe entonces significa que el tag existe y solo insertamos la relacion
+                                        //else
+                                        //{
+                                        //    //System.Data.Entity.Core.Objects.ObjectParameter TagId = new System.Data.Entity.Core.Objects.ObjectParameter("TagId", ET.TagId);
+                                        //    db.st_InsEventoTag(eventoid, ET.Nombre);
+                                        //}
                                     }
                                 }
                             }
@@ -291,19 +330,16 @@ namespace DAO
                             {
                                 if (item.lEventoVideo.Count > 0)
                                 {
+                                    //eliminamos los videos que este evento tenga asignado
+                                    db.st_DelEventoVideo(eventoid, 3);
+
                                     foreach (EventoVideo EV in item.lEventoVideo)
                                     {
-                                        db.st_InsEventoVideo(eventoid,
-                                                             EV.UrlVideo
-                                                             );
+                                        db.st_InsEventoVideo(eventoid,EV.UrlVideo);
                                     }
-
-                                    //System.Data.Entity.Core.Objects.ObjectParameter  = new System.Data.Entity.Core.Objects.ObjectParameter("TagId", ET.TagId);
                                 }
                             }
-
                             scope.Complete();
-
                         }
                         catch (Exception ex)
                         {
@@ -318,6 +354,5 @@ namespace DAO
 
             }
         }
-
     }
 }

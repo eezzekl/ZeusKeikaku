@@ -32,5 +32,17 @@ namespace DAO
                 throw ex;
             }
         }
+
+
+        public static  Perfil GetEstablecimiento()
+        {
+            Perfil p = new Perfil();
+            using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
+            {
+                p = db.Perfil.Where(x => x.PerfilId == 3).FirstOrDefault();
+            }
+            //var lPerfil = PerfilDAO.Get();
+            return p;
+        }
     }
 }

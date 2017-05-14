@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
 
-
     //para el checkbox de precio regular
     $("#chkEstablecimiento").on('ifChanged', function () {
         debugger;
@@ -56,10 +55,13 @@
         }
     });
 
-    getEventoTipo();
     getCiudad();
     LoadBandas();
     LoadTags();
+    llenartags();
+    //checar por que marca error la parte de http://localhost:15182/admin/evento/update/music/undefined al momento de cargar evento tipo
+    getEventoTipo();
+    LoadData();
 });
 
 function getEventoTipo() {
@@ -107,12 +109,39 @@ function getCiudad() {
 };
 
 /**
+ * Funcion que valida los controles antes de guardar
+ **/
+function ValidaForm() {
+    if ($('#txtTitulo').val() == '') {
+        showErrorMessage('El Título es obligatorio');
+        return false;
+    }
+    if ($('#dpFechaEvento').val() == '') {
+        showErrorMessage('La Fecha de publicación es obligatoria');
+        return false;
+    }
+    if ($('#txtEstablecimiento').val() == '') {
+        showErrorMessage('El Establecimiento es obligatorio');
+        return false;
+    }
+    if ($('#txtDireccion').val() == '') {
+        showErrorMessage('La Dirección es obligatoria');
+        return false;
+    }
+    if ($('#txtPrecio').val() == '') {
+        showErrorMessage('El Precio es obligatorio');
+        return false;
+    }
+    return true;
+}
+
+/**
  * Metodo que guarda un nuevo album
  **/
 function guardar() {
     //si valida form regresa un falso nos salimos
-    //if (!ValidaForm())
-    //    return;
+    if (!ValidaForm())
+        return;
     debugger;
     var formData = new FormData();
     var totalFiles = document.getElementById("FileUpload").files.length;
@@ -124,7 +153,7 @@ function guardar() {
 
     var item = new Evento();
 
-    item.EventoId = 0; //Se pone 0 ya que al ser nuevo no tiene id
+    item.EventoId = EventoId; //Se pone 0 ya que al ser nuevo no tiene id
     item.Titulo = $('#txtTitulo').val();
     item.Imagen = '/rutadeprueba/.jpg';
     item.FechaEvento = $('#dpFechaEvento').val();
@@ -133,7 +162,7 @@ function guardar() {
     item.PrecioRegular = $('#txtPrecio').val();
     item.Promocion = $('#txtPromocion').val();
     item.Preventa = $('#txtPreventa').val();
-    item.EventoTipo = { EventoTipoId : $('#cmbEventoTipo').val() };
+    item.EventoTipo = { EventoTipoId: $('#cmbEventoTipo').val() };
     item.Ciudad = { CiudadId: $('#cmbCiudad').val() };
     item.Latitud = '';
     item.Longitud = '';
@@ -141,7 +170,7 @@ function guardar() {
     item.linkComprarBoleto = $('#txtLinkComprarBoleto').val();
     item.Estatus = true;
     item.FechaRegistro = $('#dpFechaEvento').val();
-    item.Perfil = {PerfilId: PerfilId}
+    item.Perfil = { PerfilId: PerfilId }
 
     var bandas = $('#txtTagBanda').textext()[0].tags()._formData;
 
@@ -163,6 +192,10 @@ function guardar() {
             //var nombre = $(this).val(); //$(this).attr("name", $(this).attr("name") + "[]");
             item.lEventoVideo.push({ UrlVideo: $(this).val() })
         });
+
+        //for (var key in group.length) {
+        //    item.lEventoVideo.push({ UrlVideo: $(this).val() })
+        //}
     }
 
 
@@ -180,7 +213,8 @@ function guardar() {
             //$('#lblModifica').text("registro modificado");
             //showSuccess(Data);
             //$(location).attr('href', urlListado);
-            alert('Proceso Realizado Correctamente');
+            //alert('Proceso Realizado Correctamente');
+            showSuccess(Data.Mensaje);
         },
         error: function (data) {
             //showErrorMessage(data);
@@ -226,7 +260,7 @@ function LoadBandas() {
         //plugins: 'tags autocomplete'
         //plugins : 'autocomplete filter tags ajax'
         //plugins: 'tags prompt focus filter autocomplete ',
-        plugins: 'tags prompt focus filter autocomplete',
+        plugins: 'tags prompt focus autocomplete',
         prompt: 'Seleccionar...'//,
         //tagsItems: ['uno','dos']
         //ajax: {
@@ -247,9 +281,9 @@ function LoadBandas() {
         //        'Matanza'
         //],
         //var list = data.Datos.Nombre;
-        
-            textext = $(e.target).textext()[0],
-            query = (data ? data.query : '') || ''
+
+        textext = $(e.target).textext()[0],
+        query = (data ? data.query : '') || ''
         //query = data.query
         ;
 
@@ -358,3 +392,103 @@ var Evento = function () {
     this.lTag = [];
     this.lEventoVideo = [];
 };
+
+/**
+ * Metodo que inicia los controles del formulario
+ **/
+function LoadData() {
+    var EventoIdRef = EventoId;
+    $.ajax({
+        url: urlGet,
+        type: 'Get',
+        dataType: "json",
+        data: { EventoId: EventoIdRef},
+        success: function (Data) {
+            debugger;
+            //Asignamos el album encontrado a un temporal
+            //OldEvento = Data.Datos;
+            $('#cmbCiudad').val(Data.Datos.Ciudad.CiudadId);
+            //$('#cmbCiudad').val("3");
+            //$("#cmbCiudad option[value=3]").attr('selected', 'selected');
+            //$('#txtClave').val(Data.Datos.AlbumId);
+            $('#txtTitulo').val(Data.Datos.Titulo);
+            //$('#dpFechaPublicacion').val(ObtenerFechaDeBD(Data.Datos.FechaPublicacion));
+            $('#dpFechaEvento').datepicker("update", Data.Datos.FechaEventoTexto);
+            (Data.Datos.Establecimiento === 0) ? $('#chkEstablecimiento').iCheck('check') : $('#chkEstablecimiento').iCheck('uncheck');
+            $('#txtEstablecimiento').val(Data.Datos.Establecimiento);
+            //Bandas sobre el escenario
+            //etiquetas para el evento
+
+            (Data.Datos.Direccion === 0) ? $('#chkDireccion').iCheck('check') : $('#chkDireccion').iCheck('uncheck');
+            $('#txtDireccion').val(Data.Datos.Direccion);
+            (Data.Datos.PrecioRegular === 0) ? $('#chkPrecio').iCheck('check') : $('#chkPrecio').iCheck('uncheck');
+            $('#txtPrecio').val(Data.Datos.PrecioRegular);
+            $('#cmbEventoTipo').val(Data.Datos.EventoTipo.EventoTipoId).prop('selected', true);
+            (Data.Datos.Estatus === true) ? $('#chkEstatus').iCheck('check') : $('#chkEstatus').iCheck('uncheck');
+            //avanzado
+            $('#txtPromocion').val(Data.Datos.Promocion);
+            $('#txtPreventa').val(Data.Datos.Preventa);
+            $('#txtLinkEventoFacebook').val(Data.Datos.LinkEventoFacebook);
+            $('#txtLinkComprarBoleto').val(Data.Datos.LinkComprarBoleto);
+
+            //$('#cmbCiudad').val(Data.Datos.Ciudad.CiudadId);
+            //$('#txtContenido').val(Data.Datos.Contenido);
+            //$('#txtLinkCompra').val(Data.Datos.LinkCompra);
+            //(Data.Datos.Direccion === 0) ? $('#chkDireccion').iCheck('check') : $('#chkDireccion').iCheck('uncheck');
+            //$('#txtPrecio').val(Data.Datos.Precio);
+            //(Data.Datos.Establecimiento === 0) ? $('#chkEstablecimiento').iCheck('check') : $('#chkEstablecimiento').iCheck('uncheck');
+            //$('#txtOferta').val(Data.Datos.Oferta);
+            //$('#txtPromocion').val(Data.Datos.Promocion);
+            //var tags = "";
+            //$.each(Data.Datos.LTag, function (ind, elem) {
+            //    tags += elem.nombre + " ";
+            //});
+            ////$('#textarea').text(tags);
+            ////$('#textarea').val(tags);
+            //LlenarTextArea(Data.Datos.LTag);
+            //llenartags(Data.Datos.lTag.Nombre)
+            var tags = [];
+            $.each(Data.Datos.lEventoTag, function (ind, elem) {
+                tags.push(elem.Tag.Nombre)
+            });
+            llenartags(tags)
+
+            var bandas = [];
+            $.each(Data.Datos.lEventoPerfil, function (ind, elem) {
+                bandas.push(elem.Perfil.Nombre)
+            });
+            llenarbandas(bandas)
+
+            //agregar las url dinamicamente
+            $.each(Data.Datos.lEventoVideo, function (ind, elem) {
+                if (x <= max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><input type="text" id="txtVideo' + x + '" class="form-control" name="mytext[]" placeholder="Url de Video" /><a href="#" class="remove_field">Eliminar</a></div>'); //add input box
+                    $('#txtVideo' + x + '').val(elem.UrlVideo);
+                }
+            });
+            //var strin = JSON.stringify(Data.Datos.lEventoTag.Tag.Nombre);
+        },
+        error: function (data) {
+            showErrorMessage(data);
+            //CrearAlerta("#AlertIniciaSesion", "¡Acción Fallida!", "Acción no efectuada. Intente de nuevo, si el problema persiste contacte al Administrador del sistema.", "alert alert-danger");
+        },
+        complete: function () {
+            //  DesbloquearForm("#frmLogin");
+        }
+    });
+}
+
+//funcion para el llenado de tags
+function llenartags(arreglo) {
+    $('#txtTagTag').textext()[0].tags().addTags(arreglo);
+
+    //$('#textarea').textext(JSON.stringify(json))
+}
+
+//funcion para el llenado de bandas
+function llenarbandas(arreglo) {
+    $('#txtTagBanda').textext()[0].tags().addTags(arreglo);
+
+    //$('#textarea').textext(JSON.stringify(json))
+}

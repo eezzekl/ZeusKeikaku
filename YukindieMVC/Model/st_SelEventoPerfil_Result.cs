@@ -15,6 +15,7 @@ namespace Model
     {
         public int EventoPerfilId { get; set; }
         public Nullable<int> EventoId { get; set; }
-        public Nullable<int> PerfilId { get; set; }
+        public int PerfilId { get; set; }
+        public string Nombre { get; set; }
     }
 }

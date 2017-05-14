@@ -33,6 +33,27 @@ function ObtenerFechaDeBD(fecha) {
     return fechaCorta;
 }
 
+//obtiene la fecha formateada de un valor recibido de bd
+function ObtenerFechaDeBD2(fecha) {
+    //debugger;
+    //var fechaHoy = new Date(parseInt(date.substr(6)));
+    //var dia = fechaHoy.getDay() < 10 ? '0' + fechaHoy.getDay() : fechaHoy.getDay();
+    //var mes = (fechaHoy.getMonth() + 1) < 10 ? '0' + (fechaHoy.getMonth() + 1) : (fechaHoy.getMonth() + 1);
+    //var anio = fechaHoy.getFullYear();
+    //var fechaCorta = dia + '/' + mes + '/' + anio;
+    ////if (esGenerico) {
+    ////    fechaCorta = mes + '/' + dia + '/' + anio;
+    ////}
+    //return fechaCorta;
+
+    var date = fecha;
+    var nowDate = new Date(parseInt(date.substr(6)));
+    var result = "";
+    result = nowDate.format("dd/mm/yyyy");
+
+    return result;
+}
+
 //metodo generico que redirecciona al index de cualquier catalogo del admin
 function redireccionIndexAdmin() {
     href

@@ -2303,6 +2303,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\f\Admin\Evento\Create.js" />
+    <Content Include="Scripts\f\Admin\Evento\Index.js" />
+    <Content Include="Scripts\f\Admin\Evento\Update.js" />
     <Content Include="Scripts\f\Album.js" />
     <Content Include="Scripts\f\AlbumIndex.js" />
     <Content Include="Scripts\f\Create.js" />
@@ -2321,6 +2323,7 @@
     <Content Include="Areas\Admin\Views\Evento\Create.cshtml" />
     <Content Include="Images\covers\Thumbs.db" />
     <Content Include="Images\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\Evento\Update.cshtml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\f\Login.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />

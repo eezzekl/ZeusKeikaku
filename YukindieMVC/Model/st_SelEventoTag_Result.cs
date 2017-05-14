@@ -16,5 +16,6 @@ namespace Model
         public int EventoTagId { get; set; }
         public Nullable<int> TagId { get; set; }
         public Nullable<int> EventoId { get; set; }
+        public string Nombre { get; set; }
     }
 }

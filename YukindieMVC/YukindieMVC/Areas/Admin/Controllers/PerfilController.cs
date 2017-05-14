@@ -1,4 +1,6 @@
 ﻿using DAO;
+using Model;
+using Model.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,17 @@ namespace YukindieMVC.Areas.Admin.Controllers
         public JsonResult GetAll()
         {
             var lPerfil = PerfilDAO.Get();
+            return new JsonResult()
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new { Datos = lPerfil }
+            };
+        }
+
+        [HttpGet]
+        public JsonResult GetEstablecimiento()
+        {
+            var lPerfil = PerfilDAO.Get().FirstOrDefault();
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,

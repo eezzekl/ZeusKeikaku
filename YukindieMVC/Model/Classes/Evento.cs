@@ -15,5 +15,7 @@ namespace Model
 
         public List<Perfil> lPerfil { get; set; }
         public List<Tag> lTag { get; set; }
+
+        public string FechaEventoTexto { get; set; }
     }
 }
