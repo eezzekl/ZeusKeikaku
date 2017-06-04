@@ -30,6 +30,11 @@ namespace Model
         public string LinkComprarBoleto { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public int PerfilId { get; set; }
+        public string Nombre { get; set; }
+        public string Telefono { get; set; }
+        public string Correo { get; set; }
+        public string FotoPerfil { get; set; }
+        public string DescripcionCorta { get; set; }
         public string TipoEvento { get; set; }
     }
 }

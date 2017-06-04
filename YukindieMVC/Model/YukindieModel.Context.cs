@@ -445,35 +445,6 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelCiudadGetAll_Result>("st_SelCiudadGetAll");
         }
     
-        public virtual ObjectResult<st_SelEvento_Result> st_SelEvento(Nullable<int> eventoId, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<decimal> precio, Nullable<int> tipoOrdenamiento, Nullable<bool> estatus)
-        {
-            var eventoIdParameter = eventoId.HasValue ?
-                new ObjectParameter("EventoId", eventoId) :
-                new ObjectParameter("EventoId", typeof(int));
-    
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("FechaInicial", fechaInicial) :
-                new ObjectParameter("FechaInicial", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
-    
-            var precioParameter = precio.HasValue ?
-                new ObjectParameter("Precio", precio) :
-                new ObjectParameter("Precio", typeof(decimal));
-    
-            var tipoOrdenamientoParameter = tipoOrdenamiento.HasValue ?
-                new ObjectParameter("TipoOrdenamiento", tipoOrdenamiento) :
-                new ObjectParameter("TipoOrdenamiento", typeof(int));
-    
-            var estatusParameter = estatus.HasValue ?
-                new ObjectParameter("Estatus", estatus) :
-                new ObjectParameter("Estatus", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEvento_Result>("st_SelEvento", eventoIdParameter, fechaInicialParameter, fechaFinalParameter, precioParameter, tipoOrdenamientoParameter, estatusParameter);
-        }
-    
         public virtual ObjectResult<st_SelEventoTipo_Result> st_SelEventoTipo(Nullable<int> eventoTipoId, string descripcion, Nullable<bool> estatus)
         {
             var eventoTipoIdParameter = eventoTipoId.HasValue ?
@@ -701,6 +672,35 @@ namespace Model
                 new ObjectParameter("PerfilId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEventoPerfil_Result>("st_SelEventoPerfil", eventoPerfilIdParameter, eventoIdParameter, perfilIdParameter);
+        }
+    
+        public virtual ObjectResult<st_SelEvento_Result> st_SelEvento(Nullable<int> eventoId, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<decimal> precio, Nullable<int> tipoOrdenamiento, Nullable<bool> estatus)
+        {
+            var eventoIdParameter = eventoId.HasValue ?
+                new ObjectParameter("EventoId", eventoId) :
+                new ObjectParameter("EventoId", typeof(int));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("FechaInicial", fechaInicial) :
+                new ObjectParameter("FechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(decimal));
+    
+            var tipoOrdenamientoParameter = tipoOrdenamiento.HasValue ?
+                new ObjectParameter("TipoOrdenamiento", tipoOrdenamiento) :
+                new ObjectParameter("TipoOrdenamiento", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEvento_Result>("st_SelEvento", eventoIdParameter, fechaInicialParameter, fechaFinalParameter, precioParameter, tipoOrdenamientoParameter, estatusParameter);
         }
     }
 }

@@ -55,14 +55,95 @@
         }
     });
 
+    initMap();
+
     getCiudad();
     LoadBandas();
     LoadTags();
     llenartags();
     //checar por que marca error la parte de http://localhost:15182/admin/evento/update/music/undefined al momento de cargar evento tipo
-    getEventoTipo();
     LoadData();
+    getEventoTipo();
+
 });
+
+/*******************APARTADO PARA EL AGREGADO DE MARKERS****************************/
+var map;
+var markers = [];
+
+var marker;
+
+var mapaLatitud;
+var mapaLongitud;
+
+function placeMarker(location) {
+    if (marker) {
+        marker.setPosition(location);
+        marker.map = map;
+    } else {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+
+    mapaLatitud = marker.getPosition().lat();
+    mapaLongitud = marker.getPosition().lng();
+
+};
+
+function initMap() {
+    var haightAshbury = { lat: 20.962972208693014, lng: -89.66502189694438 };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: haightAshbury,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    //var marker = new google.maps.Marker({
+    //    position: haightAshbury,
+    //    map: map
+    //});
+
+
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function (event) {
+        debugger;
+        // esto permite agregar varios markers lo cual para nuestra
+        // operacion necesitamos solamente 1
+        //addMarker(event.latLng);
+        placeMarker(event.latLng);
+    });
+
+    //// Adds a marker at the center of the map.
+    //placeMarker(haightAshbury);
+
+    //var infoWindow = new google.maps.InfoWindow({map: map});
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            //infoWindow.setPosition(pos);
+            //infoWindow.setContent('Location found.');
+            map.setCenter(pos);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+};
+
+
+/*******************APARTADO DONDE TERMINA EL AGREGADO DE MARKERS*********************/
 
 function getEventoTipo() {
     debugger;
@@ -164,8 +245,8 @@ function guardar() {
     item.Preventa = $('#txtPreventa').val();
     item.EventoTipo = { EventoTipoId: $('#cmbEventoTipo').val() };
     item.Ciudad = { CiudadId: $('#cmbCiudad').val() };
-    item.Latitud = '';
-    item.Longitud = '';
+    item.Latitud = mapaLatitud;
+    item.Longitud = mapaLongitud;
     item.LinkEventoFacebook = $('#txtLinkEventoFacebook').val();
     item.linkComprarBoleto = $('#txtLinkComprarBoleto').val();
     item.Estatus = true;
@@ -430,6 +511,9 @@ function LoadData() {
             $('#txtPreventa').val(Data.Datos.Preventa);
             $('#txtLinkEventoFacebook').val(Data.Datos.LinkEventoFacebook);
             $('#txtLinkComprarBoleto').val(Data.Datos.LinkComprarBoleto);
+            //agregar marker a mapa
+            var ubicacion = { lat: parseFloat(Data.Datos.Latitud), lng: parseFloat(Data.Datos.Longitud) };
+            placeMarker(ubicacion);
 
             //$('#cmbCiudad').val(Data.Datos.Ciudad.CiudadId);
             //$('#txtContenido').val(Data.Datos.Contenido);

@@ -24,6 +24,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.FechaEvento = DateTime.Now.ToString("dd/MM/yyyy");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
         {
             var jsonData = new
             {
-                data = EventoDAO.GetData(allData: true)
+                data = EventoDAO.GetData(allData: false)
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
@@ -65,7 +66,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult Get(int EventoId)
         {
-            Evento evento = EventoDAO.GetData(EventoId, allData: true).FirstOrDefault();
+            Evento evento = EventoDAO.GetData(EventoId, Estatus:true , allData: true).FirstOrDefault();
             Session["sessionEvento"] = evento;
             //var LTag = new List<Tag>(TagDAO.GetTagsByAlbum(album.AlbumId));
             var a = new JsonResult()
@@ -121,6 +122,13 @@ namespace YukindieMVC.Areas.Admin.Controllers
                 }
                 //Valida(albumbo);
                 ValidaEvento(eventobo);
+
+                //ahora seteamos a texto en blanco los campos no obligatorios y que vengan en null
+                eventobo.Promocion = (String.IsNullOrEmpty(eventobo.Promocion )) ? "" : eventobo.Promocion;
+                eventobo.Preventa = (String.IsNullOrEmpty(eventobo.Preventa.ToString())) ? 0 : eventobo.Preventa;
+                eventobo.LinkEventoFacebook = (String.IsNullOrEmpty(eventobo.LinkEventoFacebook )) ? "" : eventobo.LinkEventoFacebook ;
+                eventobo.LinkComprarBoleto = (String.IsNullOrEmpty(eventobo.LinkComprarBoleto )) ? "" : eventobo.LinkComprarBoleto;
+
                 // por que viene null este? no es correcto debe poderse popular al objeto
                 eventobo.Perfil.PerfilId = 3;
                 EventoDAO.Save(eventobo);

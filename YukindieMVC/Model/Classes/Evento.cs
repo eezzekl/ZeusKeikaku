@@ -17,5 +17,7 @@ namespace Model
         public List<Tag> lTag { get; set; }
 
         public string FechaEventoTexto { get; set; }
+        //nos sirve para hacer la url amigable 
+        public string Link { get; set; }
     }
 }

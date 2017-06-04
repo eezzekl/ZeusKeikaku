@@ -60,6 +60,7 @@
     <Compile Include="SubGeneroDAO.cs" />
     <Compile Include="TagDAO.cs" />
     <Compile Include="UsuarioDAO.cs" />
+    <Compile Include="Utilerias.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

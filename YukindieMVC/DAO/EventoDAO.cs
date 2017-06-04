@@ -69,10 +69,11 @@ namespace DAO
         // vendria siendo un get one
         //alldata es una bandera si es true traemos aparte del evento todos las tablas ligadas como eventoperfil, eventovideo,eventotag
         // de lo contrario solo cargamos la tabla evento
-        public static List<Evento> GetData(int EventoId=0, DateTime? FechaInicial=null, DateTime? FechaFinal=null, decimal Precio=0, int TipoOrdenamiento=0, bool Estatus=false , bool allData=false )
+        public static List<Evento> GetData(int EventoId = 0, DateTime? FechaInicial = null, DateTime? FechaFinal = null, decimal Precio = 0, int TipoOrdenamiento = 0, bool Estatus = false, bool allData = false)
         {
             try
             {
+                Utilerias utileria = new Utilerias();
                 List<Model.Evento> litemEvento = new List<Model.Evento>();
                 List<EventoPerfil> litemEventoPerfil = new List<EventoPerfil>();
                 List<EventoTag> litemEventoTag = new List<EventoTag>();
@@ -87,7 +88,8 @@ namespace DAO
                             Titulo = x.Titulo,
                             Imagen = x.Imagen,
                             FechaEvento = x.FechaEvento,
-                            FechaEventoTexto = x.FechaEvento.ToString("dd/mm/yyyy"),
+                            //FechaEventoTexto = x.FechaEvento.ToString("dd/mm/yyyy"),
+                            FechaEventoTexto = x.FechaEvento.ToString("dd, MMM - yyyy · HH:mm tt").ToUpper().Replace(".", ""),
                             Direccion = x.Direccion,
                             Establecimiento = x.Establecimiento,
                             PrecioRegular = x.PrecioRegular,
@@ -104,15 +106,22 @@ namespace DAO
                             Estatus = x.Estatus,
                             Perfil = new Perfil
                             {
-                                PerfilId = x.PerfilId
+                                PerfilId = x.PerfilId,
+                                Nombre = x.Nombre,
+                                Telefono = x.Telefono,
+                                Correo = x.Correo,
+                                FotoPerfil = x.FotoPerfil,
+                                DescripcionCorta = x.DescripcionCorta
                             },
                             EventoTipo = new EventoTipo
                             {
                                 EventoTipoId = (Int32)x.EventoTipoId,
                                 Descripcion = x.TipoEvento
-                            }
+                            },
+                            //para cuando necesitemos la url de nuestro evento
+                            Link = string.Format("{0}/{1}", x.EventoId, utileria.GenerateSlug(x.Titulo))
                         }).ToList();
-                        
+
 
                     //AHORA LLENAMOS EVENTOPERFIL
                     if (litemEvento != null)
@@ -225,6 +234,31 @@ namespace DAO
             }
         }
 
+        //metodo que recibe la url que escribe el usuario en las cajas de texto y si es valida y de youtube o vimeo nos retorna 
+        //la url embebida para paginas web
+        public static string getUrlEmbed(string urlUsuario)
+        {
+            string retorno = string.Empty;
+            try
+            {
+                if (urlUsuario.IndexOf("https://vimeo.com") != -1)
+                {
+                    string[] arreglo = urlUsuario.Split('/');
+                    retorno = string.Format(@"<iframe src='https://player.vimeo.com/video/{0}' width='100%' height='400' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>", arreglo[3]);
+                }
+                else if (urlUsuario.IndexOf("https://www.youtube.com") != -1)
+                {
+                    string[] arreglo = urlUsuario.Split('=');
+                    retorno = string.Format(@"<iframe width='100%' height='400' src='https://www.youtube.com/embed/{0}' frameborder='0' allowfullscreen></iframe>", arreglo[1]);
+                }
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                return retorno;
+            }
+        }
+
         public static void Save(Evento item)
         {
             // si necesitamos que un procedure devuelva el valor de un id hacemos esto
@@ -307,7 +341,7 @@ namespace DAO
                                         // validamos si el tag existe en la lista de tags
                                         var tag = db.Tag.Where(x => x.Nombre == ET.Nombre).FirstOrDefault();
                                         //si no existe entonces significa que es un tag nuevo lo insertamos en la tabla tags
-                                        if(tag==null)
+                                        if (tag == null)
                                         {
                                             TagDAO.Save(ET);
                                             //System.Data.Entity.Core.Objects.ObjectParameter TagId = new System.Data.Entity.Core.Objects.ObjectParameter("TagId", ET.TagId);
@@ -335,7 +369,14 @@ namespace DAO
 
                                     foreach (EventoVideo EV in item.lEventoVideo)
                                     {
-                                        db.st_InsEventoVideo(eventoid,EV.UrlVideo);
+                                        if (!String.IsNullOrWhiteSpace(EV.UrlVideo))
+                                        {
+                                            string urlformato = getUrlEmbed(EV.UrlVideo);
+                                            if (!String.IsNullOrWhiteSpace(urlformato))
+                                            {
+                                                db.st_InsEventoVideo(eventoid, urlformato);
+                                            }
+                                        }
                                     }
                                 }
                             }

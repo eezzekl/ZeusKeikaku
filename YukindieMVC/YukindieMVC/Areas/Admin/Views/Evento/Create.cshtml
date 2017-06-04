@@ -33,7 +33,7 @@
             e.preventDefault();
             if (x <= max_fields) { //max input box allowed
                 x++; //text box increment
-                $(wrapper).append('<div><input type="text" class="form-control" name="mytext[]" placeholder="Url de video" /><a href="#" class="remove_field">Eliminar</a></div>'); //add input box
+                $(wrapper).append('<div class="dinamicurl"><input type="text" class="form-control" name="mytext[]" placeholder="Url de video" /><a href="#" class="remove_field">Eliminar</a></div>'); //add input box
             }
         });
 
@@ -55,6 +55,8 @@
 
     @*<script src="~/assets/js/E_Textext.js"></script>*@
 <script src="~/Scripts/f/Admin/Evento/Create.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTuazTT4ftRrTOscHQYPabgJPLiBS9YXc&sensor=false&signed_in=true&callback=initMap"></script>
 
 
     @*<script src="~/Scripts/f/Album.js"></script>*@
@@ -94,7 +96,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Fecha:</label>
-                                <input type="text" id="dpFechaEvento" class="form-control datepickeres" />
+                                <input type="text" id="dpFechaEvento" class="form-control datepickeres" value="@ViewBag.FechaEvento" />
                             </div>
                             <div class="form-group">
                                 <label>(*) Establecimiento:</label>
@@ -117,6 +119,19 @@
                             <div class="form-group">
                                 <label>Etiquetas para tú Evento:</label>
                                 <textarea id="txtTagTag" rows="1" class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Clic  en el mapa para agregar ubicación</label>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <div id="map" style="width: 100%; height: 250px"></div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="checkbox" id="chkUbicacion" class="icheck-minimal-red" />
+                                        De mí Perfil
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

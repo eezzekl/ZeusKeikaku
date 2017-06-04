@@ -2072,14 +2072,6 @@
             <Parameter Name="PerfilId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="st_SelCiudadGetAll" ReturnType="Collection(ZeusFinalModel.st_SelCiudadGetAll_Result)" />
-          <FunctionImport Name="st_SelEvento" ReturnType="Collection(ZeusFinalModel.st_SelEvento_Result)">
-            <Parameter Name="EventoId" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-            <Parameter Name="Precio" Mode="In" Type="Decimal" />
-            <Parameter Name="TipoOrdenamiento" Mode="In" Type="Int32" />
-            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="st_SelEventoTipo" ReturnType="Collection(ZeusFinalModel.st_SelEventoTipo_Result)">
             <Parameter Name="EventoTipoId" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -2143,6 +2135,14 @@
             <Parameter Name="EventoPerfilId" Mode="In" Type="Int32" />
             <Parameter Name="EventoId" Mode="In" Type="Int32" />
             <Parameter Name="PerfilId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="st_SelEvento" ReturnType="Collection(ZeusFinalModel.st_SelEvento_Result)">
+            <Parameter Name="EventoId" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="TipoOrdenamiento" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="st_SelAlbum__Result">
@@ -2281,6 +2281,18 @@
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
           <Property Type="Boolean" Name="Estatus" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="st_SelEventoTag_Result">
+          <Property Type="Int32" Name="EventoTagId" Nullable="false" />
+          <Property Type="Int32" Name="TagId" Nullable="true" />
+          <Property Type="Int32" Name="EventoId" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="st_SelEventoPerfil_Result">
+          <Property Type="Int32" Name="EventoPerfilId" Nullable="false" />
+          <Property Type="Int32" Name="EventoId" Nullable="true" />
+          <Property Type="Int32" Name="PerfilId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="300" />
+        </ComplexType>
         <ComplexType Name="st_SelEvento_Result">
           <Property Type="Int32" Name="EventoId" Nullable="false" />
           <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
@@ -2299,19 +2311,12 @@
           <Property Type="String" Name="LinkComprarBoleto" Nullable="true" MaxLength="200" />
           <Property Type="Boolean" Name="Estatus" Nullable="true" />
           <Property Type="Int32" Name="PerfilId" Nullable="false" />
-          <Property Type="String" Name="TipoEvento" Nullable="false" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="st_SelEventoTag_Result">
-          <Property Type="Int32" Name="EventoTagId" Nullable="false" />
-          <Property Type="Int32" Name="TagId" Nullable="true" />
-          <Property Type="Int32" Name="EventoId" Nullable="true" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="st_SelEventoPerfil_Result">
-          <Property Type="Int32" Name="EventoPerfilId" Nullable="false" />
-          <Property Type="Int32" Name="EventoId" Nullable="true" />
-          <Property Type="Int32" Name="PerfilId" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="FotoPerfil" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCorta" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TipoEvento" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2868,6 +2873,26 @@
           <FunctionImportMapping FunctionImportName="st_DelEventoPerfil" FunctionName="ZeusFinalModel.Store.st_DelEventoPerfil" />
           <FunctionImportMapping FunctionImportName="st_DelEventoTag" FunctionName="ZeusFinalModel.Store.st_DelEventoTag" />
           <FunctionImportMapping FunctionImportName="st_DelEventoVideo" FunctionName="ZeusFinalModel.Store.st_DelEventoVideo" />
+          <FunctionImportMapping FunctionImportName="st_SelEventoTag" FunctionName="ZeusFinalModel.Store.st_SelEventoTag">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoTag_Result">
+                <ScalarProperty Name="EventoTagId" ColumnName="EventoTagId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_SelEventoPerfil" FunctionName="ZeusFinalModel.Store.st_SelEventoPerfil">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoPerfil_Result">
+                <ScalarProperty Name="EventoPerfilId" ColumnName="EventoPerfilId" />
+                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
+                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="st_SelEvento" FunctionName="ZeusFinalModel.Store.st_SelEvento">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEvento_Result">
@@ -2888,27 +2913,12 @@
                 <ScalarProperty Name="LinkComprarBoleto" ColumnName="LinkComprarBoleto" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="FotoPerfil" ColumnName="FotoPerfil" />
+                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
                 <ScalarProperty Name="TipoEvento" ColumnName="TipoEvento" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="st_SelEventoTag" FunctionName="ZeusFinalModel.Store.st_SelEventoTag">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoTag_Result">
-                <ScalarProperty Name="EventoTagId" ColumnName="EventoTagId" />
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
-                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="st_SelEventoPerfil" FunctionName="ZeusFinalModel.Store.st_SelEventoPerfil">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ZeusFinalModel.st_SelEventoPerfil_Result">
-                <ScalarProperty Name="EventoPerfilId" ColumnName="EventoPerfilId" />
-                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
-                <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

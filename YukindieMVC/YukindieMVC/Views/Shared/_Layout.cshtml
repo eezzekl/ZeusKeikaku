@@ -107,6 +107,9 @@
     <link href="~/assets/Texttext/CSS/textext.plugin.prompt.css" rel="stylesheet" />
     <link href="~/assets/Texttext/CSS/textext.plugin.tags.css" rel="stylesheet" />
 
+    @*para la multiseleccion del combo*@
+    <link href="~/assets/css/bootstrap-multiselect.css" rel="stylesheet" />
+
     @RenderSection("css", required: false)
     <script src="~/Scripts/jquery-1.11.3.min.js"></script>
    <!-- <script src="~/Scripts/jquery-3.1.1.min.js"></script> -->
@@ -349,7 +352,7 @@
                         {
                             <li class="profile showopacity">
                                 <a href="#" data-toggle="dropdown" class="toggle">
-                                    <img src="@fotoPerfil" alt="user-image" class="img-circle img-inline" />
+                                    <img src="~/Images/Perfil/@fotoPerfil" alt="user-image" class="img-circle img-inline" />
                                     <span><strong>Bienvenido </strong>@nombrePerfil <i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="dropdown-menu profile animated fadeIn">
@@ -383,7 +386,7 @@
                         else
                         {
                             <li>
-                                <a href="CuentaCrear.aspx" class="btn btn-default btn-border" style="width: 100%; color: white">Iniciar Sesión</a>
+                                <a href="~/Home/Login" class="btn btn-default btn-border" style="width: 100%; color: white">Iniciar Sesión</a>
                             </li>
                             <li>
                                 <a href="CuentaCrear.aspx" class="btn btn-default btn-border" style="width: 100%; color: white">Crear Cuenta</a>
@@ -436,7 +439,7 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="ListadoEventosCartelera.aspx">
+                        <a href="~/Eventos/Index">
                             <i class="fa fa-calendar"></i>
                             <span class="title">Eventos</span>
                         </a>
@@ -559,7 +562,7 @@
                             <ul class="list-unstyled list-inline" align="center">
                                 <li><a href="Aviso.aspx" style="color: white">Aviso Legal</a></li>
                                 <li><a href="PreguntasFrecuentes.aspx" style="color: white">Mapa del Sitio</a></li>
-                                <li><label style="color: white">© 2017 YUKINDIE.</label></li>
+                                <li><label style="color: white">© 2017 Yukindie Music.</label></li>
                             </ul>
                         </div>
                         @*<%--                        <div class="col-sm-4">
@@ -569,7 +572,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-12" align="center">
-                            <label style="color:white">Desarrollado por: YUKINDIE TECHNOLOGIES.</label>
+                            <label style="color:white">Desarrollado por: <strong>Yukindie Software Group.</strong></label>
                         </div>
                     </div>
                 </div>
@@ -650,7 +653,7 @@
 
     @*para los tags de textext*@
 
-    <script src="~/assets/Texttext/textext.core.js"></script>
+    @*<script src="~/assets/Texttext/textext.core.js"></script>*@
     <script src="~/assets/Texttext/textext.plugin.ajax.js"></script>
     <script src="~/assets/Texttext/textext.plugin.arrow.js"></script>
     <script src="~/assets/Texttext/textext.plugin.autocomplete.js"></script>

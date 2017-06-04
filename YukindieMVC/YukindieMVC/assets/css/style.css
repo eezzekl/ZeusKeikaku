@@ -2629,9 +2629,10 @@ ul.states li {
 /**************panel yukindie para el listado de eventos***********/
 
 .panel-yukindieEvento {
-    border-color: #eeeeee;
+    /*border-color: #BC003F;*/
     background-color: #eeeeee;
     border-radius: 0px;
+    /*border-width: 1px*/
 }
 .panel-yukindieEvento>.panel-heading+.panel-collapse>.panel-body {
     border-top-color: #eeeeee;

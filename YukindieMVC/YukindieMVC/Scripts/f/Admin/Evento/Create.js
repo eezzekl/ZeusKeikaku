@@ -56,11 +56,90 @@
         }
     });
 
+    initMap();
+
     getEventoTipo();
     getCiudad();
     LoadBandas();
     LoadTags();
 });
+
+/*******************APARTADO PARA EL AGREGADO DE MARKERS****************************/
+var map;
+var markers = [];
+
+var marker;
+
+var mapaLatitud;
+var mapaLongitud;
+
+function placeMarker(location) {
+    if (marker) {
+        marker.setPosition(location);
+        marker.map = map;
+    } else {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+    mapaLatitud = marker.getPosition().lat();
+    mapaLongitud = marker.getPosition().lng();
+};
+
+function initMap() {
+    var haightAshbury = { lat: 20.962972208693014, lng: -89.66502189694438 };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: haightAshbury,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    //var marker = new google.maps.Marker({
+    //    position: haightAshbury,
+    //    map: map
+    //});
+
+
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function (event) {
+        debugger;
+        // esto permite agregar varios markers lo cual para nuestra
+        // operacion necesitamos solamente 1
+        //addMarker(event.latLng);
+        placeMarker(event.latLng);
+    });
+
+    //// Adds a marker at the center of the map.
+    //placeMarker(haightAshbury);
+
+    //var infoWindow = new google.maps.InfoWindow({map: map});
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            //infoWindow.setPosition(pos);
+            //infoWindow.setContent('Location found.');
+            map.setCenter(pos);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+};
+
+
+/*******************APARTADO DONDE TERMINA EL AGREGADO DE MARKERS*********************/
+
 
 function getEventoTipo() {
     debugger;
@@ -111,8 +190,8 @@ function getCiudad() {
  **/
 function guardar() {
     //si valida form regresa un falso nos salimos
-    //if (!ValidaForm())
-    //    return;
+    if (!ValidaForm())
+        return;
     debugger;
     var formData = new FormData();
     var totalFiles = document.getElementById("FileUpload").files.length;
@@ -135,12 +214,11 @@ function guardar() {
     item.Preventa = $('#txtPreventa').val();
     item.EventoTipo = { EventoTipoId : $('#cmbEventoTipo').val() };
     item.Ciudad = { CiudadId: $('#cmbCiudad').val() };
-    item.Latitud = '';
-    item.Longitud = '';
+    item.Latitud = mapaLatitud;
+    item.Longitud = mapaLongitud;
     item.LinkEventoFacebook = $('#txtLinkEventoFacebook').val();
     item.linkComprarBoleto = $('#txtLinkComprarBoleto').val();
     item.Estatus = true;
-    item.FechaRegistro = $('#dpFechaEvento').val();
     item.Perfil = {PerfilId: PerfilId}
 
     var bandas = $('#txtTagBanda').textext()[0].tags()._formData;
@@ -154,6 +232,11 @@ function guardar() {
     $.each(tags, function (ind, elem) {
         item.lTag.push({ Nombre: elem });
     });
+
+    //limpiar tags http://cgit.drupalcode.org/block_class_tags/tree/jquery-textext/js/textext.plugin.clear.js?id=b4ef68e97ee57c27f34937bf37017449a9f852c6
+    $('#txtTagTag').val('');
+
+    $('#txtTagBanda').val('');
 
     //link video por eventos
     var group = $('input[name="mytext[]"]');
@@ -180,7 +263,8 @@ function guardar() {
             //$('#lblModifica').text("registro modificado");
             //showSuccess(Data);
             //$(location).attr('href', urlListado);
-            alert('Proceso Realizado Correctamente');
+            showSuccess(Data.Mensaje);
+            limpiar();
         },
         error: function (data) {
             //showErrorMessage(data);
@@ -189,6 +273,66 @@ function guardar() {
             //showSuccess(data);
         }
     })
+
+};
+
+/**
+ * Funcion que valida los controles antes de guardar
+ **/
+function ValidaForm() {
+    if ($('#txtTitulo').val() == '') {
+        showErrorMessage('El Título es obligatorio');
+        return false;
+    }
+    if ($('#dpFechaEvento').val() == '') {
+        showErrorMessage('La Fecha de publicación es obligatoria');
+        return false;
+    }
+    if ($('#txtEstablecimiento').val() == '') {
+        showErrorMessage('El Establecimiento es obligatorio');
+        return false;
+    }
+    if ($('#txtDireccion').val() == '') {
+        showErrorMessage('La Dirección es obligatoria');
+        return false;
+    }
+    if ($('#txtPrecio').val() == '') {
+        showErrorMessage('El Precio es obligatorio');
+        return false;
+    }
+    return true;
+}
+
+function limpiar() {
+    
+    $('#txtTitulo').val('');
+    var d = new Date();
+    $('#dpFechaEvento').val(d.toLocaleDateString());
+    $('#txtDireccion').val('');
+    $('#txtEstablecimiento').val('');
+    $('#txtPrecio').val('');
+    $('#txtPromocion').val('');
+    $('#txtPreventa').val('');
+    //$('#cmbEventoTipo')[0].selectedIndex = 0;
+    //$('#cmbCiudad').val()[0].selectedIndex = 0;
+    $('#txtLinkEventoFacebook').val('');
+    $('#txtLinkComprarBoleto').val('');
+
+
+    //eliminamos los inputs creados para los videos
+    //link video por eventos
+    var group = $('input[name="mytext[]"]');
+
+    //if (group.length > 0) {
+    //    group.each(function () {
+    //        //var nombre = $(this).val(); //$(this).attr("name", $(this).attr("name") + "[]");
+    //        $(this).remove();
+    //        x--;
+    //    });
+    //    $('.remove_field').remove();
+    //}
+    $('.dinamicurl').remove();
+    x = 1;
 
 };
 

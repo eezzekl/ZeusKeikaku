@@ -209,6 +209,9 @@
     <Compile Include="Areas\Admin\Controllers\SubGeneroController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\EventoDetalleController.cs" />
+    <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -216,7 +219,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IndexViewModel.cs" />
     <Compile Include="Helpers\SessionPersister.cs" />
+    <Compile Include="Helpers\Utilerias.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs">
       <DependentUpon>YukindieContext.tt</DependentUpon>
@@ -263,6 +268,7 @@
     <Content Include="Areas\Admin\Scrips\Album\Create.js" />
     <Content Include="Areas\Admin\Scrips\Album\Gestion.js" />
     <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\bootstrap-multiselect.css" />
     <Content Include="assets\css\E_Calendar.css" />
     <Content Include="assets\css\E_CrearCuenta.css" />
     <Content Include="assets\css\E_eventoRelacionado.css" />
@@ -308,6 +314,7 @@
     <Content Include="assets\images\yukindie.png" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\blo-dashboard.js" />
+    <Content Include="assets\js\bootstrap-multiselect.js" />
     <Content Include="assets\js\chart-chartjs.js" />
     <Content Include="assets\js\chart-easypie.js" />
     <Content Include="assets\js\chart-echarts.js" />
@@ -2050,6 +2057,7 @@
     <Content Include="Images\Eventos\judas.jpg" />
     <Content Include="Images\Eventos\khafra.jpg" />
     <Content Include="Images\Eventos\leojimenez.jpg" />
+    <Content Include="Images\Eventos\monlaferte.jpg" />
     <Content Include="Images\Eventos\rippers.jpg" />
     <Content Include="Images\Eventos\tributometallica.jpg" />
     <Content Include="Images\Eventos\warbringer.jpg" />
@@ -2097,8 +2105,10 @@
     <Content Include="Images\Penguins.jpg" />
     <Content Include="Images\Perfiles\delorean.jpg" />
     <Content Include="Images\Perfiles\mnm producciones.jpg" />
+    <Content Include="Images\Perfil\armando.png" />
     <Content Include="Images\Perfil\perfil.jpg" />
     <Content Include="Images\Perfil\portada.jpg" />
+    <Content Include="Images\Perfil\yukindie.png" />
     <Content Include="Images\play.png" />
     <Content Include="Images\Post\entretenimiento01.png" />
     <Content Include="Images\Post\entretenimiento02.JPG" />
@@ -2326,6 +2336,8 @@
     <Content Include="Areas\Admin\Views\Evento\Update.cshtml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\f\Login.js" />
+    <Content Include="Scripts\f\Publico\Evento.js" />
+    <Content Include="Scripts\f\Publico\Eventos.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.bootpag.js" />
@@ -2379,6 +2391,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Eventos\Index.cshtml" />
+    <Content Include="Views\EventoDetalle\Index.cshtml" />
+    <Content Include="Views\Eventos\Index2.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Eventos\IndexPaginationMVC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
