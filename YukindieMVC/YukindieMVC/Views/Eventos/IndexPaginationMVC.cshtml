@@ -1,0 +1,288 @@
+﻿@model YukindieMVC.Helpers.IndexViewModel
+@{
+    ViewBag.Title = "Listado de Eventos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+    {
+
+    <script>
+        var urlGetEventoTipo = '@Url.Action("Get", "EventoTipo", new { area = "Admin" })';
+        var urlGetCiudad = '@Url.Action("Get", "Ciudad", new { area = "Admin" })';
+    </script>
+
+<script src="~/assets/js/bootstrap-multiselect.js"></script>
+<script src="~/Scripts/f/Publico/Eventos.js"></script>
+
+@*<script type="text/javascript">
+$(function() {
+    $('.multiselect-ui').multiselect({
+        includeSelectAllOption: true
+    });
+});
+</script>*@
+
+}
+
+<div class="col-lg-12">
+    <section class="box">
+        <header class="panel_header">
+            <h2 class="title pull-left">Búsqueda General</h2>
+            @*<div class="actions panel_actions pull-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+                </div>*@
+        </header>
+        <div class="content-body" style="display: block;">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group primary">
+                            <span class="input-group-addon">
+                                <span class="arrow"></span>
+                                <i class="fa fa-search"></i>
+                            </span>
+                            <input type="text" class="form-control search-page-input" placeholder="Buscar por Nombre de evento, Tag o Banda" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label data-toggle="collapse" data-target="#demo">FILTRO AVANZADO</label>
+            <div id="demo" class="collapse">
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Tipo Evento: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select id="cmbEventoTipo" class="multiselect-ui form-control" multiple="multiple">
+                                        @*<option value="cheese">Concierto</option>*@
+                                        @*<option value="tomatoes">Festival</option>
+    <option value="mozarella">Caridad</option>
+    <option value="mushrooms">Proyección Independiente pendejo</option>
+    <option value="pepperoni">Cultural</option>
+    <option value="onions">Misselanious</option>*@
+                                    </select>
+                                    @*<select id="cmbEventoTipo" class="form-control m-bot15"></select>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Fecha: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <select id="Select1" class="form-control m-bot15">
+                                        <option>Todas las fechas</option>
+                                        <option selected="selected">Hoy</option>
+                                        <option>Mañana</option>
+                                        <option>Esta semana</option>
+                                        <option>La próxima semana</option>
+                                        <option>Este mes</option>
+                                        <option>El próximo mes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Fechas: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" id="dpFechaInicial" class="form-control datepicker" data-format="D, dd MM yyyy" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="dpFechaFinal" class="form-control datepicker" data-format="D, dd MM yyyy" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Ordenar: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select id="cmbOrdenamiento" class="form-control m-bot15">
+                                        <option value="1">Más recientes</option>
+                                        <option value="2">Más antiguos</option>
+                                        <option value="3">Mayor precio primero</option>
+                                        <option value="4">Menor precio primero</option>
+                                        <option value="5">Con promoción primero</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <Button ID="btnBusqueda" style="width:100%" Class="btn btn-yukindie btn-icon bottom15 right15">Buscar</Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="col-lg-12">
+    <section class="box">
+        <br />
+        <div class="content-body" style="display: block;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- items being paged -->
+                            @foreach (var item in Model.Items)
+                            {
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-3" align="center">
+                                        <img src="~/Images/@item.Imagen" class="thumbnail" width="100%" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3><strong>@item.Titulo</strong></h3>
+                                        <p class="parraf"><i class="fa fa-clock-o"></i> @item.FechaEventoTexto </p>
+                                        <p class="parraf"><i class="fa fa-map-marker"></i> @item.Establecimiento · <strong>Mérida, Yucatán, México</strong></p>
+                                        <p class="parraf"><i class="fa fa-usd"></i> @(item.PrecioRegular > 0 ? string.Format("{0:C}", item.PrecioRegular) : "GRATUITO")</p>
+                                        
+                                        <h4>
+                                            <a href="" class="label label-primary">@item.EventoTipo.Descripcion</a> 
+                                            @if (item.Promocion != String.Empty)
+                                            {
+                                                <a href="" class="label label-success">Inlcuye Promoción</a>
+                                            } 
+                                        </h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="/Event/Index/@item.Link" class="btn btn-sm btn-yukindie" style="width: 100%">Información & Tickets</a>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- pager -->
+                            @if (Model.Pager.EndPage > 1)
+            {
+                                <ul class="pagination">
+                                    @if (Model.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            <a href="~/Eventos/IndexPaginationMVC">First</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Eventos/IndexPaginationMVC?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                        </li>
+                                    }
+
+                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                    {
+                                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                            <a href="~/Eventos/IndexPaginationMVC?page=@page">@page</a>
+                                        </li>
+                                    }
+
+                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            <a href="~/Eventos/IndexPaginationMVC?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Eventos/IndexPaginationMVC?page=@(Model.Pager.TotalPages)">Last</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #192445">
+                                    <h1 class="panel-title" align="center" style="color: white;"><strong>Patrocinados</strong></h1>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Leo Jimenez: Contrastour México 2016</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/khafra.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>KHAFRA Por primera vez en Mérida: Rompiendo las reglas</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Warbringer en Mérida</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Warbringer en Mérida</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #192445">
+                                    <h1 class="panel-title" align="center" style="color: white;"><strong>Suscríbete</strong></h1>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>¡Recibe noticias y promociones!. Prometemos : NO basura, NO spam.</p>
+                                <input type="text" placeholder="tu correo electrónico" class="form-control" style="width: 100%" />
+                                <br />
+                                <button class="btn btn-sm btn-yukindie pull-right">Suscribirme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

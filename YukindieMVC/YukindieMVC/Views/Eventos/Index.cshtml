@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "Listado de Eventos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+<script>
+        var urlGetAll = '@Url.Action("GetAll", "Eventos")';
+    var PerfilId = 2;
+    </script>
+<script src="~/Scripts/jquery.bootpag.js"></script>
+<script src="~/Scripts/f/Publico/Evento.js"></script>
+
+}
+
+<div class="col-lg-12">
+    <section class="box">
+        <header class="panel_header">
+            <h2 class="title pull-left">Búsqueda General</h2>
+            @*<div class="actions panel_actions pull-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+                </div>*@
+        </header>
+        <div class="content-body" style="display: block;">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group primary">
+                            <span class="input-group-addon">
+                                <span class="arrow"></span>
+                                <i class="fa fa-search"></i>
+                            </span>
+                            <input type="text" class="form-control search-page-input" placeholder="Buscar por Nombre de evento, Tag o Banda" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label data-toggle="collapse" data-target="#demo">FILTRO AVANZADO</label>
+            <div id="demo" class="collapse">
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Tipo Evento: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select id="cmbEventoTipo" class="form-control m-bot15"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Fecha: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <select id="Select1" class="form-control m-bot15">
+                                        <option>Todas las fechas</option>
+                                        <option selected="selected">Hoy</option>
+                                        <option>Mañana</option>
+                                        <option>Esta semana</option>
+                                        <option>La próxima semana</option>
+                                        <option>Este mes</option>
+                                        <option>El próximo mes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Fechas: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" id="dpFechaInicial" class="form-control datepicker" data-format="D, dd MM yyyy" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="dpFechaFinal" class="form-control datepicker" data-format="D, dd MM yyyy" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label><strong>Ordenar: </strong></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select id="cmbOrdenamiento" class="form-control m-bot15">
+                                        <option value="1">Más recientes</option>
+                                        <option value="2">Más antiguos</option>
+                                        <option value="3">Mayor precio primero</option>
+                                        <option value="4">Menor precio primero</option>
+                                        <option value="5">Con promoción primero</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <Button ID="btnBusqueda" style="width:100%" Class="btn btn-yukindie btn-icon bottom15 right15">Buscar</Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="col-lg-12">
+    <section class="box">
+        <br />
+        <div class="content-body" style="display: block;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @*<div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="panel panel-yukindieEvento">
+                                        <div class="panel-body">
+                                            <div class="col-md-4">
+
+                                                <img src="~/Images/Eventos/leojimenez.jpg" class="thumbnail" width="100%" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h3 class="margenh3"><strong><a href="PerfilDetalle.aspx">Contrastour Leo Jimenez</a></strong></h3>
+                                                <hr />
+                                                <p class='parraf'><i class="fa fa-clock-o"></i> 27, May - 2017</p>
+                                                <p class='parraf'><i class="fa fa-map-marker"></i> Delorean Bar Santuario Sonoro</p>
+                                                <p class="parraf"><strong><i class="fa fa-money"></i> $500</strong></p>
+                                                <h4>
+                                                    <label class="label label-primary">Concierto</label>
+                                                    <label class="label label-success">
+                                                        Incluye Promoción
+                                                    </label>
+                                                </h4>
+                                                <p class='parraf'><strong>Descripción: </strong>Un gran evento que presenta el talento Yucateco en el mundo de la moda,  con la participación de diseñadores de alto nivel quienes presentan lo mejor de su colección Otoño</p>
+                                                <hr />
+                                                <a href="EventoDetalle.aspx" class="btn btn-sm btn-yukindie">Información & Tickets</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="panel panel-yukindieEvento">
+                                        <div class="panel-body">
+                                            <div class="col-md-4">
+
+                                                <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h3 class="margenh3"><strong><a href="PerfilDetalle.aspx">Contrastour Leo Jimenez</a></strong></h3>
+                                                <p class='parraf'><i class="fa fa-clock-o"></i> 27, May - 2017</p>
+                                                <p class='parraf'><i class="fa fa-map-marker"></i> Delorean Bar Santuario Sonoro</p>
+                                                <h3><p class="parraf"><strong><i class="fa fa-money"></i> $500</strong></p></h3>
+                                                <h4>
+                                                    <label class="label label-primary">Concierto</label>
+                                                    <label class="label label-success">
+                                                        Incluye Promoción
+                                                    </label>
+                                                </h4>
+                                                <p class='parraf'><strong>Descripción: </strong>Un gran evento que presenta el talento Yucateco en el mundo de la moda,  con la participación de diseñadores de alto nivel quienes presentan lo mejor de su colección Otoño</p>
+                                                <hr />
+                                                <a href="EventoDetalle.aspx" class="btn btn-sm btn-yukindie">Información & Tickets</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                            <div id="content"></div>
+                            <div id="page-selection" align="center"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #192445">
+                                    <h1 class="panel-title" align="center" style="color: white;"><strong>Patrocinados</strong></h1>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Leo Jimenez: Contrastour México 2016</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/khafra.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>KHAFRA Por primera vez en Mérida: Rompiendo las reglas</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Warbringer en Mérida</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Warbringer en Mérida</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #192445">
+                                    <h1 class="panel-title" align="center" style="color: white;"><strong>Suscríbete</strong></h1>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>¡Recibe noticias y promociones!. Prometemos : NO basura, NO spam.</p>
+                                <input type="text" placeholder="tu correo electrónico" class="form-control" style="width: 100%" />
+                                <br />
+                                <button class="btn btn-sm btn-yukindie pull-right">Suscribirme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

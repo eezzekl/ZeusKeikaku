@@ -1,0 +1,429 @@
+﻿
+@{
+    ViewBag.Title = "Evento Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script>
+        var urlGet = '@Url.Action("Get", "Evento", new { area = "Admin" })';
+        var urlGetEventoTipo = '@Url.Action("Get", "EventoTipo", new { area = "Admin" })';
+        var urlGetCiudad = '@Url.Action("Get", "Ciudad", new { area = "Admin" })';
+        var urlGuardarEvento = '@Url.Action("Guardar", "Evento", new { area = "Admin" })';
+        var urlGetBandas = '@Url.Action("GetAll", "Perfil", new { area = "Admin" })';
+        var urlGetTags = '@Url.Action("Get", "Tag", new { area = "Admin" })';
+        var urlGetEstablecimiento = '@Url.Action("GetEstablecimiento", "Perfil", new { area = "Admin" })';
+
+    </script>
+
+}
+
+<div class="col-lg-12">
+    @*<section class="box">
+            <br />
+            <div class="content-body" style="display: block;">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>
+                                    <strong>
+                                        LEO JIMENEZ: CONTRASTOUR 2017
+                                    </strong>
+                                </h2>
+                                <h4>
+                                    Por <a href="">
+                                        MNM Producciones
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" style="background-color: #192445">
+                                                    <h1 class="panel-title" style="color: white;"><strong>Sobre este evento</strong></h1>
+                                                </div>
+                                            </div>
+                                            <h3><strong>¡Comparte!</strong></h3>
+                                            <div class="addthis_sharing_toolbox"></div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <button class="btn btn-lg btn-success" style="width:100%">1,296 Fans</button>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-lg btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%">
+                                                            Opciones
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Soy Fan</a></li>
+                                                            <li><a href="#">Agregar a Calendario</a></li>
+                                                            <li><a href="#">Reportar Evento</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3><strong>Categorías: </strong></h3>
+                                            <div class="form-group">
+                                                <label class="label label-primary">Concierto</label>
+                                                <label class="label label-success">Festival</label>
+                                            </div>
+                                            <h3><strong>Precio: </strong>$ 70.00 </h3>
+                                            <h3><strong>Promoción: </strong>En la compra de un boleto tu chica entra gratis!</h3>
+                                            <h3><strong>Dirección: </strong><a href="#">68 diag. # 566 Pasejo de Montejo</a></h3>
+                                            <h3><strong>Bandas sobre el escenario: </strong></h3>
+                                            <a href="#" class="label label-accent">Amperion</a>
+                                            <a href="#" class="label label-accent">Commando</a>
+                                            <a href="#" class="label label-accent">Uberhate</a>
+                                            <a href="#" class="label label-accent">Vampiros Leyenda Urbana</a>
+                                            <h3><strong>Preventas en: </strong></h3>
+                                            <a href="#" class="label label-accent">REDICOM</a>
+                                            <a href="#" class="label label-accent">Opticas Espadas</a>
+                                            <a href="#" class="label label-accent">Rock Solid Music Store</a>
+                                            <h3><strong>Compra en Línea: </strong><a href="#">TusBoletos.com</a></h3>
+                                            <h3><strong>Link del Evento: </strong><a href="#">Aquí</a></h3>
+                                            <h3><strong>Contacto: </strong></h3>
+                                            <h3><i class="glyphicon glyphicon-earphone"></i> 9999-26-35-24 (Tony Kalimocho)</h3>
+                                            <h3><i class="glyphicon glyphicon-envelope"></i> tony@mnmproducciones.com</h3>
+                                            <h3><i class="glyphicon glyphicon-link"></i> <a href="#"> Sitio Web</a></h3>
+                                            <hr />
+                                            <h3><strong>Videos:</strong></h3>
+                                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/pyXuhyJhrSY" frameborder="0" allowfullscreen></iframe>
+                                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/O9T2NEfKu7U" frameborder="0" allowfullscreen></iframe>
+                                            <iframe width="100%" height="400" src="https://www.youtube.com/embed/0bQBqn0t4IE" frameborder="0" allowfullscreen></iframe>
+                                            <hr />
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <img src="~/Images/Perfil/armando.png" class="img-circle" />
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <h3><strong>Armando Gutierrez Ramos</strong></h3>
+                                                            <h5>Músico de la vieja escuela, promotor de la música independiente en Yucatán, Rocker de Corazón y Fundador de Promueve tu Rock.</h5>
+                                                            <div class="row">
+                                                                <div class="col-xs-12 btn-social" align="center">
+                                                                    <button type="button" class="btn btn-primary facebook"><i class="fa fa-facebook"></i></button>
+                                                                    <button type="button" class="btn btn-primary twitter"><i class="fa fa-twitter"></i></button>
+                                                                    <button type="button" class="btn btn-primary youtube"><i class="fa fa-youtube"></i></button>
+                                                                    <button type="button" class="btn btn-primary rss"><i class="fa fa-soundcloud"></i></button>
+                                                                    <button type="button" class="btn btn-primary flickr"><i class="fa fa-instagram"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h3><strong>Etiquetas:</strong></h3>
+                                            <a href="#" class="label label-accent">#ROCK</a>
+                                            <a href="#" class="label label-accent">#UnidosPorLaMusica</a>
+                                            <a href="#" class="label label-accent">#MetalFest</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" style="background-color: #192445">
+                                                <h1 class="panel-title" style="color: white;"><strong>Deja un comentario</strong></h1>
+                                            </div>
+                                        </div>
+                                        <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="10" data-width="100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="background-color: #192445">
+                                        <h1 class="panel-title" align="center" style="color: white;"><strong>Patrocinados</strong></h1>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="itemy">
+                                            <div class="item_image">
+                                                <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                            </div>
+                                            <div class="item_desc">
+                                                <strong>Leo Jimenez: Contrastour México 2016</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="itemy">
+                                            <div class="item_image">
+                                                <img src="~/Images/Eventos/khafra.jpg" width="100%" />
+                                            </div>
+                                            <div class="item_desc">
+                                                <strong>KHAFRA Por primera vez en Mérida: Rompiendo las reglas</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="itemy">
+                                            <div class="item_image">
+                                                <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                            </div>
+                                            <div class="item_desc">
+                                                <strong>Warbringer en Mérida</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="itemy">
+                                            <div class="item_image">
+                                                <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                            </div>
+                                            <div class="item_desc">
+                                                <strong>Warbringer en Mérida</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="background-color: #192445">
+                                        <h1 class="panel-title" align="center" style="color: white;"><strong>Suscríbete</strong></h1>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p>¡Recibe noticias y promociones!. Prometemos : NO basura, NO spam.</p>
+                                    <input type="text" placeholder="tu correo electrónico" class="form-control" style="width: 100%" />
+                                    <br />
+                                    <button class="btn btn-sm btn-yukindie pull-right">Suscribirme</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    <section class="box">
+        <br />
+        <div class="content-body" style="display: block;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>
+                                <strong>
+                                    LEO JIMENEZ: CONTRASTOUR 2017
+                                </strong>
+                            </h2>
+                            <h4>
+                                Por <a href="">
+                                    MNM Producciones
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" style="background-color: #192445">
+                                                <h1 class="panel-title" style="color: white;"><strong>Sobre este evento</strong></h1>
+                                            </div>
+                                        </div>
+                                        <h3><strong>¡Comparte!</strong></h3>
+                                        <div class="addthis_sharing_toolbox"></div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <button class="btn btn-lg btn-success" style="width:100%">1,296 Fans</button>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-lg btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%">
+                                                        Opciones
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#">Soy Fan</a></li>
+                                                        <li><a href="#">Agregar a Calendario</a></li>
+                                                        <li><a href="#">Reportar Evento</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3><strong>Categorías: </strong></h3>
+                                        <div class="form-group">
+                                            <label class="label label-primary">Concierto</label>
+                                            <label class="label label-success">Festival</label>
+                                        </div>
+                                        <h3><strong>Precio: </strong>$ 70.00 </h3>
+                                        <h3><strong>Promoción: </strong>En la compra de un boleto tu chica entra gratis!</h3>
+                                        <h3><strong>Dirección: </strong><a href="#">68 diag. # 566 Pasejo de Montejo</a></h3>
+                                        <h3><strong>Bandas sobre el escenario: </strong></h3>
+                                        <a href="#" class="label label-accent">Amperion</a>
+                                        <a href="#" class="label label-accent">Commando</a>
+                                        <a href="#" class="label label-accent">Uberhate</a>
+                                        <a href="#" class="label label-accent">Vampiros Leyenda Urbana</a>
+                                        <h3><strong>Preventas en: </strong></h3>
+                                        <a href="#" class="label label-accent">REDICOM</a>
+                                        <a href="#" class="label label-accent">Opticas Espadas</a>
+                                        <a href="#" class="label label-accent">Rock Solid Music Store</a>
+                                        <h3><strong>Compra en Línea: </strong><a href="#">TusBoletos.com</a></h3>
+                                        <h3><strong>Link del Evento: </strong><a href="#">Aquí</a></h3>
+                                        <h3><strong>Contacto: </strong></h3>
+                                        <h3><i class="glyphicon glyphicon-earphone"></i> 9999-26-35-24 (Tony Kalimocho)</h3>
+                                        <h3><i class="glyphicon glyphicon-envelope"></i> tony@mnmproducciones.com</h3>
+                                        <h3><i class="glyphicon glyphicon-link"></i> <a href="#"> Sitio Web</a></h3>
+                                        <hr />
+                                        <h3><strong>Videos:</strong></h3>
+                                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/pyXuhyJhrSY" frameborder="0" allowfullscreen></iframe>
+                                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/O9T2NEfKu7U" frameborder="0" allowfullscreen></iframe>
+                                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/0bQBqn0t4IE" frameborder="0" allowfullscreen></iframe>
+                                        <hr />
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <img src="~/Images/Perfil/armando.png" class="img-circle" />
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <h3><strong>Armando Gutierrez Ramos</strong></h3>
+                                                        <h5>Músico de la vieja escuela, promotor de la música independiente en Yucatán, Rocker de Corazón y Fundador de Promueve tu Rock.</h5>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 btn-social" align="center">
+                                                                <button type="button" class="btn btn-primary facebook"><i class="fa fa-facebook"></i></button>
+                                                                <button type="button" class="btn btn-primary twitter"><i class="fa fa-twitter"></i></button>
+                                                                <button type="button" class="btn btn-primary youtube"><i class="fa fa-youtube"></i></button>
+                                                                <button type="button" class="btn btn-primary rss"><i class="fa fa-soundcloud"></i></button>
+                                                                <button type="button" class="btn btn-primary flickr"><i class="fa fa-instagram"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <h3><strong>Etiquetas:</strong></h3>
+                                        <a href="#" class="label label-accent">#ROCK</a>
+                                        <a href="#" class="label label-accent">#UnidosPorLaMusica</a>
+                                        <a href="#" class="label label-accent">#MetalFest</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" style="background-color: #192445">
+                                            <h1 class="panel-title" style="color: white;"><strong>Deja un comentario</strong></h1>
+                                        </div>
+                                    </div>
+                                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="10" data-width="100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #192445">
+                                    <h1 class="panel-title" align="center" style="color: white;"><strong>Patrocinados</strong></h1>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/leojimenez.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Leo Jimenez: Contrastour México 2016</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/khafra.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>KHAFRA Por primera vez en Mérida: Rompiendo las reglas</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Warbringer en Mérida</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="itemy">
+                                        <div class="item_image">
+                                            <img src="~/Images/Eventos/warbringer.jpg" width="100%" />
+                                        </div>
+                                        <div class="item_desc">
+                                            <strong>Warbringer en Mérida</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #192445">
+                                    <h1 class="panel-title" align="center" style="color: white;"><strong>Suscríbete</strong></h1>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>¡Recibe noticias y promociones!. Prometemos : NO basura, NO spam.</p>
+                                <input type="text" placeholder="tu correo electrónico" class="form-control" style="width: 100%" />
+                                <br />
+                                <button class="btn btn-sm btn-yukindie pull-right">Suscribirme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
