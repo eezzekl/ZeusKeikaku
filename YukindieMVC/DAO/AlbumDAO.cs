@@ -4,6 +4,8 @@ using Model;
 using Model.Classes;
 using System.Data.Entity.Core;
 using System;
+using System.Transactions;
+using System.Data.Entity.Core.Objects;
 
 namespace DAO
 {
@@ -64,7 +66,7 @@ namespace DAO
                 var tags = TagDAO.GetTagsByAlbum(item[0].AlbumId);
                 foreach (var tag in tags)
                 {
-                    item[0].LTag.Add(new Tag { TagId = tag.TagId, Nombre  = tag.Nombre  });
+                    item[0].LTag.Add(new Tag { TagId = tag.TagId, Nombre = tag.Nombre });
                 }
                 //item[0].LTag = 
                 return item;
@@ -85,47 +87,55 @@ namespace DAO
         /// <history>
         /// [egongora] created
         /// </history>
-        public static Album Save(Album item, List<Tag> Ltag= null)
+        public static Album Save(Album item, List<Tag> Ltag = null)
         {
+            TransactionOptions options = new TransactionOptions();
+            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.Timeout = new TimeSpan(0, 5, 0);
             try
             {
-                using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
                 {
-                    //Se inserta la informacion
-                    var i = db.st_InsAlbum_(item.AlbumId, item.Titulo, item.Imagen, item.FechaPublicacion, item.Formato, item.Contenido, item.Precio, item.Oferta, item.LinkCompra, item.Promocion, item.PerfilId, item.SubGenero.SubGeneroId, item.Estatus, item.FechaRegistro);
-                    //Se obtiene el album recien ingresado
-                    var album = db.Album.Where(x => x.Titulo == item.Titulo && x.PerfilId == item.PerfilId).FirstOrDefault();
-                    //obtenemos la lista original de los tags
-                    var oldTags = AlbumTagDAO.ListByAlbum(album.AlbumId);
-                    var ntags = new List<int>();
-                    Ltag = item.LTag;
-                    foreach (var tag in Ltag)
+                    ObjectParameter AlbumId = new ObjectParameter("AlbumId", item.AlbumId);
+                    using (var db = new Entities(ConnectionStringHelper.ConnectionString()))
                     {
-                        //Si el tag no existe lo agregamos
-                        var t = TagDAO.Get(tag);
-                        if(t == null)
-                            t = TagDAO.Save(tag);
-                        //Obtenemos la relacion
-                        var albumtag = new AlbumTag();
-                        albumtag.AlbumId = album.AlbumId;
-                        albumtag.TagId = t.TagId;
-                        var rel = AlbumTagDAO.Get(albumtag);
-                        //Si la relacion no existe la creamos
-                        if (rel == null)
-                            AlbumTagDAO.Save(albumtag);
-                        ntags.Add(t.TagId);                     
+                        try
+                        {
+                            //Se inserta la informacion
+                            var i = db.st_InsAlbum_(item.AlbumId, item.Titulo, item.Imagen, item.FechaPublicacion, item.Formato, item.Contenido, item.Precio, item.Oferta, item.LinkCompra, item.Promocion, item.PerfilId, item.SubGenero.SubGeneroId, item.Estatus, item.FechaRegistro);
+                            //Se obtiene el album recien ingresado
+                            int albumId = (item.AlbumId > 0) ? item.AlbumId : Convert.ToInt32(AlbumId.Value);
+                            var album = db.Album.Where(x => x.Titulo == item.Titulo && x.PerfilId == item.PerfilId).FirstOrDefault();
+                            //Eliminamos los tags que tenga asignados
+                            if (item.LTag != null && item.LTag.Count > 0)
+                            {
+                                //Eliminamos todos los tags del album
+                                AlbumTagDAO.Delete(new AlbumTag { AlbumId = albumId });
+                                //Llenamos los tags del album
+                                foreach (Tag tag in item.LTag)
+                                {
+                                    //Obtenemos el tag
+                                    var t = TagDAO.Get(tag);
+                                    //si el tag no existe se crea
+                                    if (t == null)
+                                        t = TagDAO.Save(tag);
+                                    //Guardamos la relacion
+                                    AlbumTagDAO.Save(new AlbumTag
+                                    {
+                                        AlbumId = album.AlbumId,
+                                        TagId = t.TagId
+                                    });
+                                }
+                            }
+                            scope.Complete();
+                            return album;
+                        }
+                        catch (EntityException ex)
+                        {
+                            scope.Dispose();
+                            throw ex;
+                        }
                     }
-                    //Obtenemos la lista de tags a eliminar de la relacion
-                    var delete = (from tag in oldTags
-                             where !ntags.Contains(Convert.ToInt32(tag.TagId))
-                             select tag).ToList();
-
-                    foreach (var tagAl in delete)
-                    {
-                        AlbumTagDAO.Delete(tagAl);
-                    }
-
-                    return album;                   
                 }
             }
             catch (EntityException ex)

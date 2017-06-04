@@ -45,6 +45,7 @@ namespace YukindieMVC.Areas.Admin.Controllers
         public JsonResult Get(int AlbumId, int PerfilId, string Titulo)
         {
             Album album = AlbumDAO.Get(AlbumId, PerfilId, Titulo).FirstOrDefault();
+            Session["sessionAlbum"] = album;
             //var LTag = new List<Tag>(TagDAO.GetTagsByAlbum(album.AlbumId));
             var a = new JsonResult()
             {
@@ -82,11 +83,15 @@ namespace YukindieMVC.Areas.Admin.Controllers
 
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                     file.SaveAs(path);
+                    albumbo.Imagen = fileName;
                 }
             }
             else
             {
-                if(string.IsNullOrEmpty(albumbo.Imagen))
+                var albumSession = (Album)Session["sessionAlbum"];
+                if (albumSession != null)
+                    albumbo.Imagen = albumSession.Imagen;
+                else
                     //si no tiene imagenes asignamos uno como por defecto 
                     albumbo.Imagen = "~/Images/Album/album.jpg";
             }
@@ -96,6 +101,10 @@ namespace YukindieMVC.Areas.Admin.Controllers
                 // por que viene null este? no es correcto debe poderse popular al objeto
                 albumbo.PerfilId = 3;
                 AlbumDAO.Save(albumbo);
+                //Si se guardo bien Eliminamos la imagen guardada
+                var AlbumEliminar = (Album)Session["sessionAlbum"];
+                if (AlbumEliminar != null)
+                    System.IO.File.Delete(AlbumEliminar.Imagen);
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,

@@ -111,7 +111,7 @@ function guardar() {
         success: function (Data) {
             $('#lblModifica').text("registro modificado");
             showSuccess(Data);
-            $(location).attr('href', urlListado);
+            //$(location).attr('href', urlListado);
         },
         error: function (data) {
             showErrorMessage(data);

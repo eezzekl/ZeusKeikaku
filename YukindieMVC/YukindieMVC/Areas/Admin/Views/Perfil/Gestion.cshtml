@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "Gestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script>
+        var PerfilId = @ViewBag.PerfilId;
+        var TipoPerfil = @ViewBag.TipoPerfil;
+        var urlSave = "@Url.Action("Save", "Perfil", new { area = "Admin" })";
+        var urlGetCity = "@Url.Action("Get", "Ciudad", new { area = "Admin" })";
+        var urlGetPerfil = "@Url.Action("GetById","Perfil", new { area= "Admin" })";
+    </script>
+    <script src="~/Areas/Admin/Scrips/Perfil/Gestion.js"></script>
+    }
+
+<div class="col-lg-12">
+    <section class="box">
+        <div class="content-body" style="display: block;">
+            <div class="row">
+                <div class="page-header">
+                    <h2><strong>Información General</strong></h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <dv>
+                                <div class="form-group">
+                                    <label>Imagen:</label>
+                                    <input id="filFoto" class="form-control" type="file" />
+                                </div>
+                            </dv>
+                            <div class="row">
+                                <img src="Images/Músicos/uberhate.jpg" width="100%" height="250" id="imgFoto"/>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nombre:</label>
+                                        <input id="txtNombre" type="text" class="form-control" placeholder="Nombre" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="lblFundacion">Fundación:</label>
+                                        <input id="txtFundacion" type="text" class="form-control datepickeres" placeholder="Fecha en que inició " />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Télefono:</label>
+                                        <input id="txtTelefono" type="text" class="form-control" placeholder="Teléfono de contacto" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tipo de Cuenta:</label>
+                                        <select id="cmbTipoCuenta" class="form-control">
+                                            <option value="1" selected="selected">Fan</option>
+                                            <option value="2">Musico</option>
+                                            <option value="3">Promotor</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ciudad:</label>
+                                        <select id="cmbCiudad" class="form-control">
+                                            <option value="1" selected="selected">Mérida</option>
+                                            <option value="2">Campeche</option>
+                                            <option value="3">Quintana Roo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo:</label>
+                                        <input id="txtCorreo" type="text" class="form-control" placeholder="Correo de contacto" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Acerca de:</label>
+                                        <textarea id="txtAcerca" class="form-control" placeholder="Acerca de..." rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" id="dvEstablecimiento">
+                <div class="page-header">
+                    <h2><strong>Establecimiento</strong></h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-9 col-md-offset-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Direccion:</label>
+                                        <textarea id="txtDireccion" rows="3" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Horario:</label>
+                                        <textarea id="txtHorarios" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        Deberia ser el mapa <br />
+                                        <label>Latitud:</label>
+                                        <input id="txtLatitud" type="text" class="form-control" placeholder="Latitud" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Longitud:</label>
+                                        <input id="txtLongitud" type="text" class="form-control" placeholder="Longitud" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="page-header">
+                    <h2><strong>Redes Sociales</strong></h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-9 col-md-offset-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><i class="fa fa-facebook"></i>Facebook:</label>
+                                        <input id="txtFacebook" type="text" class="form-control" placeholder="Url de Facebook" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><i class="fa fa-youtube-play"></i>YouTube:</label>
+                                        <input id="txtYoutube" type="text" class="form-control" placeholder="Url de YouTube" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><i class="fa fa-twitter"></i>Twitter:</label>
+                                        <input id="txtTwitter" type="text" class="form-control" placeholder="Url de Twitter" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><i class="fa fa-soundcloud"></i>SoundCloud:</label>
+                                        <input id="txtSoundCloud" type="text" class="form-control" placeholder="Url de SoundCloud" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><i class="fa fa-instagram"></i>Instagram:</label>
+                                        <input id="txtInstagram" type="text" class="form-control" placeholder="Url de Instagram" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><i class="fa fa-globe "></i>Página Web:</label>
+                                        <input id="txtWeb" type="text" class="form-control" placeholder="Url de Página Web" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="page-header">
+                    <h2><strong>Tus Preferencias</strong></h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-9 col-md-offset-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Álbumes y Bandas:</label>
+                                        <select id="cmbGenero" class="form-control">
+                                            <option value="volvo" selected="selected">Todos</option>
+                                            <option value="saab">Rock</option>
+                                            <option value="mercedes">Cumbia</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pais:</label>
+                                        <select id="cmbPais" class="form-control">
+                                            <option value="volvo" selected="selected">Todos</option>
+                                            <option value="saab">México</option>
+                                            <option value="mercedes">Argentina</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Eventos:</label>
+                                        <select id="cmbEvento" class="form-control">
+                                            <option value="volvo" selected="selected">Todos</option>
+                                            <option value="saab">Conciertos</option>
+                                            <option value="mercedes">Festivales</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Estados:</label>
+                                        <select id="cmbEstado" class="form-control">
+                                            <option value="volvo" selected="selected">Todos</option>
+                                            <option value="saab">Yucatán</option>
+                                            <option value="mercedes">CDMX</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">
+                        <button class="btn btn-yukindie">Cancelar</button>
+                        <button class="btn btn-yukindie" onclick="save()">Aceptar</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

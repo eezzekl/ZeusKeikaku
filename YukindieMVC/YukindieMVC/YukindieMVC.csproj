@@ -267,6 +267,8 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Scrips\Album\Create.js" />
     <Content Include="Areas\Admin\Scrips\Album\Gestion.js" />
+    <Content Include="Areas\Admin\Scrips\Perfil\Create.js" />
+    <Content Include="Areas\Admin\Scrips\Perfil\Gestion.js" />
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\bootstrap-multiselect.css" />
     <Content Include="assets\css\E_Calendar.css" />
@@ -2334,6 +2336,8 @@
     <Content Include="Images\covers\Thumbs.db" />
     <Content Include="Images\Thumbs.db" />
     <Content Include="Areas\Admin\Views\Evento\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Perfil\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Perfil\Gestion.cshtml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\f\Login.js" />
     <Content Include="Scripts\f\Publico\Evento.js" />
@@ -2402,7 +2406,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Ciudad\" />
     <Folder Include="Areas\Admin\Views\EventoTipo\" />
-    <Folder Include="Areas\Admin\Views\Perfil\" />
     <Folder Include="Areas\Admin\Views\SubGenero\" />
     <Folder Include="Areas\Admin\Views\Tag\" />
     <Folder Include="assets\plugins\datatables\extensions\FixedColumns\examples\integration\" />

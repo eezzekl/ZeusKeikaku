@@ -55,7 +55,7 @@ namespace DAO
             {
                 using(var db = new Entities(ConnectionStringHelper.ConnectionString()))
                 {
-                    var del = db.AlbumTag.Where(x => x.AlbumId == item.AlbumId && x.TagId == item.TagId).Single();
+                    var del = db.AlbumTag.Where(x => x.AlbumId == item.AlbumId).Single();
                     db.AlbumTag.Remove(del);
                     return db.SaveChanges();
                 }

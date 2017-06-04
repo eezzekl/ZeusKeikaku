@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e78a344d656b46d69a71c44187312cc3" Name="Diagram1">
+      <Diagram DiagramId="e78a344d656b46d69a71c44187312cc3" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="ZeusFinalModel.Album" Width="1.5" PointX="15.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.AlbumTag" Width="1.5" PointX="18" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.Cancion" Width="1.5" PointX="18" PointY="15.25" IsExpanded="true" />
@@ -25,7 +25,7 @@
         <EntityTypeShape EntityType="ZeusFinalModel.Perfil" Width="1.5" PointX="10.5" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.PerfilSociales" Width="1.5" PointX="12.75" PointY="25.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.PerfilTipo" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_Menu" Width="1.5" PointX="8.625" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_Rol" Width="1.5" PointX="13.5" PointY="29.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.Seguridad_RolPerfil" Width="1.5" PointX="15.75" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeusFinalModel.SubGenero" Width="1.5" PointX="13.5" PointY="8.125" IsExpanded="true" />

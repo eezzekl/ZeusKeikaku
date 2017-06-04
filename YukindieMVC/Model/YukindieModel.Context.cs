@@ -702,5 +702,74 @@ namespace Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEvento_Result>("st_SelEvento", eventoIdParameter, fechaInicialParameter, fechaFinalParameter, precioParameter, tipoOrdenamientoParameter, estatusParameter);
         }
+    
+        public virtual int st_InsPerfil(ObjectParameter perfilId, Nullable<int> usuarioId, Nullable<bool> rol, Nullable<int> perfilTipo, string nombre, string foto, string acercaDe, string telefono, string correo, string direccion, string horario, Nullable<System.DateTime> fundacion, Nullable<int> ciudadId, string latitud, string longitud, string presskit, string descripcionCorta)
+        {
+            var usuarioIdParameter = usuarioId.HasValue ?
+                new ObjectParameter("usuarioId", usuarioId) :
+                new ObjectParameter("usuarioId", typeof(int));
+    
+            var rolParameter = rol.HasValue ?
+                new ObjectParameter("rol", rol) :
+                new ObjectParameter("rol", typeof(bool));
+    
+            var perfilTipoParameter = perfilTipo.HasValue ?
+                new ObjectParameter("perfilTipo", perfilTipo) :
+                new ObjectParameter("perfilTipo", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var fotoParameter = foto != null ?
+                new ObjectParameter("Foto", foto) :
+                new ObjectParameter("Foto", typeof(string));
+    
+            var acercaDeParameter = acercaDe != null ?
+                new ObjectParameter("acercaDe", acercaDe) :
+                new ObjectParameter("acercaDe", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("direccion", direccion) :
+                new ObjectParameter("direccion", typeof(string));
+    
+            var horarioParameter = horario != null ?
+                new ObjectParameter("horario", horario) :
+                new ObjectParameter("horario", typeof(string));
+    
+            var fundacionParameter = fundacion.HasValue ?
+                new ObjectParameter("Fundacion", fundacion) :
+                new ObjectParameter("Fundacion", typeof(System.DateTime));
+    
+            var ciudadIdParameter = ciudadId.HasValue ?
+                new ObjectParameter("ciudadId", ciudadId) :
+                new ObjectParameter("ciudadId", typeof(int));
+    
+            var latitudParameter = latitud != null ?
+                new ObjectParameter("Latitud", latitud) :
+                new ObjectParameter("Latitud", typeof(string));
+    
+            var longitudParameter = longitud != null ?
+                new ObjectParameter("Longitud", longitud) :
+                new ObjectParameter("Longitud", typeof(string));
+    
+            var presskitParameter = presskit != null ?
+                new ObjectParameter("Presskit", presskit) :
+                new ObjectParameter("Presskit", typeof(string));
+    
+            var descripcionCortaParameter = descripcionCorta != null ?
+                new ObjectParameter("DescripcionCorta", descripcionCorta) :
+                new ObjectParameter("DescripcionCorta", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsPerfil", perfilId, usuarioIdParameter, rolParameter, perfilTipoParameter, nombreParameter, fotoParameter, acercaDeParameter, telefonoParameter, correoParameter, direccionParameter, horarioParameter, fundacionParameter, ciudadIdParameter, latitudParameter, longitudParameter, presskitParameter, descripcionCortaParameter);
+        }
     }
 }

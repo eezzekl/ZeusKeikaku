@@ -353,7 +353,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AlbumTag__TagId__5165187F">
+        <Association Name="FK__AlbumTag__TagId__45F365D3">
           <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
           <End Role="AlbumTag" Type="Self.AlbumTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -401,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Evento__CiudadId__1209AD79">
+        <Association Name="FK__Evento__CiudadId__49C3F6B7">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
           <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -413,7 +413,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Evento__EventoTi__0F2D40CE">
+        <Association Name="FK__Evento__EventoTi__4AB81AF0">
           <End Role="EventoTipo" Type="Self.EventoTipo" Multiplicity="0..1" />
           <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -425,7 +425,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Evento__PerfilId__13F1F5EB">
+        <Association Name="FK__Evento__PerfilId__4BAC3F29">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
           <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -449,7 +449,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoPer__Perfi__5629CD9C">
+        <Association Name="FK__EventoPer__Perfi__4D94879B">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="EventoPerfil" Type="Self.EventoPerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -473,7 +473,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoTag__TagId__5812160E">
+        <Association Name="FK__EventoTag__TagId__4F7CD00D">
           <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
           <End Role="EventoTag" Type="Self.EventoTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -485,7 +485,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventoVid__UrlVi__1BC821DD">
+        <Association Name="FK__EventoVid__Event__5070F446">
           <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
           <End Role="EventoVideo" Type="Self.EventoVideo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -509,7 +509,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeAlbum__Perfi__59FA5E80">
+        <Association Name="FK__LikeAlbum__Perfi__52593CB8">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikeAlbum" Type="Self.LikeAlbum" Multiplicity="*" />
           <ReferentialConstraint>
@@ -533,7 +533,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeCanci__Perfi__5BE2A6F2">
+        <Association Name="FK__LikeCanci__Perfi__5441852A">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikeCancion" Type="Self.LikeCancion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -557,7 +557,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikeEvent__Perfi__5DCAEF64">
+        <Association Name="FK__LikeEvent__Perfi__5629CD9C">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikeEvento" Type="Self.LikeEvento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -569,7 +569,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikePerfi__Perfi__5EBF139D">
+        <Association Name="FK__LikePerfi__Perfi__571DF1D5">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikePerfil" Type="Self.LikePerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -581,7 +581,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LikePerfi__Perfi__5FB337D6">
+        <Association Name="FK__LikePerfi__Perfi__5812160E">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="LikePerfil" Type="Self.LikePerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -665,7 +665,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Seguridad__Perfi__3F115E1A">
+        <Association Name="FK__Seguridad__Perfi__5EBF139D">
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
           <End Role="Seguridad_RolPerfil" Type="Self.Seguridad_RolPerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -677,7 +677,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Seguridad__RolId__3E1D39E1">
+        <Association Name="FK__Seguridad__RolId__5FB337D6">
           <End Role="Seguridad_Rol" Type="Self.Seguridad_Rol" Multiplicity="1" />
           <End Role="Seguridad_RolPerfil" Type="Self.Seguridad_RolPerfil" Multiplicity="*" />
           <ReferentialConstraint>
@@ -689,7 +689,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SubGenero__Gener__12FDD1B2">
+        <Association Name="FK__SubGenero__Gener__60A75C0F">
           <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
           <End Role="SubGenero" Type="Self.SubGenero" Multiplicity="*" />
           <ReferentialConstraint>
@@ -791,6 +791,25 @@
         <Function Name="st_InsEventoVideo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventoId" Type="int" Mode="In" />
           <Parameter Name="UrlVideo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="st_InsPerfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PerfilId" Type="int" Mode="InOut" />
+          <Parameter Name="usuarioId" Type="int" Mode="In" />
+          <Parameter Name="rol" Type="bit" Mode="In" />
+          <Parameter Name="perfilTipo" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Foto" Type="varchar" Mode="In" />
+          <Parameter Name="acercaDe" Type="varchar(max)" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="horario" Type="varchar" Mode="In" />
+          <Parameter Name="Fundacion" Type="date" Mode="In" />
+          <Parameter Name="ciudadId" Type="int" Mode="In" />
+          <Parameter Name="Latitud" Type="nchar" Mode="In" />
+          <Parameter Name="Longitud" Type="nchar" Mode="In" />
+          <Parameter Name="Presskit" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionCorta" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="st_SelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AlbumId" Type="int" Mode="In" />
@@ -924,7 +943,7 @@
             <End Role="Album" EntitySet="Album" />
             <End Role="AlbumTag" EntitySet="AlbumTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__AlbumTag__TagId__5165187F" Association="Self.FK__AlbumTag__TagId__5165187F">
+          <AssociationSet Name="FK__AlbumTag__TagId__45F365D3" Association="Self.FK__AlbumTag__TagId__45F365D3">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="AlbumTag" EntitySet="AlbumTag" />
           </AssociationSet>
@@ -940,15 +959,15 @@
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Estado" EntitySet="Estado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Evento__CiudadId__1209AD79" Association="Self.FK__Evento__CiudadId__1209AD79">
+          <AssociationSet Name="FK__Evento__CiudadId__49C3F6B7" Association="Self.FK__Evento__CiudadId__49C3F6B7">
             <End Role="Ciudad" EntitySet="Ciudad" />
             <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Evento__EventoTi__0F2D40CE" Association="Self.FK__Evento__EventoTi__0F2D40CE">
+          <AssociationSet Name="FK__Evento__EventoTi__4AB81AF0" Association="Self.FK__Evento__EventoTi__4AB81AF0">
             <End Role="EventoTipo" EntitySet="EventoTipo" />
             <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Evento__PerfilId__13F1F5EB" Association="Self.FK__Evento__PerfilId__13F1F5EB">
+          <AssociationSet Name="FK__Evento__PerfilId__4BAC3F29" Association="Self.FK__Evento__PerfilId__4BAC3F29">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
@@ -956,7 +975,7 @@
             <End Role="Evento" EntitySet="Evento" />
             <End Role="EventoPerfil" EntitySet="EventoPerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoPer__Perfi__5629CD9C" Association="Self.FK__EventoPer__Perfi__5629CD9C">
+          <AssociationSet Name="FK__EventoPer__Perfi__4D94879B" Association="Self.FK__EventoPer__Perfi__4D94879B">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="EventoPerfil" EntitySet="EventoPerfil" />
           </AssociationSet>
@@ -964,11 +983,11 @@
             <End Role="Evento" EntitySet="Evento" />
             <End Role="EventoTag" EntitySet="EventoTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoTag__TagId__5812160E" Association="Self.FK__EventoTag__TagId__5812160E">
+          <AssociationSet Name="FK__EventoTag__TagId__4F7CD00D" Association="Self.FK__EventoTag__TagId__4F7CD00D">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="EventoTag" EntitySet="EventoTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventoVid__UrlVi__1BC821DD" Association="Self.FK__EventoVid__UrlVi__1BC821DD">
+          <AssociationSet Name="FK__EventoVid__Event__5070F446" Association="Self.FK__EventoVid__Event__5070F446">
             <End Role="Evento" EntitySet="Evento" />
             <End Role="EventoVideo" EntitySet="EventoVideo" />
           </AssociationSet>
@@ -976,7 +995,7 @@
             <End Role="Album" EntitySet="Album" />
             <End Role="LikeAlbum" EntitySet="LikeAlbum" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeAlbum__Perfi__59FA5E80" Association="Self.FK__LikeAlbum__Perfi__59FA5E80">
+          <AssociationSet Name="FK__LikeAlbum__Perfi__52593CB8" Association="Self.FK__LikeAlbum__Perfi__52593CB8">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikeAlbum" EntitySet="LikeAlbum" />
           </AssociationSet>
@@ -984,7 +1003,7 @@
             <End Role="Cancion" EntitySet="Cancion" />
             <End Role="LikeCancion" EntitySet="LikeCancion" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeCanci__Perfi__5BE2A6F2" Association="Self.FK__LikeCanci__Perfi__5BE2A6F2">
+          <AssociationSet Name="FK__LikeCanci__Perfi__5441852A" Association="Self.FK__LikeCanci__Perfi__5441852A">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikeCancion" EntitySet="LikeCancion" />
           </AssociationSet>
@@ -992,15 +1011,15 @@
             <End Role="Evento" EntitySet="Evento" />
             <End Role="LikeEvento" EntitySet="LikeEvento" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikeEvent__Perfi__5DCAEF64" Association="Self.FK__LikeEvent__Perfi__5DCAEF64">
+          <AssociationSet Name="FK__LikeEvent__Perfi__5629CD9C" Association="Self.FK__LikeEvent__Perfi__5629CD9C">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikeEvento" EntitySet="LikeEvento" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikePerfi__Perfi__5EBF139D" Association="Self.FK__LikePerfi__Perfi__5EBF139D">
+          <AssociationSet Name="FK__LikePerfi__Perfi__571DF1D5" Association="Self.FK__LikePerfi__Perfi__571DF1D5">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikePerfil" EntitySet="LikePerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__LikePerfi__Perfi__5FB337D6" Association="Self.FK__LikePerfi__Perfi__5FB337D6">
+          <AssociationSet Name="FK__LikePerfi__Perfi__5812160E" Association="Self.FK__LikePerfi__Perfi__5812160E">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="LikePerfil" EntitySet="LikePerfil" />
           </AssociationSet>
@@ -1028,15 +1047,15 @@
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="PerfilSociales" EntitySet="PerfilSociales" />
           </AssociationSet>
-          <AssociationSet Name="FK__Seguridad__Perfi__3F115E1A" Association="Self.FK__Seguridad__Perfi__3F115E1A">
+          <AssociationSet Name="FK__Seguridad__Perfi__5EBF139D" Association="Self.FK__Seguridad__Perfi__5EBF139D">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__Seguridad__RolId__3E1D39E1" Association="Self.FK__Seguridad__RolId__3E1D39E1">
+          <AssociationSet Name="FK__Seguridad__RolId__5FB337D6" Association="Self.FK__Seguridad__RolId__5FB337D6">
             <End Role="Seguridad_Rol" EntitySet="Seguridad_Rol" />
             <End Role="Seguridad_RolPerfil" EntitySet="Seguridad_RolPerfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__SubGenero__Gener__12FDD1B2" Association="Self.FK__SubGenero__Gener__12FDD1B2">
+          <AssociationSet Name="FK__SubGenero__Gener__60A75C0F" Association="Self.FK__SubGenero__Gener__60A75C0F">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="SubGenero" EntitySet="SubGenero" />
           </AssociationSet>
@@ -2144,6 +2163,25 @@
             <Parameter Name="TipoOrdenamiento" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="st_InsPerfil">
+            <Parameter Name="PerfilId" Mode="InOut" Type="Int32" />
+            <Parameter Name="usuarioId" Mode="In" Type="Int32" />
+            <Parameter Name="rol" Mode="In" Type="Boolean" />
+            <Parameter Name="perfilTipo" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Foto" Mode="In" Type="String" />
+            <Parameter Name="acercaDe" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="horario" Mode="In" Type="String" />
+            <Parameter Name="Fundacion" Mode="In" Type="DateTime" />
+            <Parameter Name="ciudadId" Mode="In" Type="Int32" />
+            <Parameter Name="Latitud" Mode="In" Type="String" />
+            <Parameter Name="Longitud" Mode="In" Type="String" />
+            <Parameter Name="Presskit" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCorta" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="st_SelAlbum__Result">
           <Property Type="Int32" Name="AlbumId" Nullable="false" />
@@ -2922,6 +2960,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_InsPerfil" FunctionName="ZeusFinalModel.Store.st_InsPerfil" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

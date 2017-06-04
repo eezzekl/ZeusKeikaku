@@ -73,6 +73,7 @@
     <Compile Include="Classes\ConnectionStringHelper.cs" />
     <Compile Include="Classes\Entities.cs" />
     <Compile Include="Classes\Evento.cs" />
+    <Compile Include="Classes\Perfil.cs" />
     <Compile Include="Classes\Usuario.cs" />
     <Compile Include="Estado.cs">
       <DependentUpon>YukindieModel.tt</DependentUpon>
