@@ -44,6 +44,8 @@ namespace DAO
                         Promocion = x.Promocion,
                         PerfilId = x.PerfilId,
                         Estatus = x.Estatus,
+                        UrlAlbumPrecargado = x.UrlAlbumPrecargado,
+                        UsarAlbumPrecargado = x.UsarAlbumPrecargado,
                         SubGenero = new SubGenero
                         {
                             SubGeneroId = x.SubGeneroId,
@@ -102,7 +104,8 @@ namespace DAO
                         try
                         {
                             //Se inserta la informacion
-                            var i = db.st_InsAlbum_(item.AlbumId, item.Titulo, item.Imagen, item.FechaPublicacion, item.Formato, item.Contenido, item.Precio, item.Oferta, item.LinkCompra, item.Promocion, item.PerfilId, item.SubGenero.SubGeneroId, item.Estatus, item.FechaRegistro);
+                            var i = db.st_InsAlbum_(item.AlbumId, item.Titulo, item.Imagen, item.FechaPublicacion, item.Formato, item.Contenido, item.Precio, item.Oferta, item.LinkCompra, item.Promocion, item.PerfilId, item.SubGenero.SubGeneroId, item.Estatus, item.FechaRegistro, 
+                                item.UrlAlbumPrecargado, item.UsarAlbumPrecargado);
                             //Se obtiene el album recien ingresado
                             int albumId = (item.AlbumId > 0) ? item.AlbumId : Convert.ToInt32(AlbumId.Value);
                             var album = db.Album.Where(x => x.Titulo == item.Titulo && x.PerfilId == item.PerfilId).FirstOrDefault();

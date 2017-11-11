@@ -459,7 +459,7 @@
                                 <a class="" href="mail-compose.html">Compose</a>
                             </li>
                             <li>
-                                <a class="" href="mail-view.html">View</a>
+                                <a class="" href="#" data-toggle="modal" data-target="#modalPerfiles"><i class="glyphicon glyphicon-plus"></i>Nuevo Perfil</a>
                             </li>
                         </ul>
                     </li>
@@ -686,6 +686,58 @@
         </div>
     </div>
     <!-- modal end -->
+
+    <!--#Region Modal Perfiles Selecction-->
+    <div class="modal fade" id="modalPerfiles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Seleccione un Tipo de Perfil</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id='portfolio' class="outside">
+                                <div class="portfolio-items row">
+                                    <div class="portfolio-item col-md-4 col-sm-4 col-xs-4  creative music_genre">
+                                        <div class="portfolio-item-inner">
+                                            <div class="thumb">
+                                                <img class="" src="~/Images/CrearCuenta/musician.jpg" alt="" width="100%" height="220">
+                                                <div class="overlay"><a href="@Url.Action("Create","Perfil", new { area = "admin", TipoPefilId = 2 })"><i class="fa fa-play"></i></a></div>
+                                            </div>
+                                            <div class="portfolio-info ">
+                                                <h3><strong><a href="@Url.Action("Create","Perfil", new { area = "admin", TipoPefilId = 2 })">Músico/Banda</a></strong></h3>
+                                                <span class='desc'>Crea tu cuenta y haz que tu música llegue a todos los rincones.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="portfolio-item col-md-4 col-sm-4 col-xs-4  creative music_genre">
+                                        <div class="portfolio-item-inner">
+                                            <div class="thumb">
+                                                <img class="" src="~/Images/CrearCuenta/promotorselec.png" alt="" width="100%" height="220">
+                                                <div class="overlay"><a href="@Url.Action("Create","Perfil", new { area = "admin", TipoPefilId = 3 })"><i class="fa fa-play"></i></a></div>
+                                            </div>
+                                            <div class="portfolio-info ">
+                                                <h3><strong><a href="@Url.Action("Create","Perfil", new { area = "admin", TipoPefilId = 3 })">Promotor Cultural</a></strong></h3>
+                                                <span class='desc'>Promueve tus conciertos y encuentra nuevas propuestas.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-yukindie" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #End Region-->
 
 </body>
 </html>

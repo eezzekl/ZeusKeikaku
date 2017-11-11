@@ -27,5 +27,7 @@ namespace Model
         public int SubGeneroId { get; set; }
         public Nullable<bool> Estatus { get; set; }
         public string SubGenero { get; set; }
+        public bool UsarAlbumPrecargado { get; set; }
+        public string UrlAlbumPrecargado { get; set; }
     }
 }

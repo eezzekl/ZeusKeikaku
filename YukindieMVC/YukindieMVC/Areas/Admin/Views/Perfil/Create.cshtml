@@ -5,12 +5,15 @@
 }
 
 @section scripts{
+<script src="~/assets/plugins/ckeditor/ckeditor.js"></script>
     <script>
         var TipoPerfil = @ViewBag.TipoPerfil;
         var urlSave = "@Url.Action("Save", "Perfil", new { area = "Admin" })";
         var urlGetCity = "@Url.Action("Get", "Ciudad", new { area = "Admin" })";
     </script>
-    <script src="~/Areas/Admin/Scrips/Perfil/Gestion.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTuazTT4ftRrTOscHQYPabgJPLiBS9YXc&sensor=false&signed_in=true&callback=initMap"></script>
+    <script src="~/Areas/Admin/Scrips/Perfil/Create.js"></script>
+
 }
 
 <div class="col-lg-12">
@@ -106,13 +109,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        Deberia ser el mapa <br />
-                                        <label>Latitud:</label>
-                                        <input id="txtLatitud" type="text" class="form-control" placeholder="Latitud" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Longitud:</label>
-                                        <input id="txtLongitud" type="text" class="form-control" placeholder="Longitud" />
+                                        <div class="form-group">
+                                            <label>Clic  en el mapa para agregar ubicación</label>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div id="map" style="width: 100%; height: 250px"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <input type="checkbox" id="chkUbicacion" class="icheck-minimal-red" />
+                                                    De mí Perfil
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

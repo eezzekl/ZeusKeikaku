@@ -218,6 +218,12 @@
           <Property Name="Longitud" Type="nchar" MaxLength="15" />
           <Property Name="Presskit" Type="nvarchar" MaxLength="100" />
           <Property Name="DescripcionCorta" Type="nvarchar" MaxLength="100" />
+          <Property Name="Facebook" Type="varchar" MaxLength="200" />
+          <Property Name="Twitter" Type="varchar" MaxLength="200" />
+          <Property Name="Instagram" Type="varchar" MaxLength="200" />
+          <Property Name="Youtube" Type="varchar" MaxLength="200" />
+          <Property Name="SoundCloud" Type="varchar" MaxLength="200" />
+          <Property Name="Web" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="PerfilSociales">
           <Key>
@@ -746,6 +752,8 @@
           <Parameter Name="SubGeneroId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="bit" Mode="In" />
           <Parameter Name="FechaRegistro" Type="date" Mode="In" />
+          <Parameter Name="UrlAlbum" Type="varchar" Mode="In" />
+          <Parameter Name="UseAlbum" Type="bit" Mode="In" />
         </Function>
         <Function Name="st_InsCancion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Titulo" Type="varchar" Mode="In" />
@@ -810,6 +818,12 @@
           <Parameter Name="Longitud" Type="nchar" Mode="In" />
           <Parameter Name="Presskit" Type="varchar" Mode="In" />
           <Parameter Name="DescripcionCorta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Facebook" Type="varchar" Mode="In" />
+          <Parameter Name="Twitter" Type="varchar" Mode="In" />
+          <Parameter Name="Instagram" Type="varchar" Mode="In" />
+          <Parameter Name="Youtube" Type="varchar" Mode="In" />
+          <Parameter Name="SoundCloud" Type="varchar" Mode="In" />
+          <Parameter Name="Web" Type="varchar" Mode="In" />
         </Function>
         <Function Name="st_SelAlbum_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AlbumId" Type="int" Mode="In" />
@@ -1330,6 +1344,12 @@
           <NavigationProperty Name="Usuario" Relationship="Self.FK__Perfil__UsuarioI__32E0915F" FromRole="Perfil" ToRole="Usuario" />
           <NavigationProperty Name="PerfilSociales" Relationship="Self.FK__PerfilSoc__perfi__656C112C" FromRole="Perfil" ToRole="PerfilSociales" />
           <NavigationProperty Name="Seguridad_RolPerfil" Relationship="Self.FK__Seguridad__Perfi__3F115E1A" FromRole="Perfil" ToRole="Seguridad_RolPerfil" />
+          <Property Name="Facebook" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Twitter" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Instagram" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Youtube" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SoundCloud" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Web" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PerfilSociales">
           <Key>
@@ -2013,6 +2033,8 @@
             <Parameter Name="SubGeneroId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="In" Type="Boolean" />
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="UrlAlbum" Mode="In" Type="String" />
+            <Parameter Name="UseAlbum" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="st_InsCancion">
             <Parameter Name="Titulo" Mode="In" Type="String" />
@@ -2181,6 +2203,12 @@
             <Parameter Name="Longitud" Mode="In" Type="String" />
             <Parameter Name="Presskit" Mode="In" Type="String" />
             <Parameter Name="DescripcionCorta" Mode="In" Type="String" />
+            <Parameter Name="Facebook" Mode="In" Type="String" />
+            <Parameter Name="Twitter" Mode="In" Type="String" />
+            <Parameter Name="Instagram" Mode="In" Type="String" />
+            <Parameter Name="Youtube" Mode="In" Type="String" />
+            <Parameter Name="SoundCloud" Mode="In" Type="String" />
+            <Parameter Name="Web" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="st_SelAlbum__Result">
@@ -2198,6 +2226,8 @@
           <Property Type="Int32" Name="SubGeneroId" Nullable="false" />
           <Property Type="Boolean" Name="Estatus" Nullable="true" />
           <Property Type="String" Name="SubGenero" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="UsarAlbumPrecargado" Nullable="false" />
+          <Property Type="String" Name="UrlAlbumPrecargado" Nullable="false" />
         </ComplexType>
         <ComplexType Name="st_SelAlbumFiltro_Result">
           <Property Type="Int32" Name="AlbumId" Nullable="false" />
@@ -2574,6 +2604,12 @@
           <EntitySetMapping Name="Perfil">
             <EntityTypeMapping TypeName="ZeusFinalModel.Perfil">
               <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="Web" ColumnName="Web" />
+                <ScalarProperty Name="SoundCloud" ColumnName="SoundCloud" />
+                <ScalarProperty Name="Youtube" ColumnName="Youtube" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
                 <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />

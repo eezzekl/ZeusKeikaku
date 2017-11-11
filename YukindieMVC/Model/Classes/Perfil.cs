@@ -5,6 +5,6 @@
 
     public partial class Perfil
     {
-        public List<PerfilSociales> SocialMedia { get; set; }
+        //public List<PerfilSociales> SocialMedia { get; set; }
     }
 }

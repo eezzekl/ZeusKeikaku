@@ -1,4 +1,14 @@
-﻿$("#cmbTipoCuenta").change(function () {
+﻿$(document).ready(function () {
+    initMap();
+    $("#cmbTipoCuenta").change(function () {
+        changeLabels($("#cmbTipoCuenta").val());
+    });
+    $("#cmbTipoCuenta").val(TipoPerfil);
+    
+    CKEDITOR.replace('txtAcerca');
+});
+
+$("#cmbTipoCuenta").change(function () {
     changeLabels($("#cmbTipoCuenta").val());
 })
 
@@ -18,6 +28,60 @@ function changeLabels(tipoPerfil) {
             break;
     }
 }
+/*MAPA*/
+var map;
+var markers = [];
+
+var marker;
+
+var mapaLatitud;
+var mapaLongitud;
+
+function placeMarker(location) {
+    if (marker) {
+        marker.setPosition(location);
+        marker.map = map;
+    } else {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+    mapaLatitud = marker.getPosition().lat();
+    mapaLongitud = marker.getPosition().lng();
+};
+
+function initMap() {
+    var haightAshbury = { lat: 20.962972208693014, lng: -89.66502189694438 };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: haightAshbury,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function (event) {
+        placeMarker(event.latLng);
+    });
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+};
+
+/*Fin Mapa*/
 
 function save() {
     var formData = new FormData();
@@ -38,23 +102,17 @@ function save() {
     item.Telefono = $('#txtTelefono').val();
     item.Ciudad = { CiudadId: $('#cmbCiudad').val() };
     item.Correo = $('#txtCorreo').val();
-    item.AcercaDe = $("#txtAcerca").val();
+    item.AcercaDe = CKEDITOR.instances.txtAcerca.getData(); // $("#txtAcerca").val();
     item.Direccion = $('#txtDireccion').val() != '' ? $('#txtDireccion').val() : item.Direccion;
     item.Horario = $('#txtHorarios').val() != '' ? $('#txtHorarios').val() : item.Horario;
-    item.Latitud = '2';
-    item.Longitud = '1';
-    if ($('#txtFacebook').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Facebook', Url: $('#txtFacebook').val() });
-    if ($('#txtYoutube').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Youtube', Url: $('#txtYoutube').val() });
-    if ($('#txtTwitter').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Twitter', Url: $('#txtTwitter').val() });
-    if ($('#txtSoundCloud').val() != '')
-        item.SocialMedia.push({ RedSocial: 'SoundCloud', Url: $('#txtSoundCloud').val() });
-    if ($('#txtInstagram').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Instagram', Url: $('#txtInstagram').val() });
-    if ($('#txtWeb').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Web', Url: $('#txtWeb').val() });
+    item.Latitud = mapaLatitud;
+    item.Longitud = mapaLongitud;
+    item.Facebook = $('#txtFacebook').val();
+    item.Youtube = $('#txtYoutube').val();
+    item.Twitter = $('#txtTwitter').val();
+    item.SoundCloud = $('#txtSoundCloud').val();
+    item.Instagram = $('#txtInstagram').val();
+    item.Web = $('#txtWeb').val();
 
     formData.append("item", JSON.stringify(item));
 
@@ -97,5 +155,10 @@ var Perfil = function () {
     this.Longitud = '';
     this.Presskit = '';
     this.DescripcionCorta = '';
-    this.SocialMedia = [];
+    this.Facebook = '';
+    this.Twitter = '';
+    this.Instagram = '';
+    this.Youtube = '';
+    this.SoundCloud = '';
+    this.Web = '';
 };

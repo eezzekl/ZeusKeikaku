@@ -1,8 +1,68 @@
 ﻿$(document).ready(function () {
+    initMap();
+    CKEDITOR.replace('txtAcerca');
     if (PerfilId != 0)
         FillForm();
 });
 
+/*MAPA*/
+var map;
+var markers = [];
+
+var marker;
+
+var mapaLatitud;
+var mapaLongitud;
+
+function placeMarker(location) {
+    if (marker) {
+        marker.setPosition(location);
+        marker.map = map;
+    } else {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+    mapaLatitud = marker.getPosition().lat();
+    mapaLongitud = marker.getPosition().lng();
+};
+
+function initMap(lat, lon) {
+    if (lat == undefined)
+        lat = 20.962972208693014;
+    if (lon == undefined)
+        lon = -89.66502189694438;
+    var haightAshbury = { lat: lat, lng: lon };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: haightAshbury,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function (event) {
+        placeMarker(event.latLng);
+    });
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+};
+
+/*Fin Mapa*/
 $("#cmbTipoCuenta").change(function () {
     changeLabels($("#cmbTipoCuenta").val());
 })
@@ -37,34 +97,17 @@ function FillForm() {
             $('#cmbTipoCuenta').val(Data.Datos.TipoPerfil);
             $('#cmbCiudad').val(Data.Datos.CiudadId);
             $('#txtCorreo').val(Data.Datos.Correo);
-            $('#txtAcerca').val(Data.Datos.AcercaDe);
+            //$('#txtAcerca').val(Data.Datos.AcercaDe);
+            CKEDITOR.instances.txtAcerca.setData(Data.Datos.AcercaDe);
             $('#txtDireccion').val(Data.Datos.Direccion);
             $('#txtHorarios').val(Data.Datos.Horario);
-            $('#txtLatitud').val(Data.Datos.Latitud);
-            $('#txtLongitud').val(Data.Datos.Longitud);
-            $.each(Data.Datos.SocialMedia, function (index, value) {
-                switch (value.RedSocial) {
-                    case "Facebook":
-                        $('#txtFacebook').val(value.Url);
-                        break;
-                    case "Youtube":
-                        $('#txtYoutube').val(value.Url);
-                        break;
-                    case "Twitter":
-                        $('#txtTwitter').val(value.Url);
-                        break;
-                    case "SoundCloud":
-                        $('#txtSoundCloud').val(value.Url);
-                        break;
-                    case "Instagram":
-                        $('#txtInstagram').val(value.Url);
-                        break;
-                    case "Web":
-                        $('#txtWeb').val(value.Url);
-                        break;
-
-                }
-            });
+            initMap(Data.Datos.Latitud, Data.Datos.Longitud);
+            $('#txtFacebook').val(Data.Datos.Facebook);
+            $('#txtYoutube').val(Data.Datos.Youtube);
+            $('#txtTwitter').val(Data.Datos.Twitter);
+            $('#txtSoundCloud').val(Data.Datos.SoundCloud);
+            $('#txtInstagram').val(Data.Datos.Instagram);
+            $('#txtWeb').val(Data.Datos.Web);
         },
         error: function (data) {
             showErrorMessage(data);
@@ -91,23 +134,17 @@ function save() {
     item.Telefono = $('#txtTelefono').val();
     item.Ciudad = { CiudadId: $('#cmbCiudad').val() };
     item.Correo = $('#txtCorreo').val();
-    item.AcercaDe = $("#txtAcerca").val();
+    item.AcercaDe = CKEDITOR.instances.txtAcerca.getData(); // $("#txtAcerca").val();
     item.Direccion = $('#txtDireccion').val() != '' ? $('#txtDireccion').val() : item.Direccion;
     item.Horario = $('#txtHorarios').val() != '' ? $('#txtHorarios').val() : item.Horario;
-    item.Latitud = '2';
-    item.Longitud = '1';
-    if ($('#txtFacebook').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Facebook', Url: $('#txtFacebook').val() });
-    if ($('#txtYoutube').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Youtube', Url: $('#txtYoutube').val() });
-    if ($('#txtTwitter').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Twitter', Url: $('#txtTwitter').val() });
-    if ($('#txtSoundCloud').val() != '')
-        item.SocialMedia.push({ RedSocial: 'SoundCloud', Url: $('#txtSoundCloud').val() });
-    if ($('#txtInstagram').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Instagram', Url: $('#txtInstagram').val() });
-    if ($('#txtWeb').val() != '')
-        item.SocialMedia.push({ RedSocial: 'Web', Url: $('#txtWeb').val() });
+    item.Latitud = mapaLatitud;
+    item.Longitud = mapaLongitud;
+    item.Facebook = $('#txtFacebook').val();
+    item.Youtube = $('#txtYoutube').val();
+    item.Twitter = $('#txtTwitter').val();
+    item.SoundCloud = $('#txtSoundCloud').val();
+    item.Instagram = $('#txtInstagram').val();
+    item.Web = $('#txtWeb').val();
 
     formData.append("item", JSON.stringify(item));
 
@@ -150,5 +187,10 @@ var Perfil = function () {
     this.Longitud = '';
     this.Presskit = '';
     this.DescripcionCorta = '';
-    this.SocialMedia = [];
+    this.Facebook = '';
+    this.Twitter = '';
+    this.Instagram = '';
+    this.Youtube = '';
+    this.SoundCloud = '';
+    this.Web = '';
 };

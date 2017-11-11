@@ -121,7 +121,7 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsAlbum", tituloParameter, imagenParameter, fechaPublicacionParameter, formatoParameter, contenidoParameter, precioParameter, ofertaParameter, linkCompraParameter, promocionParameter, perfilIdParameter, subGeneroIdParameter, estatusParameter);
         }
     
-        public virtual int st_InsAlbum_(Nullable<int> albumId, string titulo, string imagen, Nullable<System.DateTime> fechaPublicacion, string formato, string contenido, Nullable<decimal> precio, Nullable<decimal> oferta, string linkCompra, string promocion, Nullable<int> perfilId, Nullable<int> subGeneroId, Nullable<bool> estatus, Nullable<System.DateTime> fechaRegistro)
+        public virtual int st_InsAlbum_(Nullable<int> albumId, string titulo, string imagen, Nullable<System.DateTime> fechaPublicacion, string formato, string contenido, Nullable<decimal> precio, Nullable<decimal> oferta, string linkCompra, string promocion, Nullable<int> perfilId, Nullable<int> subGeneroId, Nullable<bool> estatus, Nullable<System.DateTime> fechaRegistro, string urlAlbum, Nullable<bool> useAlbum)
         {
             var albumIdParameter = albumId.HasValue ?
                 new ObjectParameter("AlbumId", albumId) :
@@ -179,7 +179,15 @@ namespace Model
                 new ObjectParameter("FechaRegistro", fechaRegistro) :
                 new ObjectParameter("FechaRegistro", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsAlbum_", albumIdParameter, tituloParameter, imagenParameter, fechaPublicacionParameter, formatoParameter, contenidoParameter, precioParameter, ofertaParameter, linkCompraParameter, promocionParameter, perfilIdParameter, subGeneroIdParameter, estatusParameter, fechaRegistroParameter);
+            var urlAlbumParameter = urlAlbum != null ?
+                new ObjectParameter("UrlAlbum", urlAlbum) :
+                new ObjectParameter("UrlAlbum", typeof(string));
+    
+            var useAlbumParameter = useAlbum.HasValue ?
+                new ObjectParameter("UseAlbum", useAlbum) :
+                new ObjectParameter("UseAlbum", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsAlbum_", albumIdParameter, tituloParameter, imagenParameter, fechaPublicacionParameter, formatoParameter, contenidoParameter, precioParameter, ofertaParameter, linkCompraParameter, promocionParameter, perfilIdParameter, subGeneroIdParameter, estatusParameter, fechaRegistroParameter, urlAlbumParameter, useAlbumParameter);
         }
     
         public virtual int st_InsCancion(string titulo, string duracion, Nullable<int> numeroTrack, string rutaArchivo, Nullable<bool> tipo, Nullable<int> albumId, Nullable<bool> estatus)
@@ -703,7 +711,7 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<st_SelEvento_Result>("st_SelEvento", eventoIdParameter, fechaInicialParameter, fechaFinalParameter, precioParameter, tipoOrdenamientoParameter, estatusParameter);
         }
     
-        public virtual int st_InsPerfil(ObjectParameter perfilId, Nullable<int> usuarioId, Nullable<bool> rol, Nullable<int> perfilTipo, string nombre, string foto, string acercaDe, string telefono, string correo, string direccion, string horario, Nullable<System.DateTime> fundacion, Nullable<int> ciudadId, string latitud, string longitud, string presskit, string descripcionCorta)
+        public virtual int st_InsPerfil(ObjectParameter perfilId, Nullable<int> usuarioId, Nullable<bool> rol, Nullable<int> perfilTipo, string nombre, string foto, string acercaDe, string telefono, string correo, string direccion, string horario, Nullable<System.DateTime> fundacion, Nullable<int> ciudadId, string latitud, string longitud, string presskit, string descripcionCorta, string facebook, string twitter, string instagram, string youtube, string soundCloud, string web)
         {
             var usuarioIdParameter = usuarioId.HasValue ?
                 new ObjectParameter("usuarioId", usuarioId) :
@@ -769,7 +777,31 @@ namespace Model
                 new ObjectParameter("DescripcionCorta", descripcionCorta) :
                 new ObjectParameter("DescripcionCorta", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsPerfil", perfilId, usuarioIdParameter, rolParameter, perfilTipoParameter, nombreParameter, fotoParameter, acercaDeParameter, telefonoParameter, correoParameter, direccionParameter, horarioParameter, fundacionParameter, ciudadIdParameter, latitudParameter, longitudParameter, presskitParameter, descripcionCortaParameter);
+            var facebookParameter = facebook != null ?
+                new ObjectParameter("Facebook", facebook) :
+                new ObjectParameter("Facebook", typeof(string));
+    
+            var twitterParameter = twitter != null ?
+                new ObjectParameter("Twitter", twitter) :
+                new ObjectParameter("Twitter", typeof(string));
+    
+            var instagramParameter = instagram != null ?
+                new ObjectParameter("Instagram", instagram) :
+                new ObjectParameter("Instagram", typeof(string));
+    
+            var youtubeParameter = youtube != null ?
+                new ObjectParameter("Youtube", youtube) :
+                new ObjectParameter("Youtube", typeof(string));
+    
+            var soundCloudParameter = soundCloud != null ?
+                new ObjectParameter("SoundCloud", soundCloud) :
+                new ObjectParameter("SoundCloud", typeof(string));
+    
+            var webParameter = web != null ?
+                new ObjectParameter("Web", web) :
+                new ObjectParameter("Web", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("st_InsPerfil", perfilId, usuarioIdParameter, rolParameter, perfilTipoParameter, nombreParameter, fotoParameter, acercaDeParameter, telefonoParameter, correoParameter, direccionParameter, horarioParameter, fundacionParameter, ciudadIdParameter, latitudParameter, longitudParameter, presskitParameter, descripcionCortaParameter, facebookParameter, twitterParameter, instagramParameter, youtubeParameter, soundCloudParameter, webParameter);
         }
     }
 }

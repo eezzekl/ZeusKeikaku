@@ -69,29 +69,9 @@ namespace DAO
                     {
                         try
                         {
-                            var i = db.st_InsPerfil(PerfilId, item.UsuarioId, item.Rol, item.PerfilTipoId, item.Nombre, item.FotoPerfil,
-                                item.AcercaDe, item.Telefono, item.Correo, item.Direccion, item.Horario, item.Fundacion,
-                                item.CiudadId, item.Latitud, item.Longitud, item.Presskit, item.DescripcionCorta);
+                            var i = db.st_InsPerfil(PerfilId, item.UsuarioId, item.Rol, item.PerfilTipoId, item.Nombre, item.FotoPerfil, item.AcercaDe, item.Telefono, item.Correo, item.Direccion, item.Horario, item.Fundacion, item.CiudadId, item.Latitud, item.Longitud, item.Presskit, item.DescripcionCorta, item.Facebook, item.Twitter, item.Instagram, item.Youtube, item.SoundCloud, item.Web);
                             int id = (item.PerfilId > 0) ? item.PerfilId : Convert.ToInt32(PerfilId.Value);
-
-                            if(item.SocialMedia != null && item.SocialMedia.Count > 0)
-                            {
-                                PerfilSocialesDao.DeleteAllbyPerfilId(new PerfilSociales { PerfilId = id });
-                                foreach(var sm in item.SocialMedia)
-                                {
-                                    var red = PerfilSocialesDao.Get(new PerfilSociales { RedSocial = sm.RedSocial, PerfilId = id });
-                                    if (red == null)
-                                        PerfilSocialesDao.Save(new PerfilSociales
-                                        {
-                                            PerfilId = id,
-                                            RedSocial = sm.RedSocial,
-                                            Url = sm.Url,
-                                            Estatus = true,
-                                            FechaRegistro = DateTime.Today
-                                        });
-                                }
-                            }
-
+                            
                             var perfil = db.Perfil.Where(x => x.PerfilId == id).FirstOrDefault();
                             scope.Complete();
                             return perfil;
@@ -145,9 +125,6 @@ namespace DAO
             using(var db= new Entities(ConnectionStringHelper.ConnectionString()))
             {
                 var perfil = db.Perfil.Where(p => p.PerfilId == PerfilId).FirstOrDefault();
-
-                perfil.SocialMedia = new List<PerfilSociales>();
-                perfil.SocialMedia = PerfilSocialesDao.GetByPerfil(perfil.PerfilId);
                 return perfil;
             }
         }

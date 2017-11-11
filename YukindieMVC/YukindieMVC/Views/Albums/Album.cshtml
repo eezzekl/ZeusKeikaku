@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "Album";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script>
+        var albumid = @ViewBag.AlbumId;
+        var perfilId = 1;       
+        var  urlGet = '@Url.Action("Get", "Albums")';
+    </script>
+    <script src="~/Scripts/Album/Album.js"></script>
+}
+
+<div class="col-md-12">
+    <section class="box">
+        <div class="content-body" style="display: block;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>
+                                <b>
+                                    <Label ID="lblTitulo"> Mi Album {Test}</Label>
+                                </b>
+                            </h2>
+                            <h4>
+                                De <a href="">
+                                    <Label ID="lblPerfil"> NOTA: no entiendo el funcionamiento de este control</Label>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Album-->
+                    <div class="form-group">
+                        <div class="row">
+                            <!-- Imagen-->
+                            <div class="col-md-6">
+                                <img id="imgAlbum" style="width: 100%; height: 300px" title="Cover" src="~/Images/Album/album.jpg" />
+                                <br />
+                            </div>
+                            <!-- Datos del disco-->
+                            <div class="col-md-6">
+                                <h4>
+                                    <strong>Género: </strong>
+                                    <Label ID="lblGenero"> Test</Label>
+                                </h4>
+                                <strike>
+                                    <h4 style="color:red">
+                                        <strong>Precio: </strong>
+                                        <Label ID="lblPrecio">0.00</Label>
+                                    </h4>
+                                </strike>
+                                <h4 style="color: green">
+                                    <strong>Oferta: </strong>
+                                    <Label ID="lblOferta">50%</Label>
+                                </h4>
+                                <h4>
+                                    <strong>Publicación: </strong>
+                                    <Label ID="lblFechaPublicacion">01/01/0001</Label>
+                                </h4>
+                                <h4>
+                                    <strong>Formato: </strong>
+                                    <Label ID="lblFormato">Digital</Label>
+                                </h4>
+                                <h4>
+                                    <strong>Contenido: </strong>
+                                    <Label ID="lblContenido"></Label>
+                                </h4>
+                                <h4>
+                                    <strong>Cómpralo: </strong>
+                                    <a id="UrlAlbum" href="" target="_blank">Aquí</a>
+                                </h4>
+                                <h4>
+                                    <strong>Promoción: </strong>
+                                    <Label ID="lblPromocion">No es lo mismo que oferta?</Label>
+                                </h4>
+                                <small id="lblNotes">* Producto sujeto a disponibilidad y hasta agotar existencias.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Botones Seguimiento? -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button class="btn btn-lg btn-success" style="width: 100%"> 1,296 Fans </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-lg btn-success">Guardar Álbum</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-lg btn-success">Reportar Álbum</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Compartir -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><strong>¡Comparte!</strong></h3>
+                            <div class="addthis_sharing_toolbox"></div>
+                        </div>
+                    </div>
+                    <!-- Reproductores -->
+                    <div class="row">
+                        <div class="col-md-12" id="dvLocalRep">
+                            <br />
+                            <div style="background: transparent !important; border: 5px solid #192445">
+                                <div class="row">
+                                    <div id="audio-info" class="col-md-12" align="center">
+                                        <h4><strong><span class="artist"></span></strong>- <span class="title"></span></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <audio id="player" ontimeupdate="initProgressBar()"></audio>
+                                        <div class="col-md-1">
+                                            <small id="start-time"></small>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <progress id="seek-obj" value="0" max="1" style="width: 90%"></progress>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <small id="end-time"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin: 0px 0;" />
+                                <div class="row">
+                                    <div id="buttons" align="center">
+                                        <span>
+                                            <button id="shuffle"></button>
+                                            <button id="prev"></button>
+                                            <button id="play"></button>
+                                            <button id="pause"></button>
+                                            <button id="next"></button>
+                                            <button id="stop"></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr style="margin: 0px 0;" />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="audio-player">
+                                            <ul id="playlist" class="list-group">
+                                                <li class="list-group-item" song="Algo Inmoral.mp3" cover="~/Images/Album/album.jpg" artist="Lulaby">Algo Inmoral</li>
+                                                <li class="list-group-item" song="El enigma.mp3" cover="~/Images/Album/album.jpg" artist="Vampiros Leyenda Urbana">El enigma de tus besos</li>
+                                                <li class="list-group-item" song="fuckaholic.mp3" cover="~/Images/Album/album.jpg" artist="Commando">Fuckaholic</li>
+                                                <li class="list-group-item" song="SBK.mp3" cover="~/Images/Album/album.jpg" artist="Commando">Serial Bitch Killer</li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="dvExtRep">
+                            
+                        </div>
+                    </div>
+                    <!-- Comentarios de facebook -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color: #192445">
+                            <h1 class="panel-title" style="color: white;"><strong>Deja un comentario</strong></h1>
+                        </div>
+                    </div>
+                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="10" data-width="100%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

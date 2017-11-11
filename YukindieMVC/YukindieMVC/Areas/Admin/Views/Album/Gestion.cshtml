@@ -32,28 +32,15 @@
 
 <div class="col-lg-12">
     <section class="box">
-
         <div class="content-body" style="display: block;">
-            <div class="row">
-                <button data-toggle="collapse" data-target="#demo">Collapsible</button>
-
-                <div id="demo" class="collapse">
-                    <label id="lblModifica"> sin modificar</label>
-                </div>
-            </div>
             <div class="row">
                 <div class="page-header">
                     <a href="~/Admin/Album/Index" class="pull-right btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Regresar</a>
-                    <h2><strong>Nuevo Álbum</strong></h2>
+                    <h2><strong>Administrar Álbum</strong></h2>
                 </div>
                 <div class="col-xs-12">
                     <div class="row">
-                        <div class="col-md-6">
-                            @*se debe manejar la clave como un tipo hidden*@
-                            <div class="form-group">
-                                <label>Clave:</label>
-                                <input id="txtClave" type="text" class="form-control" placeholder="Clave del Álbum" />
-                            </div>
+                        <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label>Título:</label>
                                 <input id="txtTitulo" type="text" class="form-control" placeholder="Título del Álbum" />
@@ -68,13 +55,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Género:</label>
-                                <select id="cmbSubGenero" class="form-control">
-                                    @*<option>Heavy Metal</option>
-                                        <option>Rock</option>
-                                        <option>Punk</option>*@
-                                </select>
+                                <select id="cmbSubGenero" class="form-control"></select>
                             </div>
-                            <div class="form-group">
+                            <!-- El status va oculto al crear, ya que al crear una nueva cuenta siempre es activa-->
+                            <div class="form-group" style="display:none">
                                 <label>Estatus:</label>
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -84,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label>*Formato:</label>
                                 <select id="cmbFormato" class="form-control m-bot15">
@@ -98,11 +82,29 @@
                                 <input type="text" id="txtContenido" class="form-control" placeholder="Título del Álbum" />
                             </div>
                             <div class="form-group">
-                                <label>*Url Venta:</label>
+                                <label>Album externo :</label>
+                                <input type="text" id="txtUrlAlbum" class="form-control" placeholder="Sporify GPlay, SoundCloud" />
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="chkUseAlbumExt" class="icheck-minimal-red" />
+                                Usar Album externo
+                            </div>
+                            <div class="form-group">
+                                <br />
+                                <input type="checkbox" id="chkSale" class="icheck-minimal-red" />
+                                Mostrar Datos de venta
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="dvSale" style="display:none">
+                        <div class="col-md-12"><h2>Datos de venta</h2></div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label>Url Venta:</label>
                                 <input type="text" id="txtLinkCompra" class="form-control" placeholder="Título del Álbum" />
                             </div>
                             <div class="form-group">
-                                <label>*Precio:</label>
+                                <label>Precio:</label>
                                 <div class="row">
                                     <div class="col-xs-8">
                                         <input type="text" id="txtPrecio" placeholder="A que precio venderá su producto" class="form-control" />
@@ -113,6 +115,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+
                             <div class="form-group">
                                 <label>*Precio de Oferta:</label>
                                 <div class="row">
@@ -133,17 +138,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <br />
-                            <textarea id="textarea" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
                             <span class="pull-right">
                                 <button class="btn btn-yukindie" onclick="Redireccionar('Admin','Album','','')">Cancelar</button>
                                 <button class="btn btn-yukindie" onclick="guardar()">Aceptar</button>
                             </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br />
+                            <textarea id="textarea" rows="1"></textarea>
                         </div>
                     </div>
                 </div>
@@ -151,127 +155,4 @@
         </div>
     </section>
 </div>
-
-
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Album</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.FechaPublicacion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FechaPublicacion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaPublicacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Formato, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Formato, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Formato, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Contenido, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Contenido, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Contenido, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Oferta, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Oferta, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Oferta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.LinkCompra, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LinkCompra, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LinkCompra, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Promocion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Promocion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Promocion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PerfilId, "PerfilId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("PerfilId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.PerfilId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.SubGeneroId, "SubGeneroId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("SubGeneroId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.SubGeneroId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Estatus)
-                        @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }*@
 

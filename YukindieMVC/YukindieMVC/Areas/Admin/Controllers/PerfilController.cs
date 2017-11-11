@@ -88,8 +88,9 @@ namespace YukindieMVC.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int TipoPefilId = 1)
         {
+            ViewBag.TipoPerfil = TipoPefilId;
             return View();
         }
 

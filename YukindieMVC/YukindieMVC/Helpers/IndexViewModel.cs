@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace YukindieMVC.Helpers
     public class IndexViewModel
     {
         public IEnumerable<Model.Evento > Items { get; set; }
+        public IEnumerable<Album> AlbumP { get; set; }
         public Pager Pager { get; set; }
     }
 

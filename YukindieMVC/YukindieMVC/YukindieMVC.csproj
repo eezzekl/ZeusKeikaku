@@ -209,6 +209,7 @@
     <Compile Include="Areas\Admin\Controllers\SubGeneroController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\EventoDetalleController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
@@ -2184,6 +2185,7 @@
       <DependentUpon>YukindieContext.edmx</DependentUpon>
       <LastGenOutput>YukindieContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Album\Album.js" />
     <Content Include="Scripts\bootstrap-datepicker-1.6.4-dist\css\bootstrap-datepicker.css" />
     <Content Include="Scripts\bootstrap-datepicker-1.6.4-dist\css\bootstrap-datepicker.min.css" />
     <Content Include="Scripts\bootstrap-datepicker-1.6.4-dist\css\bootstrap-datepicker.standalone.css" />
@@ -2400,6 +2402,8 @@
     <Content Include="Views\Eventos\Index2.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Eventos\IndexPaginationMVC.cshtml" />
+    <Content Include="Views\Albums\Index.cshtml" />
+    <Content Include="Views\Albums\Album.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

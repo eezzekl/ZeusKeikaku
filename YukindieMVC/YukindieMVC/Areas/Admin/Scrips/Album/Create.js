@@ -93,6 +93,8 @@ function guardar() {
     item.SubGenero = { SubGeneroId: $('#cmbSubGenero').val() };
     item.Estatus = true;
     item.FechaRegistro = $('#dpFechaPublicacion').val();
+    item.UrlAlbumPrecargado = $('#txtUrlAlbum').val();
+    item.UsarAlbumPrecargado = $('#chkUseAlbumExt').val();
     var tags = $('#textarea').textext()[0].tags()._formData;
 
     $.each(tags, function (ind, elem) {
@@ -162,5 +164,7 @@ var Album = function () {
     this.Estatus = true;
     this.FechaRegistro = ''
     this.Ltag = [];
+    this.UrlAlbumPrecargado = '', 
+    this.UsarAlbumPrecargado = false
 };
 
